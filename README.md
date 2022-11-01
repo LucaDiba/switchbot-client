@@ -1,15 +1,15 @@
 <h1 align="center">Welcome to @lucadiba/switchbot-client 👋</h1>
 <p>
-  <a href="https://www.npmjs.com/package/@lucadiba/switchbot-client" target="_blank">
+  <a href="https://www.npmjs.com/package/@lucadiba/switchbot-client">
     <img alt="NPM package" src="https://img.shields.io/npm/v/@lucadiba/switchbot-client?color=blue" />
   </a>
-  <a href="https://github.com/LucaDiba/switchbot-client#readme" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  <a href="https://github.com/LucaDiba/switchbot-client/actions/workflows/main.yml">
+    <img alt="CI build" src="https://github.com/LucaDiba/switchbot-client/actions/workflows/main.yml/badge.svg" />
   </a>
-  <a href="https://github.com/LucaDiba/switchbot-client/graphs/commit-activity" target="_blank">
+  <a href="https://github.com/LucaDiba/switchbot-client/graphs/commit-activity">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/LucaDiba/switchbot-client/blob/main/LICENSE" target="_blank">
+  <a href="https://github.com/LucaDiba/switchbot-client/blob/main/LICENSE">
     <img alt="License: GPL--3.0" src="https://img.shields.io/github/license/LucaDiba/switchbot-client" />
   </a>
 </p>

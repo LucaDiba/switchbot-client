@@ -68,3 +68,5 @@ class SwitchBot {
     return this.request<T>("POST", path, body);
   };
 }
+
+export default SwitchBot;

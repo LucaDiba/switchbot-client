@@ -1,6 +1,8 @@
 <h1 align="center">Welcome to @lucadiba/switchbot-client 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://www.npmjs.com/package/@lucadiba/switchbot-client" target="_blank">
+    <img alt="NPM package" src="https://img.shields.io/npm/v/@lucadiba/switchbot-client?color=blue" />
+  </a>
   <a href="https://github.com/LucaDiba/switchbot-client#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -12,9 +14,7 @@
   </a>
 </p>
 
-> A client for SwitchBot APIs
-
-### 🏠 [Homepage](https://github.com/LucaDiba/switchbot-client#readme)
+> A JavaScript client for SwitchBot 1.1 APIs with built-in TypeScript types.
 
 ## Install
 
@@ -32,8 +32,8 @@ const switchbot = new SwitchBot({
   secretKey: "secretKey",
 });
 
-// Turn on SwitchBot Bot
-await switchbot.bot("deviceId").turnOn();
+// Press SwitchBot Bot
+switchbot.bot("deviceId").press();
 ```
 
 Currently supported APIs:
@@ -68,7 +68,7 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2022 [Luca Dibattista](https://github.com/LucaDiba).<br />
-This project is [GPL--3.0](https://github.com/LucaDiba/switchbot-client/blob/master/LICENSE) licensed.
+This project is [GPL-3.0](https://github.com/LucaDiba/switchbot-client/blob/master/LICENSE) licensed.
 
 ---
 

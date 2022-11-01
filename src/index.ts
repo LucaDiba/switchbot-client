@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from "axios";
 import Bot from "./devices/Bot.js";
 
-type SwitchBotOptions = {
+export type SwitchBotOptions = {
   openToken: string;
   secretKey: string;
 };
 
-export default class SwitchBot {
+class SwitchBot {
   private readonly _openToken: string;
 
   private readonly _secretKey: string;

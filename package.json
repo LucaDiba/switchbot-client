@@ -6,9 +6,10 @@
   "main": "lib/index.js",
   "types": "lib",
   "scripts": {
-    "build": "rm -r ./lib && tsc --project tsconfig.build.json",
+    "build": "rm -rf ./lib && tsc --project tsconfig.build.json",
     "lint": "eslint ./src",
-    "test": "jest ./src"
+    "test": "jest ./src",
+    "build-docs": "typedoc --exclude \"**/*+(.test).ts\" --exclude \"**/utils/*.ts\" --entryPointStrategy expand ./src"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,8 @@
     "nock": "^13.2.9",
     "prettier": "^2.7.1",
     "ts-jest": "^29.0.3",
+    "typedoc": "^0.23.19",
+    "typedoc-plugin-rename-defaults": "^0.6.4",
     "typescript": "^4.8.4"
   }
 }

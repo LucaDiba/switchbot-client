@@ -6,3 +6,6 @@ coverage
 
 # Node
 node_modules
+
+# Documentation
+docs

@@ -1,0 +1,8 @@
+# Compiled files
+lib
+
+# Test files
+coverage
+
+# Node
+node_modules

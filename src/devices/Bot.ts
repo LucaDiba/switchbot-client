@@ -1,6 +1,5 @@
-import { Deps, DeviceStatusReponse } from "../types";
-import { SWITCHBOT_RESPONSE_STATUS_OK } from "../utils/constant";
-import { returnDeviceStatusBodyOrThrow } from "../utils/response";
+import { Deps, DeviceStatusReponse } from "../types.js";
+import { returnDeviceStatusBodyOrThrow } from "../utils/response.js";
 
 type DeviceId = string;
 

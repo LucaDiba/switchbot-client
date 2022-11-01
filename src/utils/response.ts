@@ -1,5 +1,5 @@
-import { DeviceStatusReponse } from "../types";
-import { SWITCHBOT_RESPONSE_STATUS_OK } from "./constant";
+import { DeviceStatusReponse } from "../types.js";
+import { SWITCHBOT_RESPONSE_STATUS_OK } from "./constant.js";
 
 export const returnDeviceStatusBodyOrThrow = <T>(
   response: DeviceStatusReponse<T>

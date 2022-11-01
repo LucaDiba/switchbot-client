@@ -1,8 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { v4 as uuidv4 } from "uuid";
-import hmacSHA256 from "crypto-js/hmac-sha256";
-import Base64 from "crypto-js/enc-base64";
-import Bot from "./devices/Bot";
+import Bot from "./devices/Bot.js";
 
 type SwitchBotOptions = {
   openToken: string;
@@ -37,10 +34,14 @@ export default class SwitchBot {
   });
 
   private request = async <T>(method: string, path: string, body: any) => {
+    const { createHmac, randomUUID } = await import("node:crypto");
     const t = Date.now();
-    const nonce = uuidv4();
+    const nonce = randomUUID();
     const data = this._openToken + t + nonce;
-    const sign = Base64.stringify(hmacSHA256(data, this._secretKey));
+    const sign = createHmac("sha256", this._secretKey)
+      .update(Buffer.from(data, "utf-8"))
+      .digest()
+      .toString("base64");
 
     const response = await this._axios.request<T>({
       method,

@@ -14,7 +14,9 @@ type DeviceCommandBody = {};
 
 export default class Bot {
   private readonly _deviceId: DeviceId;
+
   private readonly getRequest: Deps["getRequest"];
+
   private readonly postRequest: Deps["postRequest"];
 
   constructor(deviceId: string, deps: Deps) {

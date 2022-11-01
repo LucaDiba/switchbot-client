@@ -8,6 +8,7 @@ type SwitchBotOptions = {
 
 export default class SwitchBot {
   private readonly _openToken: string;
+
   private readonly _secretKey: string;
 
   private readonly _axios: AxiosInstance;

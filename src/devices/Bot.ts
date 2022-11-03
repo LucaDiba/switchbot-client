@@ -1,16 +1,16 @@
 import { Deps, DeviceStatusReponse } from "../types.js";
 import { returnDeviceStatusBodyOrThrow } from "../utils/response.js";
 
-type DeviceId = string;
+export type DeviceId = string;
 
-type DeviceStatusBody = {
+export type DeviceStatusBody = {
   deviceId: DeviceId;
   deviceType: "Bot";
   power: "on" | "off";
   hubDeviceId: DeviceId;
 };
 
-type DeviceCommandBody = {};
+export type DeviceCommandBody = {};
 
 export default class Bot {
   private readonly _deviceId: DeviceId;
@@ -19,7 +19,7 @@ export default class Bot {
 
   private readonly postRequest: Deps["postRequest"];
 
-  constructor(deviceId: string, deps: Deps) {
+  constructor(deviceId: DeviceId, deps: Deps) {
     this._deviceId = deviceId;
     this.getRequest = deps.getRequest;
     this.postRequest = deps.postRequest;

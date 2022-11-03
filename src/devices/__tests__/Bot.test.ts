@@ -107,6 +107,26 @@ describe("Bot", () => {
 
         const secondStatus = await bot.getStatus();
         expect(secondStatus.power).toEqual("on");
+      });
+    });
+
+    test("getHubDeviceId", async () => {
+      nock.cleanAll();
+      nock(BASE_URL)
+        .get(`/v1.1/devices/${deviceId}/status`)
+        .reply(200, {
+          statusCode: 100,
+          body: {
+            deviceId,
+            deviceType: "Bot",
+            power: "on",
+            hubDeviceId,
+          },
+          message: "success",
+        });
+
+      const botHubDeviceId = await switchBot.bot(deviceId).getHubDeviceId();
+      expect(botHubDeviceId).toEqual(hubDeviceId);
     });
   });
 

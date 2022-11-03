@@ -47,6 +47,11 @@ export default class Bot {
     return this._cachedStatus;
   };
 
+  public getHubDeviceId = async () => {
+    const status = await this.getStatus();
+    return status.hubDeviceId;
+  };
+
   public turnOn = async () => {
     const response = await this._deps.postRequest<
       DeviceStatusReponse<DeviceCommandBody>

@@ -15,14 +15,12 @@ export type DeviceCommandBody = {};
 export default class Bot {
   private readonly _deviceId: DeviceId;
 
-  private readonly getRequest: Deps["getRequest"];
+  private readonly _deps: Deps;
 
-  private readonly postRequest: Deps["postRequest"];
 
   constructor(deviceId: DeviceId, deps: Deps) {
     this._deviceId = deviceId;
-    this.getRequest = deps.getRequest;
-    this.postRequest = deps.postRequest;
+    this._deps = deps;
   }
 
   private getPath = (path: string) => {
@@ -30,7 +28,7 @@ export default class Bot {
   };
 
   public getStatus = async () => {
-    const response = await this.getRequest<
+    const response = await this._deps.getRequest<
       DeviceStatusReponse<DeviceStatusBody>
     >(this.getPath("/status"));
 
@@ -38,7 +36,7 @@ export default class Bot {
   };
 
   public turnOn = async () => {
-    const response = await this.postRequest<
+    const response = await this._deps.postRequest<
       DeviceStatusReponse<DeviceCommandBody>
     >(this.getPath("/commands"), {
       command: "turnOn",
@@ -50,7 +48,7 @@ export default class Bot {
   };
 
   public turnOff = async () => {
-    const response = await this.postRequest<
+    const response = await this._deps.postRequest<
       DeviceStatusReponse<DeviceCommandBody>
     >(this.getPath("/commands"), {
       command: "turnOff",
@@ -62,7 +60,7 @@ export default class Bot {
   };
 
   public press = async () => {
-    const response = await this.postRequest<
+    const response = await this._deps.postRequest<
       DeviceStatusReponse<DeviceCommandBody>
     >(this.getPath("/commands"), {
       command: "press",

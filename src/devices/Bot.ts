@@ -12,6 +12,11 @@ export type DeviceStatusBody = {
 
 export type DeviceCommandBody = {};
 
+export enum PowerStatus {
+  ON,
+  OFF,
+}
+
 export type GetStatusOptions = {
   forceRefresh?: boolean;
 };
@@ -50,6 +55,20 @@ export default class Bot {
   public getHubDeviceId = async () => {
     const status = await this.getStatus();
     return status.hubDeviceId;
+  };
+
+  public getPowerStatus = async () => {
+    const status = await this.getStatus();
+
+    if (status.power === "on") {
+      return PowerStatus.ON;
+    }
+
+    if (status.power === "off") {
+      return PowerStatus.OFF;
+    }
+
+    throw new Error(`Unexpected power status: ${status.power}`);
   };
 
   public turnOn = async () => {

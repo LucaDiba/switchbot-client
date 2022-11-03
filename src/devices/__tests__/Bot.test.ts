@@ -1,4 +1,5 @@
 import SwitchBot from "../..";
+import { PowerStatus } from "../Bot";
 export const BASE_URL = "https://api.switch-bot.com";
 
 const nock = require("nock");
@@ -127,6 +128,53 @@ describe("Bot", () => {
 
       const botHubDeviceId = await switchBot.bot(deviceId).getHubDeviceId();
       expect(botHubDeviceId).toEqual(hubDeviceId);
+    });
+
+    test("getPowerStatus ON", async () => {
+      const botPowerStatus = await switchBot.bot(deviceId).getPowerStatus();
+      expect(botPowerStatus).toEqual(PowerStatus.ON);
+    });
+
+    test("getPowerStatus OFF", async () => {
+      nock.cleanAll();
+
+      nock(BASE_URL)
+        .get(`/v1.1/devices/${deviceId}/status`)
+        .reply(200, {
+          statusCode: 100,
+          body: {
+            deviceId,
+            deviceType: "Bot",
+            power: "off",
+            hubDeviceId,
+          },
+          message: "success",
+        });
+
+      const botPowerStatus = await switchBot.bot(deviceId).getPowerStatus();
+      expect(botPowerStatus).toEqual(PowerStatus.OFF);
+    });
+
+    test("getPowerStatus INVALID", async () => {
+      const INVALID_STATUS = "invalid";
+
+      nock.cleanAll();
+      nock(BASE_URL)
+        .get(`/v1.1/devices/${deviceId}/status`)
+        .reply(200, {
+          statusCode: 100,
+          body: {
+            deviceId,
+            deviceType: "Bot",
+            power: INVALID_STATUS,
+            hubDeviceId,
+          },
+          message: "success",
+        });
+
+      await expect(async () => {
+        await switchBot.bot(deviceId).getPowerStatus();
+      }).rejects.toThrowError(`Unexpected power status: ${INVALID_STATUS}`);
     });
   });
 

@@ -1,4 +1,5 @@
 <h1 align="center">Welcome to @lucadiba/switchbot-client 👋</h1>
+<h2 align="center">⚠️ This package is in alpha ⚠️</h2>
 <p>
   <a href="https://www.npmjs.com/package/@lucadiba/switchbot-client">
     <img alt="NPM package" src="https://img.shields.io/npm/v/@lucadiba/switchbot-client?color=blue" />
@@ -8,6 +9,9 @@
   </a>
   <a href="https://github.com/LucaDiba/switchbot-client/graphs/commit-activity">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://lucadiba.github.io/switchbot-client/">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://github.com/LucaDiba/switchbot-client/blob/main/LICENSE">
     <img alt="License: GPL--3.0" src="https://img.shields.io/github/license/LucaDiba/switchbot-client" />

@@ -12,11 +12,16 @@ export type DeviceStatusBody = {
 
 export type DeviceCommandBody = {};
 
+export type GetStatusOptions = {
+  forceRefresh?: boolean;
+};
+
 export default class Bot {
   private readonly _deviceId: DeviceId;
 
   private readonly _deps: Deps;
 
+  private _cachedStatus: DeviceStatusBody | null = null;
 
   constructor(deviceId: DeviceId, deps: Deps) {
     this._deviceId = deviceId;
@@ -27,12 +32,19 @@ export default class Bot {
     return `/v1.1/devices/${this._deviceId}${path}`;
   };
 
-  public getStatus = async () => {
+  public getStatus = async (options: GetStatusOptions = {}) => {
+    const forceRefresh = options.forceRefresh ?? false;
+
+    if (this._cachedStatus && !forceRefresh) {
+      return this._cachedStatus;
+    }
+
     const response = await this._deps.getRequest<
       DeviceStatusReponse<DeviceStatusBody>
     >(this.getPath("/status"));
 
-    return returnDeviceStatusBodyOrThrow(response);
+    this._cachedStatus = returnDeviceStatusBodyOrThrow(response);
+    return this._cachedStatus;
   };
 
   public turnOn = async () => {

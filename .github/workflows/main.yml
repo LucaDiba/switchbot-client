@@ -30,3 +30,12 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Create the docs directory locally in CI
+        run: npm run build-docs
+
+      - name: Deploy the docs
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: docs

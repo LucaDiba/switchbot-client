@@ -45,6 +45,8 @@ Currently supported devices:
 
 - Bot
 - Plug
+- Plug Mini
+- Lock
 
 ## Author
 

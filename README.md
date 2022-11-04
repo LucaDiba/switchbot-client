@@ -9,13 +9,13 @@
   </a>
   <img alt="Code coverage" src="https://codecov.io/gh/LucaDiba/switchbot-client/branch/main/graph/badge.svg?token=RvIg6LPcvm" />
   <a href="https://github.com/LucaDiba/switchbot-client/graphs/commit-activity">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+    <img alt="Maintained" src="https://img.shields.io/badge/maintained-yes-brightgreen.svg" />
   </a>
   <a href="https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://github.com/LucaDiba/switchbot-client/blob/main/LICENSE">
-    <img alt="License: GPL--3.0" src="https://img.shields.io/github/license/LucaDiba/switchbot-client" />
+    <img alt="License: GPL-3.0" src="https://img.shields.io/github/license/LucaDiba/switchbot-client" />
   </a>
 </p>
 
@@ -47,6 +47,7 @@ Currently supported devices:
 - Plug
 - Plug Mini
 - Lock
+- [📘 Full documentation](https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html)
 
 ## Author
 

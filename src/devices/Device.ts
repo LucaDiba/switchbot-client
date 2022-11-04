@@ -65,8 +65,9 @@ export class Device<DeviceStatusBody extends BaseDeviceStatusBody> {
 }
 
 export class DeviceWithPower<
-  T extends BaseDeviceWithPowerStatusBody
-> extends Device<T> {
+  StatusBody extends BaseDeviceWithPowerStatusBody,
+  CommandBody
+> extends Device<StatusBody> {
   public getPowerStatus = async () => {
     const status = await this.getStatus();
 
@@ -78,10 +79,10 @@ export class DeviceWithPower<
   };
 
   public turnOn = async () => {
-    return this.sendCommand("turnOn");
+    return this.sendCommand<CommandBody>("turnOn");
   };
 
   public turnOff = async () => {
-    return this.sendCommand("turnOff");
+    return this.sendCommand<CommandBody>("turnOff");
   };
 }

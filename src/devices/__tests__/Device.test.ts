@@ -152,7 +152,7 @@ describe("Device", () => {
 });
 
 describe("DeviceWithPower", () => {
-  let device: DeviceWithPower<BaseDeviceWithPowerStatusBody>;
+  let device: DeviceWithPower<BaseDeviceWithPowerStatusBody, {}>;
 
   beforeEach(() => {
     deps = {

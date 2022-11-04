@@ -8,7 +8,10 @@ type StatusBody = BaseDeviceWithPowerStatusBody & {
 
 type CommandBody = {};
 
-export default class SwitchBotBot extends DeviceWithPower<StatusBody> {
+export default class SwitchBotBot extends DeviceWithPower<
+  StatusBody,
+  CommandBody
+> {
   public press = () => this.sendCommand<CommandBody>("press");
 }
 

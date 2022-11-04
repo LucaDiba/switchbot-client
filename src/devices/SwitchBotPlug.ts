@@ -8,7 +8,10 @@ type StatusBody = BaseDeviceWithPowerStatusBody & {
 
 type CommandBody = {};
 
-export default class SwitchBotPlug extends DeviceWithPower<StatusBody> {}
+export default class SwitchBotPlug extends DeviceWithPower<
+  StatusBody,
+  CommandBody
+> {}
 
 export type SwitchBotPlugStatusBody = StatusBody;
 export type SwitchBotPlugCommandBody = CommandBody;

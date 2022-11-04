@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to @lucadiba/switchbot-client 👋</h1>
+<h1 align="center">🤖 @lucadiba/switchbot-client 🤖</h1>
 <h2 align="center">⚠️ This package is in alpha ⚠️</h2>
 <p>
   <a href="https://www.npmjs.com/package/@lucadiba/switchbot-client">
@@ -41,19 +41,10 @@ const switchbot = new SwitchBot({
 switchbot.bot("deviceId").press();
 ```
 
-Currently supported APIs:
+Currently supported devices:
 
 - Bot
-  - get status
-  - turn on
-  - turn off
-  - press
-
-## Run tests
-
-```sh
-npm run test
-```
+- Plug
 
 ## Author
 

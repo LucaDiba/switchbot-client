@@ -1,5 +1,6 @@
 import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
+import SwitchBotLock from "../devices/SwitchBotLock";
 import SwitchBotPlug from "../devices/SwitchBotPlug";
 const BASE_URL = "https://api.switch-bot.com";
 
@@ -47,11 +48,15 @@ describe("requests", () => {
 });
 
 describe("instantiate devices", () => {
-  test("bot", () => {
+  test("Bot", () => {
     expect(switchBot.bot(deviceId)).toBeInstanceOf(SwitchBotBot);
   });
 
-  test("plug", () => {
+  test("Plug", () => {
     expect(switchBot.plug(deviceId)).toBeInstanceOf(SwitchBotPlug);
+  });
+
+  test("Lock", () => {
+    expect(switchBot.lock(deviceId)).toBeInstanceOf(SwitchBotLock);
   });
 });

@@ -1,20 +1,17 @@
-import { Deps, DeviceStatusReponse } from "../types.js";
-import { DEVICE_TYPES_ARRAY } from "../utils/constant.js";
+import {
+  BaseDeviceStatusBody,
+  BaseDeviceWithPowerStatusBody,
+  Deps,
+  DeviceId,
+  DeviceStatusReponse,
+} from "../types.js";
 import { returnDeviceStatusBodyOrThrow } from "../utils/response.js";
 
 export type GetStatusOptions = {
   forceRefresh?: boolean;
 };
 
-export default class Device<
-  DeviceId,
-  DeviceStatusBody extends {
-    deviceId: DeviceId;
-    deviceType: typeof DEVICE_TYPES_ARRAY[number];
-    deviceName: string;
-    hubDeviceId: DeviceId;
-  }
-> {
+export class Device<DeviceStatusBody extends BaseDeviceStatusBody> {
   protected readonly _deviceId: DeviceId;
 
   protected readonly _deps: Deps;
@@ -64,5 +61,27 @@ export default class Device<
     );
 
     return returnDeviceStatusBodyOrThrow(response);
+  };
+}
+
+export class DeviceWithPower<
+  T extends BaseDeviceWithPowerStatusBody
+> extends Device<T> {
+  public getPowerStatus = async () => {
+    const status = await this.getStatus();
+
+    if (status.power === "on" || status.power === "off") {
+      return status.power;
+    }
+
+    throw new Error(`Unexpected power status: ${status.power}`);
+  };
+
+  public turnOn = async () => {
+    return this.sendCommand("turnOn");
+  };
+
+  public turnOff = async () => {
+    return this.sendCommand("turnOff");
   };
 }

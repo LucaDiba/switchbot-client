@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
-import Bot, { DeviceId as BotDeviceId } from "./devices/SwitchBotBot.js";
+import Bot from "./devices/SwitchBotBot.js";
+import { DeviceId } from "./types.js";
 
 export type SwitchBotOptions = {
   openToken: string;
@@ -25,7 +26,7 @@ export default class SwitchBot {
     });
   }
 
-  public bot = (deviceId: BotDeviceId) => {
+  public bot = (deviceId: DeviceId) => {
     return new Bot(deviceId, this.getDeps());
   };
 

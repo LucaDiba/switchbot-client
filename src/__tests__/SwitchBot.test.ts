@@ -2,6 +2,7 @@ import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
 import SwitchBotLock from "../devices/SwitchBotLock";
 import SwitchBotPlug from "../devices/SwitchBotPlug";
+import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
 const BASE_URL = "https://api.switch-bot.com";
 
 const nock = require("nock");
@@ -54,6 +55,10 @@ describe("instantiate devices", () => {
 
   test("Plug", () => {
     expect(switchBot.plug(deviceId)).toBeInstanceOf(SwitchBotPlug);
+  });
+
+  test("Plug Mini", () => {
+    expect(switchBot.plugMini(deviceId)).toBeInstanceOf(SwitchBotPlugMini);
   });
 
   test("Lock", () => {

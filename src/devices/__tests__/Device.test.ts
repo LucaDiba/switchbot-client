@@ -3,7 +3,7 @@ import {
   BaseDeviceWithPowerStatusBody,
   Deps,
 } from "../../types";
-import { Device, DeviceWithPower } from "../Device";
+import { Device, DeviceWithPower, DeviceWithPowerToggle } from "../Device";
 
 const deviceId = "deviceId";
 const hubDeviceId = "hubDeviceId";
@@ -257,6 +257,46 @@ describe("DeviceWithPower", () => {
         `/v1.1/devices/${deviceId}/commands`,
         {
           command: "turnOff",
+          parameter: "default",
+          commandType: "command",
+        }
+      );
+    });
+  });
+});
+
+describe("DeviceWithPowerToggle", () => {
+  let device: DeviceWithPowerToggle<BaseDeviceWithPowerStatusBody, {}>;
+
+  beforeEach(() => {
+    deps = {
+      getRequest: jest.fn(),
+      postRequest: jest.fn(),
+    };
+    device = new DeviceWithPowerToggle(deviceId, deps);
+  });
+
+  describe("POST requests", () => {
+    beforeEach(() => {
+      deps.postRequest = jest.fn().mockReturnValueOnce({
+        statusCode: 100,
+        body: {},
+        message: "success",
+      });
+    });
+
+    afterEach(() => {
+      expect(deps.getRequest).toBeCalledTimes(0);
+      expect(deps.postRequest).toBeCalledTimes(1);
+    });
+
+    test("toggle", async () => {
+      await device.toggle();
+
+      expect(deps.postRequest).toBeCalledWith(
+        `/v1.1/devices/${deviceId}/commands`,
+        {
+          command: "toggle",
           parameter: "default",
           commandType: "command",
         }

@@ -78,11 +78,29 @@ export class DeviceWithPower<
     throw new Error(`Unexpected power status: ${status.power}`);
   };
 
+  /**
+   * Set the device to on state
+   */
   public turnOn = async () => {
     return this.sendCommand<CommandBody>("turnOn");
   };
 
+  /**
+   * Set the device to off state
+   */
   public turnOff = async () => {
     return this.sendCommand<CommandBody>("turnOff");
+  };
+}
+
+export class DeviceWithPowerToggle<
+  StatusBody extends BaseDeviceWithPowerStatusBody,
+  CommandBody
+> extends DeviceWithPower<StatusBody, CommandBody> {
+  /**
+   * Toggle the device power state
+   */
+  public toggle = async () => {
+    return this.sendCommand<CommandBody>("toggle");
   };
 }

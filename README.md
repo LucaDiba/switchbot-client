@@ -11,7 +11,7 @@
   <a href="https://github.com/LucaDiba/switchbot-client/graphs/commit-activity">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://lucadiba.github.io/switchbot-client/classes/index.SwitchBot.html">
+  <a href="https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://github.com/LucaDiba/switchbot-client/blob/main/LICENSE">

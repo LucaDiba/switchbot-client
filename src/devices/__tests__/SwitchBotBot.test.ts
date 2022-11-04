@@ -1,5 +1,4 @@
 import SwitchBot from "../..";
-import { PowerStatus } from "../Bot";
 export const BASE_URL = "https://api.switch-bot.com";
 
 const nock = require("nock");
@@ -132,7 +131,7 @@ describe("Bot", () => {
 
     test("getPowerStatus ON", async () => {
       const botPowerStatus = await switchBot.bot(deviceId).getPowerStatus();
-      expect(botPowerStatus).toEqual(PowerStatus.ON);
+      expect(botPowerStatus).toEqual("on");
     });
 
     test("getPowerStatus OFF", async () => {
@@ -152,7 +151,7 @@ describe("Bot", () => {
         });
 
       const botPowerStatus = await switchBot.bot(deviceId).getPowerStatus();
-      expect(botPowerStatus).toEqual(PowerStatus.OFF);
+      expect(botPowerStatus).toEqual("off");
     });
 
     test("getPowerStatus INVALID", async () => {

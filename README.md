@@ -67,7 +67,7 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2022 [Luca Dibattista](https://github.com/LucaDiba).<br />
-This project is [GPL-3.0](https://github.com/LucaDiba/switchbot-client/blob/master/LICENSE) licensed.
+This project is [GPL-3.0](https://github.com/LucaDiba/switchbot-client/blob/main/LICENSE) licensed.
 
 ---
 

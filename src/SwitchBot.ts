@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { createHmac, randomUUID } from "crypto";
 import SwitchBotBot from "./devices/SwitchBotBot.js";
+import SwitchBotCurtain from "./devices/SwitchBotCurtain.js";
 import SwitchBotLock from "./devices/SwitchBotLock.js";
 import SwitchBotPlug from "./devices/SwitchBotPlug.js";
 import SwitchBotPlugMini from "./devices/SwitchBotPlugMini.js";
@@ -40,6 +41,10 @@ export default class SwitchBot {
 
   public plugMini = (deviceId: DeviceId) => {
     return new SwitchBotPlugMini(deviceId, this.getDeps());
+  };
+
+  public curtain = (deviceId: DeviceId) => {
+    return new SwitchBotCurtain(deviceId, this.getDeps());
   };
 
   public lock = (deviceId: DeviceId) => {

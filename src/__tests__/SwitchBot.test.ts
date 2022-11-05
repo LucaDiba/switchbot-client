@@ -1,5 +1,6 @@
 import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
+import SwitchBotCurtain from "../devices/SwitchBotCurtain";
 import SwitchBotLock from "../devices/SwitchBotLock";
 import SwitchBotPlug from "../devices/SwitchBotPlug";
 import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
@@ -59,6 +60,10 @@ describe("instantiate devices", () => {
 
   test("Plug Mini", () => {
     expect(switchBot.plugMini(deviceId)).toBeInstanceOf(SwitchBotPlugMini);
+  });
+
+  test("Curtain", () => {
+    expect(switchBot.curtain(deviceId)).toBeInstanceOf(SwitchBotCurtain);
   });
 
   test("Lock", () => {

@@ -9,7 +9,7 @@
     "build": "rm -rf ./lib && tsc --project tsconfig.build.json",
     "lint": "eslint ./src",
     "test": "jest ./src",
-    "build-docs": "typedoc --exclude \"**/*+(.test).ts\" --exclude \"**/utils/*.ts\" --entryPointStrategy expand ./src"
+    "build-docs": "typedoc --readme none --exclude \"**/*+(.test).ts\" --exclude \"**/utils/*.ts\" --entryPointStrategy expand ./src"
   },
   "repository": {
     "type": "git",

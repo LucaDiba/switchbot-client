@@ -1,4 +1,4 @@
-<h1 align="center">🤖 @lucadiba/switchbot-client 🤖</h1>
+<h1 align="center">SwitchBot client</h1>
 <h2 align="center">⚠️ This package is in alpha ⚠️</h2>
 <p>
   <a href="https://www.npmjs.com/package/@lucadiba/switchbot-client">

@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import { createHmac, randomUUID } from "crypto";
 import SwitchBotBot from "./devices/SwitchBotBot.js";
 import SwitchBotLock from "./devices/SwitchBotLock.js";
 import SwitchBotPlug from "./devices/SwitchBotPlug.js";
@@ -51,8 +52,6 @@ export default class SwitchBot {
   });
 
   private request = async <T>(method: string, path: string, body: any) => {
-    const { createHmac, randomUUID } = await import("node:crypto");
-
     const t = Date.now();
     const nonce = randomUUID();
     const data = this._openToken + t + nonce;

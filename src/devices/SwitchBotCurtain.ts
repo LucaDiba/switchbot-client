@@ -4,6 +4,10 @@ import { Device } from "./Device.js";
 
 type StatusBody = BaseDeviceStatusBody & {
   deviceType: typeof DEVICE_TYPES.BOT;
+  calibrate: boolean;
+  group: boolean;
+  moving: boolean;
+  slidePosition: String;
 };
 
 type CommandBody = {};

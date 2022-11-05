@@ -46,6 +46,7 @@ Currently supported devices:
 - Bot
 - Plug
 - Plug Mini
+- Curtain
 - Lock
 - [📘 Full documentation](https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html)
 

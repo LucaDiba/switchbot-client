@@ -31,6 +31,29 @@ jobs:
       - name: Build
         run: npm run build
 
+  update_docs_coverage:
+    name: Update docs and code coverage
+
+    needs: [build]
+    if: github.ref == 'refs/heads/main'
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Use Node 19
+        uses: actions/setup-node@v1
+        with:
+          node-version: "19.x"
+
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+
+      - name: Build
+        run: npm run build
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
 

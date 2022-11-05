@@ -4,7 +4,7 @@
   <a href="https://www.npmjs.com/package/@lucadiba/switchbot-client">
     <img alt="NPM package" src="https://img.shields.io/npm/v/@lucadiba/switchbot-client?color=blue" />
   </a>
-  <a href="https://github.com/LucaDiba/switchbot-client/actions/workflows/main.yml">
+  <a href="https://github.com/LucaDiba/switchbot-client/actions/workflows/ci.yml">
     <img alt="CI build" src="https://github.com/LucaDiba/switchbot-client/actions/workflows/ci.yml/badge.svg" />
   </a>
   <img alt="Code coverage" src="https://codecov.io/gh/LucaDiba/switchbot-client/branch/main/graph/badge.svg?token=RvIg6LPcvm" />

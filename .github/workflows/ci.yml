@@ -32,9 +32,10 @@ jobs:
         run: npm run build
 
   update_docs_coverage:
-    name: Update and publish docs, update code coverage
+    name: Update docs and code coverage
 
     needs: [build]
+    if: github.ref == 'refs/heads/main'
 
     runs-on: "ubuntu-latest"
 

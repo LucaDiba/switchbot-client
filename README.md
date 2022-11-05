@@ -15,7 +15,7 @@
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://github.com/LucaDiba/switchbot-client/blob/main/LICENSE">
-    <img alt="License: GPL-3.0" src="https://img.shields.io/github/license/LucaDiba/switchbot-client" />
+    <img alt="License: MIT" src="https://img.shields.io/github/license/LucaDiba/switchbot-client" />
   </a>
 </p>
 
@@ -67,7 +67,7 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2022 [Luca Dibattista](https://github.com/LucaDiba).<br />
-This project is [GPL-3.0](https://github.com/LucaDiba/switchbot-client/blob/main/LICENSE) licensed.
+This project is [MIT](https://github.com/LucaDiba/switchbot-client/blob/main/LICENSE) licensed.
 
 ---
 

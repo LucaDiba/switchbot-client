@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 
 describe("Device", () => {
-  let device: Device<BaseDeviceStatusBody>;
+  let device: Device<BaseDeviceStatusBody, {}>;
 
   beforeEach(() => {
     deps = {

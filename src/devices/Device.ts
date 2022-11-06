@@ -15,7 +15,10 @@ export type GetStatusOptions = {
   forceRefresh?: boolean;
 };
 
-export class Device<DeviceStatusBody extends BaseDeviceStatusBody> {
+export class Device<
+  DeviceStatusBody extends BaseDeviceStatusBody,
+  CommandBody
+> {
   protected readonly _deviceId: DeviceId;
 
   protected readonly _deps: Deps;
@@ -51,18 +54,17 @@ export class Device<DeviceStatusBody extends BaseDeviceStatusBody> {
     return status.hubDeviceId;
   };
 
-  protected sendCommand = async <T>(
+  protected sendCommand = async (
     command: string,
     parameter: string = "default"
   ) => {
-    const response = await this._deps.postRequest<DeviceCommandResponse<T>>(
-      this._getPath("/commands"),
-      {
-        command,
-        parameter,
-        commandType: "command",
-      }
-    );
+    const response = await this._deps.postRequest<
+      DeviceCommandResponse<CommandBody>
+    >(this._getPath("/commands"), {
+      command,
+      parameter,
+      commandType: "command",
+    });
 
     return returnDeviceCommandBodyOrThrow(response);
   };
@@ -71,7 +73,7 @@ export class Device<DeviceStatusBody extends BaseDeviceStatusBody> {
 export class DeviceWithPower<
   StatusBody extends BaseDeviceWithPowerStatusBody,
   CommandBody
-> extends Device<StatusBody> {
+> extends Device<StatusBody, CommandBody> {
   public getPowerStatus = async () => {
     const status = await this.getStatus();
 
@@ -86,14 +88,14 @@ export class DeviceWithPower<
    * Set the device to on state
    */
   public turnOn = async () => {
-    return this.sendCommand<CommandBody>("turnOn");
+    return this.sendCommand("turnOn");
   };
 
   /**
    * Set the device to off state
    */
   public turnOff = async () => {
-    return this.sendCommand<CommandBody>("turnOff");
+    return this.sendCommand("turnOff");
   };
 }
 
@@ -105,6 +107,6 @@ export class DeviceWithPowerToggle<
    * Toggle the device power state
    */
   public toggle = async () => {
-    return this.sendCommand<CommandBody>("toggle");
+    return this.sendCommand("toggle");
   };
 }

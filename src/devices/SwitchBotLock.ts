@@ -1,15 +1,17 @@
-import { BaseDeviceStatusBody } from "../types.js";
+import { BaseDeviceGetDeviceBody, BaseDeviceStatusBody } from "../types.js";
 import { DEVICE_TYPES } from "../utils/constant.js";
 import { Device } from "./Device.js";
 
-type StatusBody = BaseDeviceStatusBody & {
+export type GetDeviceBody = BaseDeviceGetDeviceBody; // TODO: determine exact type
+
+export type StatusBody = BaseDeviceStatusBody & {
   deviceType: typeof DEVICE_TYPES.LOCK;
   lockState: "locked" | "unlocked" | "jammed";
   doorState: "closed" | "opened";
   calibrate: boolean;
 };
 
-type CommandBody = {
+export type CommandBody = {
   doorState: "closed" | "opened";
   isSlave: boolean;
   doorStateSource: "master" | string; // TODO: determine other possible values
@@ -24,17 +26,15 @@ type CommandBody = {
   doorOpenedOvertimeWarning: boolean;
   unlockedOvertimeWarning: boolean;
 };
-export default class SwitchBotLock extends Device<StatusBody> {
+
+export default class SwitchBotLock extends Device<StatusBody, CommandBody> {
   /**
    * Rotate to locked position
    */
-  public lock = () => this.sendCommand<CommandBody>("lock");
+  public lock = () => this.sendCommand("lock");
 
   /**
    * Rotate to unlocked position
    */
-  public unlock = () => this.sendCommand<CommandBody>("unlock");
+  public unlock = () => this.sendCommand("unlock");
 }
-
-export type SwitchBotLockStatusBody = StatusBody;
-export type SwitchBotLockCommandBody = CommandBody;

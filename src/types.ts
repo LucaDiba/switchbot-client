@@ -22,3 +22,8 @@ export type BaseDeviceStatusBody = {
 export type BaseDeviceWithPowerStatusBody = BaseDeviceStatusBody & {
   power: "on" | "off";
 };
+
+export type BaseDeviceGetDeviceBody = BaseDeviceStatusBody & {
+  deviceName: string;
+  enableCloudService: boolean;
+};

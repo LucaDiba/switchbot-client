@@ -33,6 +33,12 @@ export type BaseDeviceWithPowerStatusBody<DeviceType> =
     power: "on" | "off";
   };
 
+export type BaseDeviceWithTemperatureHumidityStatusBody<DeviceType> =
+  BaseDeviceStatusBody<DeviceType> & {
+    temperature: number;
+    humidity: number;
+  };
+
 export type BaseDeviceGetDeviceBody<DeviceType> =
   BaseDeviceStatusBody<DeviceType> & {
     deviceName: string;

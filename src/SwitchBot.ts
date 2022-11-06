@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { createHmac, randomUUID } from "crypto";
 import SwitchBotBot from "./devices/SwitchBotBot.js";
 import SwitchBotCurtain from "./devices/SwitchBotCurtain.js";
+import SwitchBotHumidifier from "./devices/SwitchBotHumidifier.js";
 import SwitchBotLock from "./devices/SwitchBotLock.js";
 import SwitchBotMeter from "./devices/SwitchBotMeter.js";
 import SwitchBotPlug from "./devices/SwitchBotPlug.js";
@@ -38,6 +39,10 @@ export default class SwitchBot {
 
   public curtain = (deviceId: DeviceId) => {
     return new SwitchBotCurtain(deviceId, this.getDeps());
+  };
+
+  public humidifier = (deviceId: DeviceId) => {
+    return new SwitchBotHumidifier(deviceId, this.getDeps());
   };
 
   public lock = (deviceId: DeviceId) => {

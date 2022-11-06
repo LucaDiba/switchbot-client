@@ -1,6 +1,7 @@
 import {
   BaseDeviceStatusBody,
   BaseDeviceWithPowerStatusBody,
+  BaseDeviceWithTemperatureHumidityStatusBody,
   Deps,
   DeviceCommandResponse,
   DeviceId,
@@ -112,4 +113,19 @@ export class DeviceWithPowerToggle<
   public toggle = async () => {
     return this.sendCommand("toggle");
   };
+}
+
+export class DeviceWithTemperatureHumidity<
+  StatusBody extends BaseDeviceWithTemperatureHumidityStatusBody<DeviceTypes>,
+  CommandBody
+> extends Device<StatusBody, CommandBody> {
+  /**
+   * @returns Temperature in celsius.
+   */
+  public getTemperature = async () => (await this.getStatus()).temperature;
+
+  /**
+   * @returns Humidity percentage (integer, 0 - 100).
+   */
+  public getHumidity = async () => (await this.getStatus()).humidity;
 }

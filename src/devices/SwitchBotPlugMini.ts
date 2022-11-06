@@ -24,7 +24,7 @@ type CommandBody = {
   isOverload: boolean;
   currentVoltage: number;
   power: "on" | "off";
-  isLed: false;
+  isLed: boolean;
 };
 
 export default class SwitchBotPlug extends DeviceWithPowerToggle<

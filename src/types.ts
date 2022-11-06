@@ -13,6 +13,15 @@ export type DeviceStatusReponse<T> = {
   body: T;
 };
 
+export type DeviceCommandResponse<T> = DeviceStatusReponse<{
+  items: {
+    code: number;
+    deviceId: DeviceId;
+    message: string;
+    status: T;
+  }[];
+}>;
+
 export type BaseDeviceStatusBody = {
   deviceId: DeviceId;
   deviceType: typeof DEVICE_TYPES_ARRAY[number];
@@ -21,4 +30,9 @@ export type BaseDeviceStatusBody = {
 
 export type BaseDeviceWithPowerStatusBody = BaseDeviceStatusBody & {
   power: "on" | "off";
+};
+
+export type BaseDeviceGetDeviceBody = BaseDeviceStatusBody & {
+  deviceName: string;
+  enableCloudService: boolean;
 };

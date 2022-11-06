@@ -4,13 +4,26 @@ import { Device } from "./Device.js";
 
 type StatusBody = BaseDeviceStatusBody & {
   deviceType: typeof DEVICE_TYPES.LOCK;
-  lockState: "LOCKED" | "UNLOCKED" | "JAMMED";
-  doorState: string; // TODO: determine the literal ("CLOSED" | ???)
+  lockState: "locked" | "unlocked" | "jammed";
+  doorState: "closed" | "opened";
   calibrate: boolean;
 };
 
-type CommandBody = {};
-
+type CommandBody = {
+  doorState: "closed" | "opened";
+  isSlave: boolean;
+  doorStateSource: "master" | string; // TODO: determine other possible values
+  isSlaveOnline: boolean;
+  battery: number;
+  pauseAutoLock: boolean;
+  lockState: "locked" | "unlocked" | "jammed";
+  lastActionSource: "manual" | string; // TODO: determine other possible values
+  isCalibrate: boolean;
+  power: "on" | "off";
+  isGroup: boolean;
+  doorOpenedOvertimeWarning: boolean;
+  unlockedOvertimeWarning: boolean;
+};
 export default class SwitchBotLock extends Device<StatusBody> {
   /**
    * Rotate to locked position

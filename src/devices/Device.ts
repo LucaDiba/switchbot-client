@@ -2,10 +2,14 @@ import {
   BaseDeviceStatusBody,
   BaseDeviceWithPowerStatusBody,
   Deps,
+  DeviceCommandResponse,
   DeviceId,
   DeviceStatusReponse,
 } from "../types.js";
-import { returnDeviceStatusBodyOrThrow } from "../utils/response.js";
+import {
+  returnDeviceCommandBodyOrThrow,
+  returnDeviceStatusBodyOrThrow,
+} from "../utils/response.js";
 
 export type GetStatusOptions = {
   forceRefresh?: boolean;
@@ -51,7 +55,7 @@ export class Device<DeviceStatusBody extends BaseDeviceStatusBody> {
     command: string,
     parameter: string = "default"
   ) => {
-    const response = await this._deps.postRequest<DeviceStatusReponse<T>>(
+    const response = await this._deps.postRequest<DeviceCommandResponse<T>>(
       this._getPath("/commands"),
       {
         command,
@@ -60,7 +64,7 @@ export class Device<DeviceStatusBody extends BaseDeviceStatusBody> {
       }
     );
 
-    return returnDeviceStatusBodyOrThrow(response);
+    return returnDeviceCommandBodyOrThrow(response);
   };
 }
 

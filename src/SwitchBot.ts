@@ -56,7 +56,7 @@ export default class SwitchBot {
     postRequest: this.postRequest,
   });
 
-  private request = async <T>(method: string, path: string, body: any) => {
+  private getRequestHeaders = () => {
     const t = Date.now();
     const nonce = randomUUID();
     const data = this._openToken + t + nonce;
@@ -65,27 +65,29 @@ export default class SwitchBot {
       .digest()
       .toString("base64");
 
-    const response = await this._axios.request<T>({
-      method,
-      url: path,
-      data: body,
-      headers: {
-        sign,
-        nonce,
-        t,
-        "Content-Type": "application/json",
-        "Content-Length": body.length,
-      },
+    return {
+      sign,
+      nonce,
+      t,
+    };
+  };
+
+  private getRequest = async <T>(path: string) => {
+    const response = await this._axios.get<T>(path, {
+      headers: this.getRequestHeaders(),
     });
 
     return response.data;
   };
 
-  private getRequest = async <T>(path: string) => {
-    return this.request<T>("GET", path, "");
-  };
-
   private postRequest = async <T>(path: string, body: any) => {
-    return this.request<T>("POST", path, body);
+    const response = await this._axios.post<T>(path, body, {
+      headers: {
+        ...this.getRequestHeaders(),
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
   };
 }

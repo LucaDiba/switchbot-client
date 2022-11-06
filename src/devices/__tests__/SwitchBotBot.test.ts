@@ -1,10 +1,12 @@
 import { Deps } from "../../types";
+import { getMockedCommandResponse } from "../../utils/tests";
 import SwitchBotBot from "../SwitchBotBot";
 
 const deviceId = "deviceId";
 
 let device: SwitchBotBot;
 let deps: Deps;
+let mockCommandResponse = getMockedCommandResponse({ deviceId });
 
 beforeEach(() => {
   deps = {
@@ -12,14 +14,11 @@ beforeEach(() => {
     postRequest: jest.fn(),
   };
   device = new SwitchBotBot(deviceId, deps);
+  mockCommandResponse = getMockedCommandResponse({ deviceId });
 });
 
 test("press", async () => {
-  deps.postRequest = jest.fn().mockReturnValueOnce({
-    statusCode: 100,
-    body: {},
-    message: "success",
-  });
+  deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
 
   await device.press();
 

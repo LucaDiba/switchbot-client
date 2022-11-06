@@ -4,6 +4,7 @@ import SwitchBotCurtain from "../devices/SwitchBotCurtain";
 import SwitchBotLock from "../devices/SwitchBotLock";
 import SwitchBotPlug from "../devices/SwitchBotPlug";
 import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
+import { getMockedCommandResponse } from "../utils/tests";
 const BASE_URL = "https://api.switch-bot.com";
 
 const nock = require("nock");
@@ -15,6 +16,8 @@ const switchBot = new SwitchBot({
 const deviceId = "deviceId";
 
 describe("requests", () => {
+  const mockCommandResponse = getMockedCommandResponse({ deviceId });
+
   test("get status", async () => {
     nock(BASE_URL)
       .get(`/v1.1/devices/${deviceId}/status`)
@@ -39,11 +42,7 @@ describe("requests", () => {
         parameter: "default",
         commandType: "command",
       })
-      .reply(200, {
-        statusCode: 100,
-        body: {},
-        message: "success",
-      });
+      .reply(200, mockCommandResponse);
 
     await switchBot.bot(deviceId).press();
   });

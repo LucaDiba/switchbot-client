@@ -1,10 +1,12 @@
 import { Deps } from "../../types";
+import { getMockedCommandResponse } from "../../utils/tests";
 import SwitchBotLock from "../SwitchBotLock";
 
 const deviceId = "deviceId";
 
 let device: SwitchBotLock;
 let deps: Deps;
+let mockCommandResponse = getMockedCommandResponse({ deviceId });
 
 beforeEach(() => {
   deps = {
@@ -12,14 +14,11 @@ beforeEach(() => {
     postRequest: jest.fn(),
   };
   device = new SwitchBotLock(deviceId, deps);
+  mockCommandResponse = getMockedCommandResponse({ deviceId });
 });
 
 test("lock", async () => {
-  deps.postRequest = jest.fn().mockReturnValueOnce({
-    statusCode: 100,
-    body: {},
-    message: "success",
-  });
+  deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
 
   await device.lock();
 
@@ -32,11 +31,7 @@ test("lock", async () => {
 });
 
 test("unlock", async () => {
-  deps.postRequest = jest.fn().mockReturnValueOnce({
-    statusCode: 100,
-    body: {},
-    message: "success",
-  });
+  deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
 
   await device.unlock();
 

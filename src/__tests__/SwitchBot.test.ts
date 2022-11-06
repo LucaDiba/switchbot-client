@@ -3,6 +3,7 @@ import nock from "nock";
 import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
 import SwitchBotCurtain from "../devices/SwitchBotCurtain";
+import SwitchBotHumidifier from "../devices/SwitchBotHumidifier";
 import SwitchBotLock from "../devices/SwitchBotLock";
 import SwitchBotMeter from "../devices/SwitchBotMeter";
 import SwitchBotPlug from "../devices/SwitchBotPlug";
@@ -141,6 +142,10 @@ describe("instantiate devices", () => {
 
   test("Curtain", () => {
     expect(switchBot.curtain(deviceId)).toBeInstanceOf(SwitchBotCurtain);
+  });
+
+  test("Humidifier", () => {
+    expect(switchBot.humidifier(deviceId)).toBeInstanceOf(SwitchBotHumidifier);
   });
 
   test("Lock", () => {

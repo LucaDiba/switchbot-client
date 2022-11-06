@@ -1,11 +1,20 @@
 import {
   BaseDeviceStatusBody,
   BaseDeviceWithPowerStatusBody,
+  BaseDeviceWithTemperatureHumidityStatusBody,
   Deps,
 } from "../../types";
 import { DEVICE_TYPES_ARRAY } from "../../utils/constant";
-import { getMockedCommandResponse } from "../../utils/tests";
-import { Device, DeviceWithPower, DeviceWithPowerToggle } from "../Device";
+import {
+  getMockedCommandResponse,
+  getMockedStatusResponse,
+} from "../../utils/tests";
+import {
+  Device,
+  DeviceWithPower,
+  DeviceWithPowerToggle,
+  DeviceWithTemperatureHumidity,
+} from "../Device";
 
 type DeviceTypes = typeof DEVICE_TYPES_ARRAY[number];
 
@@ -303,5 +312,49 @@ describe("DeviceWithPowerToggle", () => {
         }
       );
     });
+  });
+});
+
+describe("DeviceWithPowerLevel", () => {
+  const EXPECTED_TEMPERATURE = 22.2;
+  const EXPECTED_HUMIDITY = 45;
+
+  let device: DeviceWithTemperatureHumidity<
+    BaseDeviceWithTemperatureHumidityStatusBody<DeviceTypes>,
+    {}
+  >;
+
+  beforeEach(() => {
+    deps = {
+      getRequest: jest.fn(),
+      postRequest: jest.fn(),
+    };
+    device = new DeviceWithTemperatureHumidity(deviceId, deps);
+    deps.getRequest = jest.fn().mockReturnValueOnce(
+      getMockedStatusResponse({
+        body: {
+          temperature: EXPECTED_TEMPERATURE,
+          humidity: EXPECTED_HUMIDITY,
+        },
+      })
+    );
+  });
+
+  test("get temperature", async () => {
+    const temperature = await device.getTemperature();
+
+    expect(temperature).toEqual(EXPECTED_TEMPERATURE);
+
+    expect(deps.getRequest).toBeCalledTimes(1);
+    expect(deps.postRequest).toBeCalledTimes(0);
+  });
+
+  test("get humidity", async () => {
+    const humidity = await device.getHumidity();
+
+    expect(humidity).toEqual(EXPECTED_HUMIDITY);
+
+    expect(deps.getRequest).toBeCalledTimes(1);
+    expect(deps.postRequest).toBeCalledTimes(0);
   });
 });

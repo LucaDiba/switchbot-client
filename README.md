@@ -45,6 +45,7 @@ Currently supported devices:
 
 - Bot
 - Curtain
+- Humidifier
 - Lock
 - Meter
 - Meter Plus

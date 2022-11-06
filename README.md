@@ -47,8 +47,10 @@ Currently supported devices:
 - Curtain
 - Lock
 - Meter
+- Meter Plus
 - Plug
-- Plug Mini
+- Plug Mini (US)
+- Plug Mini (JP)
 - [📘 Full documentation](https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html)
 
 ## Author

@@ -5,11 +5,11 @@ import {
 import { DEVICE_TYPES } from "../utils/constant.js";
 import { DeviceWithPower } from "./Device.js";
 
-export type GetDeviceBody = BaseDeviceGetDeviceBody;
+type DeviceType = typeof DEVICE_TYPES.PLUG;
 
-export type StatusBody = BaseDeviceWithPowerStatusBody & {
-  deviceType: typeof DEVICE_TYPES.BOT;
-};
+export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType>;
+
+export type StatusBody = BaseDeviceWithPowerStatusBody<DeviceType>;
 
 export type CommandBody = any; // TODO: Figure out what this is
 

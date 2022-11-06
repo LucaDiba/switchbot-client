@@ -6,17 +6,20 @@ import {
   DeviceId,
   DeviceStatusReponse,
 } from "../types.js";
+import { DEVICE_TYPES_ARRAY } from "../utils/constant.js";
 import {
   returnDeviceCommandBodyOrThrow,
   returnDeviceStatusBodyOrThrow,
 } from "../utils/response.js";
+
+type DeviceTypes = typeof DEVICE_TYPES_ARRAY[number];
 
 export type GetStatusOptions = {
   forceRefresh?: boolean;
 };
 
 export class Device<
-  DeviceStatusBody extends BaseDeviceStatusBody,
+  DeviceStatusBody extends BaseDeviceStatusBody<DeviceTypes>,
   CommandBody
 > {
   protected readonly _deviceId: DeviceId;
@@ -71,7 +74,7 @@ export class Device<
 }
 
 export class DeviceWithPower<
-  StatusBody extends BaseDeviceWithPowerStatusBody,
+  StatusBody extends BaseDeviceWithPowerStatusBody<DeviceTypes>,
   CommandBody
 > extends Device<StatusBody, CommandBody> {
   public getPowerStatus = async () => {
@@ -85,14 +88,14 @@ export class DeviceWithPower<
   };
 
   /**
-   * Set the device to on state
+   * Set the device to on state.
    */
   public turnOn = async () => {
     return this.sendCommand("turnOn");
   };
 
   /**
-   * Set the device to off state
+   * Set the device to off state.
    */
   public turnOff = async () => {
     return this.sendCommand("turnOff");
@@ -100,7 +103,7 @@ export class DeviceWithPower<
 }
 
 export class DeviceWithPowerToggle<
-  StatusBody extends BaseDeviceWithPowerStatusBody,
+  StatusBody extends BaseDeviceWithPowerStatusBody<DeviceTypes>,
   CommandBody
 > extends DeviceWithPower<StatusBody, CommandBody> {
   /**

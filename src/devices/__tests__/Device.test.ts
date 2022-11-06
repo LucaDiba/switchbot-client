@@ -3,8 +3,11 @@ import {
   BaseDeviceWithPowerStatusBody,
   Deps,
 } from "../../types";
+import { DEVICE_TYPES_ARRAY } from "../../utils/constant";
 import { getMockedCommandResponse } from "../../utils/tests";
 import { Device, DeviceWithPower, DeviceWithPowerToggle } from "../Device";
+
+type DeviceTypes = typeof DEVICE_TYPES_ARRAY[number];
 
 const deviceId = "deviceId";
 const hubDeviceId = "hubDeviceId";
@@ -21,7 +24,7 @@ beforeEach(() => {
 });
 
 describe("Device", () => {
-  let device: Device<BaseDeviceStatusBody, {}>;
+  let device: Device<BaseDeviceStatusBody<DeviceTypes>, {}>;
 
   beforeEach(() => {
     deps = {
@@ -155,7 +158,7 @@ describe("Device", () => {
 });
 
 describe("DeviceWithPower", () => {
-  let device: DeviceWithPower<BaseDeviceWithPowerStatusBody, {}>;
+  let device: DeviceWithPower<BaseDeviceWithPowerStatusBody<DeviceTypes>, {}>;
 
   beforeEach(() => {
     deps = {
@@ -265,7 +268,10 @@ describe("DeviceWithPower", () => {
 });
 
 describe("DeviceWithPowerToggle", () => {
-  let device: DeviceWithPowerToggle<BaseDeviceWithPowerStatusBody, {}>;
+  let device: DeviceWithPowerToggle<
+    BaseDeviceWithPowerStatusBody<DeviceTypes>,
+    {}
+  >;
 
   beforeEach(() => {
     deps = {

@@ -2,10 +2,11 @@ import { BaseDeviceGetDeviceBody, BaseDeviceStatusBody } from "../types.js";
 import { DEVICE_TYPES } from "../utils/constant.js";
 import { Device } from "./Device.js";
 
-export type GetDeviceBody = BaseDeviceGetDeviceBody; // TODO: determine exact type
+type DeviceType = typeof DEVICE_TYPES.LOCK;
 
-export type StatusBody = BaseDeviceStatusBody & {
-  deviceType: typeof DEVICE_TYPES.LOCK;
+export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType>; // TODO: determine exact type
+
+export type StatusBody = BaseDeviceStatusBody<DeviceType> & {
   lockState: "locked" | "unlocked" | "jammed";
   doorState: "closed" | "opened";
   calibrate: boolean;
@@ -29,12 +30,12 @@ export type CommandBody = {
 
 export default class SwitchBotLock extends Device<StatusBody, CommandBody> {
   /**
-   * Rotate to locked position
+   * Rotate to locked position.
    */
   public lock = () => this.sendCommand("lock");
 
   /**
-   * Rotate to unlocked position
+   * Rotate to unlocked position.
    */
   public unlock = () => this.sendCommand("unlock");
 }

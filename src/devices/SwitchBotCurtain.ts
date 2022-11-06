@@ -6,7 +6,9 @@ import {
 import { DEVICE_TYPES } from "../utils/constant.js";
 import { Device } from "./Device.js";
 
-export type GetDeviceBody = BaseDeviceGetDeviceBody & {
+type DeviceType = typeof DEVICE_TYPES.BOT;
+
+export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType> & {
   curtainDevicesIds: DeviceId[];
   calibrate: boolean;
   group: boolean;
@@ -14,8 +16,7 @@ export type GetDeviceBody = BaseDeviceGetDeviceBody & {
   openDirection: string; // TODO: determine possible values ("left" | "right" ?)
 };
 
-export type StatusBody = BaseDeviceStatusBody & {
-  deviceType: typeof DEVICE_TYPES.BOT;
+export type StatusBody = BaseDeviceStatusBody<DeviceType> & {
   calibrate: boolean;
   group: boolean;
   moving: boolean;

@@ -1,9 +1,12 @@
 import { BaseDeviceGetDeviceBody, BaseDeviceStatusBody } from "../types.js";
+import { DEVICE_TYPES } from "../utils/constant.js";
 import { Device } from "./Device.js";
 
-export type GetDeviceBody = BaseDeviceGetDeviceBody;
+type DeviceType = typeof DEVICE_TYPES.METER | typeof DEVICE_TYPES.METER_PLUS;
 
-export type StatusBody = BaseDeviceStatusBody & {
+export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType>;
+
+export type StatusBody = BaseDeviceStatusBody<DeviceType> & {
   temperature: number;
   humidity: number;
 };
@@ -12,12 +15,12 @@ export type CommandBody = never;
 
 export default class SwitchBotMeter extends Device<StatusBody, CommandBody> {
   /**
-   * @returns temperature in celsius
+   * @returns Temperature in celsius.
    */
   public getTemperature = async () => (await this.getStatus()).temperature;
 
   /**
-   * @returns humidity percentage (integer, 0 - 100)
+   * @returns Humidity percentage (integer, 0 - 100).
    */
   public getHumidity = async () => (await this.getStatus()).humidity;
 }

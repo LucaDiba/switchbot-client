@@ -22,17 +22,19 @@ export type DeviceCommandResponse<T> = DeviceStatusReponse<{
   }[];
 }>;
 
-export type BaseDeviceStatusBody = {
+export type BaseDeviceStatusBody<DeviceType> = {
   deviceId: DeviceId;
-  deviceType: typeof DEVICE_TYPES_ARRAY[number];
+  deviceType: DeviceType & typeof DEVICE_TYPES_ARRAY[number];
   hubDeviceId: DeviceId;
 };
 
-export type BaseDeviceWithPowerStatusBody = BaseDeviceStatusBody & {
-  power: "on" | "off";
-};
+export type BaseDeviceWithPowerStatusBody<DeviceType> =
+  BaseDeviceStatusBody<DeviceType> & {
+    power: "on" | "off";
+  };
 
-export type BaseDeviceGetDeviceBody = BaseDeviceStatusBody & {
-  deviceName: string;
-  enableCloudService: boolean;
-};
+export type BaseDeviceGetDeviceBody<DeviceType> =
+  BaseDeviceStatusBody<DeviceType> & {
+    deviceName: string;
+    enableCloudService: boolean;
+  };

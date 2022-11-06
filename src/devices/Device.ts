@@ -2,6 +2,7 @@ import {
   BaseDeviceStatusBody,
   BaseDeviceWithPowerStatusBody,
   Deps,
+  DeviceCommandResponse,
   DeviceId,
   DeviceStatusReponse,
 } from "../types.js";
@@ -54,20 +55,14 @@ export class Device<DeviceStatusBody extends BaseDeviceStatusBody> {
     command: string,
     parameter: string = "default"
   ) => {
-    const response = await this._deps.postRequest<
-      DeviceStatusReponse<{
-        items: {
-          code: number;
-          deviceId: DeviceId;
-          message: string;
-          status: T;
-        }[];
-      }>
-    >(this._getPath("/commands"), {
-      command,
-      parameter,
-      commandType: "command",
-    });
+    const response = await this._deps.postRequest<DeviceCommandResponse<T>>(
+      this._getPath("/commands"),
+      {
+        command,
+        parameter,
+        commandType: "command",
+      }
+    );
 
     return returnDeviceCommandBodyOrThrow(response);
   };

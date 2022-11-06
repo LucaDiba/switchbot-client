@@ -3,18 +3,21 @@ import {
   BaseDeviceWithPowerStatusBody,
   Deps,
 } from "../../types";
+import { getMockedCommandResponse } from "../../utils/tests";
 import { Device, DeviceWithPower, DeviceWithPowerToggle } from "../Device";
 
 const deviceId = "deviceId";
 const hubDeviceId = "hubDeviceId";
 
 let deps: Deps;
+let mockCommandResponse = getMockedCommandResponse({ deviceId });
 
 beforeEach(() => {
   deps = {
     getRequest: jest.fn(),
     postRequest: jest.fn(),
   };
+  mockCommandResponse = getMockedCommandResponse({ deviceId });
 });
 
 describe("Device", () => {
@@ -225,11 +228,7 @@ describe("DeviceWithPower", () => {
 
   describe("POST requests", () => {
     beforeEach(() => {
-      deps.postRequest = jest.fn().mockReturnValueOnce({
-        statusCode: 100,
-        body: {},
-        message: "success",
-      });
+      deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
     });
 
     afterEach(() => {
@@ -278,11 +277,7 @@ describe("DeviceWithPowerToggle", () => {
 
   describe("POST requests", () => {
     beforeEach(() => {
-      deps.postRequest = jest.fn().mockReturnValueOnce({
-        statusCode: 100,
-        body: {},
-        message: "success",
-      });
+      deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
     });
 
     afterEach(() => {

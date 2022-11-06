@@ -1,10 +1,12 @@
 import { Deps } from "../../types";
+import { getMockedCommandResponse } from "../../utils/tests";
 import SwitchBotCurtain from "../SwitchBotCurtain";
 
 const deviceId = "deviceId";
 
 let device: SwitchBotCurtain;
 let deps: Deps;
+let mockCommandResponse = getMockedCommandResponse({ deviceId });
 
 beforeEach(() => {
   deps = {
@@ -12,15 +14,12 @@ beforeEach(() => {
     postRequest: jest.fn(),
   };
   device = new SwitchBotCurtain(deviceId, deps);
+  mockCommandResponse = getMockedCommandResponse({ deviceId });
 });
 
 describe("setPosition", () => {
   beforeEach(() => {
-    deps.postRequest = jest.fn().mockReturnValueOnce({
-      statusCode: 100,
-      body: {},
-      message: "success",
-    });
+    deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
   });
 
   it("should send command to switchbot", async () => {
@@ -63,11 +62,7 @@ describe("setPosition", () => {
 });
 
 test("open", async () => {
-  deps.postRequest = jest.fn().mockReturnValueOnce({
-    statusCode: 100,
-    body: {},
-    message: "success",
-  });
+  deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
 
   await device.open();
 
@@ -80,11 +75,7 @@ test("open", async () => {
 });
 
 test("open", async () => {
-  deps.postRequest = jest.fn().mockReturnValueOnce({
-    statusCode: 100,
-    body: {},
-    message: "success",
-  });
+  deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
 
   await device.close();
 

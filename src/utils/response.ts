@@ -1,4 +1,4 @@
-import { DeviceId, DeviceStatusReponse } from "../types.js";
+import { DeviceCommandResponse, DeviceStatusReponse } from "../types.js";
 import { SWITCHBOT_RESPONSE_STATUS_OK } from "./constant.js";
 
 export const returnDeviceStatusBodyOrThrow = <T>(
@@ -12,14 +12,7 @@ export const returnDeviceStatusBodyOrThrow = <T>(
 };
 
 export const returnDeviceCommandBodyOrThrow = <T>(
-  response: DeviceStatusReponse<{
-    items: {
-      code: number;
-      deviceId: DeviceId;
-      message: string;
-      status: T;
-    }[];
-  }>
+  response: DeviceCommandResponse<T>
 ) => {
   if (response.statusCode !== SWITCHBOT_RESPONSE_STATUS_OK) {
     const { statusCode, message } = response;

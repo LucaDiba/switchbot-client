@@ -1,3 +1,5 @@
+import { createHmac } from "crypto";
+import nock from "nock";
 import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
 import SwitchBotCurtain from "../devices/SwitchBotCurtain";
@@ -5,37 +7,42 @@ import SwitchBotLock from "../devices/SwitchBotLock";
 import SwitchBotPlug from "../devices/SwitchBotPlug";
 import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
 import { getMockedCommandResponse } from "../utils/tests";
-const BASE_URL = "https://api.switch-bot.com";
 
-const nock = require("nock");
+const BASE_URL = "https://api.switch-bot.com";
+const OPEN_TOKEN = "openToken";
+const SECRET_KEY = "secretKey";
 
 const switchBot = new SwitchBot({
-  openToken: "openToken",
-  secretKey: "secretKey",
+  openToken: OPEN_TOKEN,
+  secretKey: SECRET_KEY,
 });
 const deviceId = "deviceId";
 
 describe("requests", () => {
-  const mockCommandResponse = getMockedCommandResponse({ deviceId });
+  test("get", async () => {
+    const mockStatusResponse = {
+      statusCode: 100,
+      body: {
+        deviceId,
+        deviceType: "Bot",
+        power: "on",
+        hubDeviceId: deviceId,
+      },
+      message: "success",
+    };
 
-  test("get status", async () => {
     nock(BASE_URL)
       .get(`/v1.1/devices/${deviceId}/status`)
-      .reply(200, {
-        statusCode: 100,
-        body: {
-          deviceId,
-          deviceType: "Bot",
-          power: "on",
-          hubDeviceId: deviceId,
-        },
-        message: "success",
-      });
+      .reply(200, mockStatusResponse);
 
-    await switchBot.bot(deviceId).getStatus();
+    const response = await switchBot.bot(deviceId).getStatus();
+
+    expect(response).toEqual(mockStatusResponse.body);
   });
 
-  test("press", async () => {
+  test("post", async () => {
+    const mockCommandResponse = getMockedCommandResponse({ deviceId });
+
     nock(BASE_URL)
       .post(`/v1.1/devices/${deviceId}/commands`, {
         command: "press",
@@ -44,7 +51,85 @@ describe("requests", () => {
       })
       .reply(200, mockCommandResponse);
 
-    await switchBot.bot(deviceId).press();
+    const response = await switchBot.bot(deviceId).press();
+
+    expect(response).toEqual(mockCommandResponse.body.items[0].status);
+  });
+
+  describe("headers", () => {
+    const getExpectedSign = (t: string, nonce: string) => {
+      const data = OPEN_TOKEN + t + nonce;
+      return createHmac("sha256", SECRET_KEY)
+        .update(Buffer.from(data, "utf-8"))
+        .digest()
+        .toString("base64");
+    };
+
+    test("get", async () => {
+      nock(BASE_URL)
+        .get(`/v1.1/devices/${deviceId}/status`)
+        .reply(function (uri, body, callback) {
+          const { sign, nonce, t } = this.req.headers;
+
+          if (sign !== getExpectedSign(t, nonce)) {
+            return callback(new Error("Invalid signature"), [
+              400,
+              "Invalid signature",
+            ]);
+          }
+
+          callback(null, [200, getMockedCommandResponse({ deviceId })]);
+        });
+
+      try {
+        const response = await switchBot.bot(deviceId).getStatus();
+        expect(response).toMatchInlineSnapshot(`
+          {
+            "items": [
+              {
+                "code": 100,
+                "deviceId": "deviceId",
+                "message": "success",
+                "status": {},
+              },
+            ],
+          }
+        `);
+      } catch (e) {
+        throw new Error(e as any);
+      }
+    });
+
+    test("post", async () => {
+      nock(BASE_URL)
+        .post(`/v1.1/devices/${deviceId}/commands`)
+        .reply(function (uri, body, callback) {
+          const { sign, nonce, t } = this.req.headers;
+
+          if (sign !== getExpectedSign(t, nonce)) {
+            return callback(new Error("Invalid signature"), [
+              400,
+              "Invalid signature",
+            ]);
+          }
+
+          if (this.req.headers["content-type"] !== "application/json") {
+            return callback(new Error("Invalid content type"), [
+              400,
+              "Invalid content type",
+            ]);
+          }
+
+          callback(null, [200, getMockedCommandResponse({ deviceId })]);
+        });
+
+      try {
+        const response = await switchBot.bot(deviceId).press();
+        expect(response).toMatchInlineSnapshot(`{}`);
+      } catch (e) {
+        throw new Error(e as any);
+      }
+    });
   });
 });
 

@@ -81,12 +81,10 @@ export default class SwitchBot {
   };
 
   private postRequest = async <T>(path: string, body: any) => {
-    const response = await this._axios.post<T>(path, {
-      data: body,
+    const response = await this._axios.post<T>(path, body, {
       headers: {
         ...this.getRequestHeaders(),
         "Content-Type": "application/json",
-        "Content-Length": body.length,
       },
     });
 

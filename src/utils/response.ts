@@ -1,4 +1,4 @@
-import { DeviceStatusReponse } from "../types.js";
+import { DeviceId, DeviceStatusReponse } from "../types.js";
 import { SWITCHBOT_RESPONSE_STATUS_OK } from "./constant.js";
 
 export const returnDeviceStatusBodyOrThrow = <T>(
@@ -9,4 +9,36 @@ export const returnDeviceStatusBodyOrThrow = <T>(
   }
 
   throw new Error(response.message);
+};
+
+export const returnDeviceCommandBodyOrThrow = <T>(
+  response: DeviceStatusReponse<{
+    items: {
+      code: number;
+      deviceId: DeviceId;
+      message: string;
+      status: T;
+    }[];
+  }>
+) => {
+  if (response.statusCode !== SWITCHBOT_RESPONSE_STATUS_OK) {
+    const { statusCode, message } = response;
+    throw new Error(`Error ${statusCode}: ${message}`);
+  }
+
+  const { body } = response;
+
+  if (body.items.length !== 1) {
+    throw new Error(`Unexpected items length: ${body.items.length}`);
+  }
+
+  const item = body.items[0];
+  const { code, status } = item;
+
+  if (code !== SWITCHBOT_RESPONSE_STATUS_OK) {
+    const { deviceId, message } = item;
+    throw new Error(`Error ${code} from device ${deviceId}: ${message}`);
+  }
+
+  return status;
 };

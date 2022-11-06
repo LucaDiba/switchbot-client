@@ -44,10 +44,11 @@ switchbot.bot("deviceId").press();
 Currently supported devices:
 
 - Bot
-- Plug
-- Plug Mini
 - Curtain
 - Lock
+- Meter
+- Plug
+- Plug Mini
 - [📘 Full documentation](https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html)
 
 ## Author

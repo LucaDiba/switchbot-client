@@ -1,8 +1,20 @@
-import { BaseDeviceStatusBody } from "../types.js";
+import {
+  BaseDeviceGetDeviceBody,
+  BaseDeviceStatusBody,
+  DeviceId,
+} from "../types.js";
 import { DEVICE_TYPES } from "../utils/constant.js";
 import { Device } from "./Device.js";
 
-type StatusBody = BaseDeviceStatusBody & {
+export type GetDeviceBody = BaseDeviceGetDeviceBody & {
+  curtainDevicesIds: DeviceId[];
+  calibrate: boolean;
+  group: boolean;
+  master: boolean;
+  openDirection: string; // TODO: determine possible values ("left" | "right" ?)
+};
+
+export type StatusBody = BaseDeviceStatusBody & {
   deviceType: typeof DEVICE_TYPES.BOT;
   calibrate: boolean;
   group: boolean;
@@ -10,7 +22,7 @@ type StatusBody = BaseDeviceStatusBody & {
   slidePosition: String;
 };
 
-type CommandBody = {};
+export type CommandBody = any; // TODO: Figure out what this is
 
 enum SetPositionMode {
   PERFORMANCE = "0",
@@ -18,7 +30,7 @@ enum SetPositionMode {
   DEFAULT = "ff",
 }
 
-export default class SwitchBotCurtain extends Device<StatusBody> {
+export default class SwitchBotCurtain extends Device<StatusBody, CommandBody> {
   /**
    * @param position
    *  Must be a number between 0 and 100.
@@ -31,19 +43,16 @@ export default class SwitchBotCurtain extends Device<StatusBody> {
 
     const parameter = `0,${SetPositionMode.DEFAULT},${position}`;
 
-    return this.sendCommand<CommandBody>("setPosition", parameter);
+    return this.sendCommand("setPosition", parameter);
   };
 
   /**
    * Open the curtain (equivalent to set position to 0).
    */
-  public open = () => this.sendCommand<CommandBody>("turnOn");
+  public open = () => this.sendCommand("turnOn");
 
   /**
    * Close the curtain (equivalent to set position to 100).
    */
-  public close = () => this.sendCommand<CommandBody>("turnOff");
+  public close = () => this.sendCommand("turnOff");
 }
-
-export type SwitchBotCurtainStatusBody = StatusBody;
-export type SwitchBotCurtainCommandBody = CommandBody;

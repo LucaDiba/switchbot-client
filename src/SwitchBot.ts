@@ -3,6 +3,7 @@ import { createHmac, randomUUID } from "crypto";
 import SwitchBotBot from "./devices/SwitchBotBot.js";
 import SwitchBotCurtain from "./devices/SwitchBotCurtain.js";
 import SwitchBotLock from "./devices/SwitchBotLock.js";
+import SwitchBotMeter from "./devices/SwitchBotMeter.js";
 import SwitchBotPlug from "./devices/SwitchBotPlug.js";
 import SwitchBotPlugMini from "./devices/SwitchBotPlugMini.js";
 import { DeviceId } from "./types.js";
@@ -35,20 +36,24 @@ export default class SwitchBot {
     return new SwitchBotBot(deviceId, this.getDeps());
   };
 
-  public plug = (deviceId: DeviceId) => {
-    return new SwitchBotPlug(deviceId, this.getDeps());
-  };
-
-  public plugMini = (deviceId: DeviceId) => {
-    return new SwitchBotPlugMini(deviceId, this.getDeps());
-  };
-
   public curtain = (deviceId: DeviceId) => {
     return new SwitchBotCurtain(deviceId, this.getDeps());
   };
 
   public lock = (deviceId: DeviceId) => {
     return new SwitchBotLock(deviceId, this.getDeps());
+  };
+
+  public meter = (deviceId: DeviceId) => {
+    return new SwitchBotMeter(deviceId, this.getDeps());
+  };
+
+  public plug = (deviceId: DeviceId) => {
+    return new SwitchBotPlug(deviceId, this.getDeps());
+  };
+
+  public plugMini = (deviceId: DeviceId) => {
+    return new SwitchBotPlugMini(deviceId, this.getDeps());
   };
 
   private getDeps = () => ({

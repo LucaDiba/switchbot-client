@@ -1,7 +1,23 @@
-import { DeviceId } from "../types";
+import { DeviceCommandResponse, DeviceId, DeviceStatusReponse } from "../types";
 import { SWITCHBOT_RESPONSE_STATUS_OK } from "./constant";
 
-export const getMockedCommandResponse = ({
+export const getMockedStatusResponse = <T>({
+  statusCode,
+  message,
+  body,
+}: {
+  statusCode?: number;
+  message?: string;
+  body?: T;
+}) => {
+  return {
+    statusCode: statusCode ?? SWITCHBOT_RESPONSE_STATUS_OK,
+    message: message ?? "success",
+    body: body ?? {},
+  } as DeviceStatusReponse<T>;
+};
+
+export const getMockedCommandResponse = <T>({
   deviceId,
 
   mainStatusCode,
@@ -16,7 +32,7 @@ export const getMockedCommandResponse = ({
   mainMessage?: string;
   itemCode?: number;
   itemMessage?: string;
-  itemStatus?: any;
+  itemStatus?: T;
 }) => {
   return {
     statusCode: mainStatusCode ?? SWITCHBOT_RESPONSE_STATUS_OK,
@@ -31,5 +47,5 @@ export const getMockedCommandResponse = ({
         },
       ],
     },
-  };
+  } as DeviceCommandResponse<T>;
 };

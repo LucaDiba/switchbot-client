@@ -4,6 +4,7 @@ import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
 import SwitchBotCurtain from "../devices/SwitchBotCurtain";
 import SwitchBotLock from "../devices/SwitchBotLock";
+import SwitchBotMeter from "../devices/SwitchBotMeter";
 import SwitchBotPlug from "../devices/SwitchBotPlug";
 import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
 import { getMockedCommandResponse } from "../utils/tests";
@@ -138,19 +139,23 @@ describe("instantiate devices", () => {
     expect(switchBot.bot(deviceId)).toBeInstanceOf(SwitchBotBot);
   });
 
-  test("Plug", () => {
-    expect(switchBot.plug(deviceId)).toBeInstanceOf(SwitchBotPlug);
-  });
-
-  test("Plug Mini", () => {
-    expect(switchBot.plugMini(deviceId)).toBeInstanceOf(SwitchBotPlugMini);
-  });
-
   test("Curtain", () => {
     expect(switchBot.curtain(deviceId)).toBeInstanceOf(SwitchBotCurtain);
   });
 
   test("Lock", () => {
     expect(switchBot.lock(deviceId)).toBeInstanceOf(SwitchBotLock);
+  });
+
+  test("Meter", () => {
+    expect(switchBot.meter(deviceId)).toBeInstanceOf(SwitchBotMeter);
+  });
+
+  test("Plug", () => {
+    expect(switchBot.plug(deviceId)).toBeInstanceOf(SwitchBotPlug);
+  });
+
+  test("Plug Mini", () => {
+    expect(switchBot.plugMini(deviceId)).toBeInstanceOf(SwitchBotPlugMini);
   });
 });

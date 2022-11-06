@@ -1,6 +1,11 @@
-import { BaseDeviceWithPowerStatusBody } from "../types.js";
+import {
+  BaseDeviceGetDeviceBody,
+  BaseDeviceWithPowerStatusBody,
+} from "../types.js";
 import { DEVICE_TYPES } from "../utils/constant.js";
 import { DeviceWithPowerToggle } from "./Device.js";
+
+type GetDeviceBody = BaseDeviceGetDeviceBody;
 
 type StatusBody = BaseDeviceWithPowerStatusBody & {
   deviceType:
@@ -8,12 +13,25 @@ type StatusBody = BaseDeviceWithPowerStatusBody & {
     | typeof DEVICE_TYPES.PLUG_MINI_JP;
 };
 
-type CommandBody = {};
+type CommandBody = {
+  isDelay: boolean;
+  rssiQuality: number;
+  currentElectricity: number;
+  currentTemperature: number;
+  onTime: number;
+  currentWeight: number;
+  currentPower: number;
+  isOverload: boolean;
+  currentVoltage: number;
+  power: "on" | "off";
+  isLed: false;
+};
 
 export default class SwitchBotPlug extends DeviceWithPowerToggle<
   StatusBody,
   CommandBody
 > {}
 
+export type SwitchBotPlugGetDeviceBody = GetDeviceBody;
 export type SwitchBotPlugStatusBody = StatusBody;
 export type SwitchBotPlugCommandBody = CommandBody;

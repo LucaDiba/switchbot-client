@@ -39,6 +39,12 @@ export type BaseDeviceWithTemperatureHumidityStatusBody<DeviceType> =
     humidity: number;
   };
 
+export type BaseDeviceWithMotionBrightnessStatusBody<DeviceType> =
+  BaseDeviceStatusBody<DeviceType> & {
+    moveDetected: boolean;
+    brightness: "bright" | "dim";
+  };
+
 export type BaseDeviceGetDeviceBody<DeviceType> =
   BaseDeviceStatusBody<DeviceType> & {
     deviceName: string;

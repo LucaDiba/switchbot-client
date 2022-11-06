@@ -44,15 +44,34 @@ switchbot.bot("deviceId").press();
 Currently supported devices:
 
 - Bot
+- Contact Sensor
 - Curtain
 - Humidifier
 - Lock
 - Meter
 - Meter Plus
+- Motion Sensor
 - Plug
 - Plug Mini (US)
 - Plug Mini (JP)
 - [📘 Full documentation](https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html)
+
+Coming soon:
+
+- Hub/Hub Plus/Hub Mini
+- Keypad
+- Keypad Touch
+- Remote
+- Ceiling Light
+- Ceiling Light Pro
+- Strip Light
+- Color Bulb
+- Robot Vacuum Cleaner S1
+- Robot Vacuum Cleaner S1 Plus
+- Indoor Cam
+- Pan/Tilt Cam
+- Pan/Tilt Cam 2K
+- Virtual infrared remote devices
 
 ## Author
 

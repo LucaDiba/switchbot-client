@@ -2,10 +2,12 @@ import { createHmac } from "crypto";
 import nock from "nock";
 import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
+import SwitchBotContactSensor from "../devices/SwitchBotContactSensor";
 import SwitchBotCurtain from "../devices/SwitchBotCurtain";
 import SwitchBotHumidifier from "../devices/SwitchBotHumidifier";
 import SwitchBotLock from "../devices/SwitchBotLock";
 import SwitchBotMeter from "../devices/SwitchBotMeter";
+import SwitchBotMotionSensor from "../devices/SwitchBotMotionSensor";
 import SwitchBotPlug from "../devices/SwitchBotPlug";
 import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
 import { getMockedCommandResponse } from "../utils/tests";
@@ -140,6 +142,12 @@ describe("instantiate devices", () => {
     expect(switchBot.bot(deviceId)).toBeInstanceOf(SwitchBotBot);
   });
 
+  test("ContactSensor", () => {
+    expect(switchBot.contactSensor(deviceId)).toBeInstanceOf(
+      SwitchBotContactSensor
+    );
+  });
+
   test("Curtain", () => {
     expect(switchBot.curtain(deviceId)).toBeInstanceOf(SwitchBotCurtain);
   });
@@ -154,6 +162,12 @@ describe("instantiate devices", () => {
 
   test("Meter", () => {
     expect(switchBot.meter(deviceId)).toBeInstanceOf(SwitchBotMeter);
+  });
+
+  test("MotionSensor", () => {
+    expect(switchBot.motionSensor(deviceId)).toBeInstanceOf(
+      SwitchBotMotionSensor
+    );
   });
 
   test("Plug", () => {

@@ -1,3 +1,3 @@
-import SwitchBot from "./SwitchBot";
+import SwitchBot from "./SwitchBot.js";
 
 export default SwitchBot;

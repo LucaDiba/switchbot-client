@@ -4,7 +4,7 @@
   "description": "A client for SwitchBot APIs",
   "type": "module",
   "main": "lib/index.js",
-  "types": "lib",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "rm -rf ./lib && tsc --project tsconfig.build.json",
     "lint": "eslint ./src",

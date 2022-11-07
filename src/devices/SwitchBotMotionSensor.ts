@@ -3,7 +3,7 @@ import {
   BaseDeviceWithMotionBrightnessStatusBody,
 } from "../types.js";
 import { DEVICE_TYPES } from "../utils/constant.js";
-import { Device } from "./Device.js";
+import { DeviceWithStatus } from "./Device.js";
 
 type DeviceType = typeof DEVICE_TYPES.MOTION_SENSOR;
 
@@ -13,7 +13,7 @@ export type StatusBody = BaseDeviceWithMotionBrightnessStatusBody<DeviceType>;
 
 export type CommandBody = never;
 
-export default class SwitchBotMotionSensor extends Device<
+export default class SwitchBotMotionSensor extends DeviceWithStatus<
   StatusBody,
   CommandBody
 > {}

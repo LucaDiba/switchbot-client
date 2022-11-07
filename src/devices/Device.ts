@@ -19,24 +19,26 @@ export type GetStatusOptions = {
   forceRefresh?: boolean;
 };
 
-export class Device<
-  DeviceStatusBody extends BaseDeviceStatusBody<DeviceTypes>,
-  CommandBody
-> {
+export class Device {
   protected readonly _deviceId: DeviceId;
 
   protected readonly _deps: Deps;
-
-  private _cachedStatus: DeviceStatusBody | null = null;
 
   constructor(deviceId: DeviceId, deps: Deps) {
     this._deviceId = deviceId;
     this._deps = deps;
   }
 
-  private _getPath = (path: string) => {
+  protected _getPath = (path: string) => {
     return `/v1.1/devices/${this._deviceId}${path}`;
   };
+}
+
+export class DeviceWithStatus<
+  DeviceStatusBody extends BaseDeviceStatusBody<DeviceTypes>,
+  CommandBody
+> extends Device {
+  private _cachedStatus: DeviceStatusBody | null = null;
 
   public getStatus = async (options: GetStatusOptions = {}) => {
     const forceRefresh = options.forceRefresh ?? false;
@@ -77,7 +79,7 @@ export class Device<
 export class DeviceWithPower<
   StatusBody extends BaseDeviceWithPowerStatusBody<DeviceTypes>,
   CommandBody
-> extends Device<StatusBody, CommandBody> {
+> extends DeviceWithStatus<StatusBody, CommandBody> {
   public getPowerStatus = async () => {
     const status = await this.getStatus();
 
@@ -118,7 +120,7 @@ export class DeviceWithPowerToggle<
 export class DeviceWithTemperatureHumidity<
   StatusBody extends BaseDeviceWithTemperatureHumidityStatusBody<DeviceTypes>,
   CommandBody
-> extends Device<StatusBody, CommandBody> {
+> extends DeviceWithStatus<StatusBody, CommandBody> {
   /**
    * @returns Temperature in celsius.
    */

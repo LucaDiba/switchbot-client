@@ -4,7 +4,7 @@ import {
   DeviceId,
 } from "../types.js";
 import { DEVICE_TYPES } from "../utils/constant.js";
-import { Device } from "./Device.js";
+import { DeviceWithStatus } from "./Device.js";
 
 type DeviceType = typeof DEVICE_TYPES.BOT;
 
@@ -31,7 +31,10 @@ enum SetPositionMode {
   DEFAULT = "ff",
 }
 
-export default class SwitchBotCurtain extends Device<StatusBody, CommandBody> {
+export default class SwitchBotCurtain extends DeviceWithStatus<
+  StatusBody,
+  CommandBody
+> {
   /**
    * @param position
    *  Must be a number between 0 and 100.

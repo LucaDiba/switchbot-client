@@ -5,6 +5,7 @@ import SwitchBotContactSensor from "./devices/SwitchBotContactSensor.js";
 import SwitchBotCurtain from "./devices/SwitchBotCurtain.js";
 import SwitchBotHub from "./devices/SwitchBotHub.js";
 import SwitchBotHumidifier from "./devices/SwitchBotHumidifier.js";
+import SwitchBotKeypad from "./devices/SwitchBotKeypad.js";
 import SwitchBotLock from "./devices/SwitchBotLock.js";
 import SwitchBotMeter from "./devices/SwitchBotMeter.js";
 import SwitchBotMotionSensor from "./devices/SwitchBotMotionSensor.js";
@@ -57,6 +58,10 @@ export default class SwitchBot {
 
   public humidifier = (deviceId: DeviceId) => {
     return new SwitchBotHumidifier(deviceId, this.getDeps());
+  };
+
+  public keypad = (deviceId: DeviceId) => {
+    return new SwitchBotKeypad(deviceId, this.getDeps());
   };
 
   public lock = (deviceId: DeviceId) => {

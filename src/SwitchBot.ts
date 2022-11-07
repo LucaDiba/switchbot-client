@@ -3,13 +3,14 @@ import { createHmac, randomUUID } from "crypto";
 import SwitchBotBot from "./devices/SwitchBotBot.js";
 import SwitchBotContactSensor from "./devices/SwitchBotContactSensor.js";
 import SwitchBotCurtain from "./devices/SwitchBotCurtain.js";
+import SwitchBotHub from "./devices/SwitchBotHub.js";
 import SwitchBotHumidifier from "./devices/SwitchBotHumidifier.js";
 import SwitchBotLock from "./devices/SwitchBotLock.js";
 import SwitchBotMeter from "./devices/SwitchBotMeter.js";
 import SwitchBotMotionSensor from "./devices/SwitchBotMotionSensor.js";
 import SwitchBotPlug from "./devices/SwitchBotPlug.js";
 import SwitchBotPlugMini from "./devices/SwitchBotPlugMini.js";
-import { DeviceId } from "./types.js";
+import { DeviceId, GetAllDevicesResponse } from "./types.js";
 
 export type SwitchBotOptions = {
   openToken: string;
@@ -35,6 +36,9 @@ export default class SwitchBot {
     });
   }
 
+  public devices = () =>
+    this.getRequest<GetAllDevicesResponse>("/v1.1/devices");
+
   public bot = (deviceId: DeviceId) => {
     return new SwitchBotBot(deviceId, this.getDeps());
   };
@@ -45,6 +49,10 @@ export default class SwitchBot {
 
   public curtain = (deviceId: DeviceId) => {
     return new SwitchBotCurtain(deviceId, this.getDeps());
+  };
+
+  public hub = (deviceId: DeviceId) => {
+    return new SwitchBotHub(deviceId, this.getDeps());
   };
 
   public humidifier = (deviceId: DeviceId) => {

@@ -3,7 +3,7 @@ import {
   BaseDeviceWithMotionBrightnessStatusBody,
 } from "../types.js";
 import { DEVICE_TYPES } from "../utils/constant.js";
-import { Device } from "./Device.js";
+import { DeviceWithStatus } from "./Device.js";
 
 type DeviceType = typeof DEVICE_TYPES.CONTACT_SENSOR;
 
@@ -16,7 +16,7 @@ export type StatusBody =
 
 export type CommandBody = never;
 
-export default class SwitchBotContactSensor extends Device<
+export default class SwitchBotContactSensor extends DeviceWithStatus<
   StatusBody,
   CommandBody
 > {}

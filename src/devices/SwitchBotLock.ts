@@ -1,6 +1,6 @@
 import { BaseDeviceGetDeviceBody, BaseDeviceStatusBody } from "../types.js";
 import { DEVICE_TYPES } from "../utils/constant.js";
-import { Device } from "./Device.js";
+import { DeviceWithStatus } from "./Device.js";
 
 type DeviceType = typeof DEVICE_TYPES.LOCK;
 
@@ -28,7 +28,10 @@ export type CommandBody = {
   unlockedOvertimeWarning: boolean;
 };
 
-export default class SwitchBotLock extends Device<StatusBody, CommandBody> {
+export default class SwitchBotLock extends DeviceWithStatus<
+  StatusBody,
+  CommandBody
+> {
   /**
    * Rotate to locked position.
    */

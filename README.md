@@ -46,6 +46,9 @@ Currently supported devices:
 - Bot
 - Contact Sensor
 - Curtain
+- Hum
+- Hub Plus
+- Hub Mini
 - Humidifier
 - Lock
 - Meter
@@ -58,7 +61,6 @@ Currently supported devices:
 
 Coming soon:
 
-- Hub/Hub Plus/Hub Mini
 - Keypad
 - Keypad Touch
 - Remote

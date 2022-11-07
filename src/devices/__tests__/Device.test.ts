@@ -10,7 +10,7 @@ import {
   getMockedStatusResponse,
 } from "../../utils/tests";
 import {
-  Device,
+  DeviceWithStatus,
   DeviceWithPower,
   DeviceWithPowerToggle,
   DeviceWithTemperatureHumidity,
@@ -33,14 +33,14 @@ beforeEach(() => {
 });
 
 describe("Device", () => {
-  let device: Device<BaseDeviceStatusBody<DeviceTypes>, {}>;
+  let device: DeviceWithStatus<BaseDeviceStatusBody<DeviceTypes>, {}>;
 
   beforeEach(() => {
     deps = {
       getRequest: jest.fn(),
       postRequest: jest.fn(),
     };
-    device = new Device(deviceId, deps);
+    device = new DeviceWithStatus(deviceId, deps);
   });
 
   describe("getStatus", () => {

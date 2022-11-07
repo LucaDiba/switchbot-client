@@ -15,6 +15,7 @@ import { GetDeviceBody as GetDeviceBodyPlug } from "./devices/SwitchBotPlug";
 import { GetDeviceBody as GetDeviceBodyPlugMini } from "./devices/SwitchBotPlugMini";
 import { GetDeviceBody as GetDeviceBodyRemote } from "./devices/SwitchBotRemote";
 import { GetDeviceBody as GetDeviceBodyRobotVacuumCleaner } from "./devices/SwitchBotRobotVacuumCleaner";
+import { GetDeviceBody as GetDeviceBodyStripLight } from "./devices/SwitchBotStripLight";
 
 export type Deps = {
   getRequest: <T>(path: string) => Promise<T>;
@@ -47,9 +48,14 @@ export type GetAllDevicesResponse = SwitchBotResponse<{
     | GetDeviceBodyPlugMini
     | GetDeviceBodyRemote
     | GetDeviceBodyRobotVacuumCleaner
-    | any // TODO: Add all device types
+    | GetDeviceBodyStripLight
   >;
-  infraredRemoteList: any[];
+  infraredRemoteList: Array<{
+    deviceId: DeviceId;
+    deviceName: string;
+    remoteType: string;
+    hubDeviceId: DeviceId;
+  }>;
 }>;
 
 export type DeviceStatusReponse<T> = SwitchBotResponse<T>;

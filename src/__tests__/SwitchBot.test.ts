@@ -17,6 +17,7 @@ import SwitchBotPlug from "../devices/SwitchBotPlug";
 import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
 import SwitchBotRemote from "../devices/SwitchBotRemote";
 import SwitchBotRobotVacuumCleaner from "../devices/SwitchBotRobotVacuumCleaner";
+import SwitchBotStripLight from "../devices/SwitchBotStripLight";
 import { getMockedCommandResponse } from "../utils/tests";
 
 const BASE_URL = "https://api.switch-bot.com";
@@ -219,5 +220,9 @@ describe("instantiate devices", () => {
     expect(switchBot.robotVacuumCleaner(deviceId)).toBeInstanceOf(
       SwitchBotRobotVacuumCleaner
     );
+  });
+
+  test("Strip Light", () => {
+    expect(switchBot.stripLight(deviceId)).toBeInstanceOf(SwitchBotStripLight);
   });
 });

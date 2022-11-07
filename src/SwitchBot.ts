@@ -16,6 +16,7 @@ import SwitchBotPlug from "./devices/SwitchBotPlug.js";
 import SwitchBotPlugMini from "./devices/SwitchBotPlugMini.js";
 import SwitchBotRemote from "./devices/SwitchBotRemote.js";
 import SwitchBotRobotVacuumCleaner from "./devices/SwitchBotRobotVacuumCleaner.js";
+import SwitchBotStripLight from "./devices/SwitchBotStripLight.js";
 import { DeviceId, GetAllDevicesResponse } from "./types.js";
 
 export type SwitchBotOptions = {
@@ -111,6 +112,10 @@ export default class SwitchBot {
 
   public robotVacuumCleaner = (deviceId: DeviceId) => {
     return new SwitchBotRobotVacuumCleaner(deviceId, this.getDeps());
+  };
+
+  public stripLight = (deviceId: DeviceId) => {
+    return new SwitchBotStripLight(deviceId, this.getDeps());
   };
 
   private getDeps = () => ({

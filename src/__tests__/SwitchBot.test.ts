@@ -29,19 +29,23 @@ describe("requests", () => {
     const mockStatusResponse = {
       statusCode: 100,
       body: {
-        deviceId,
-        deviceType: "Bot",
-        power: "on",
-        hubDeviceId: deviceId,
+        deviceList: [
+          {
+            deviceId: "deviceId",
+            deviceName: "deviceName",
+            deviceType: "Bot",
+            hubDeviceId: "hubDeviceId",
+            enableCloudService: true,
+          },
+        ],
+        infraredRemoteList: [],
       },
       message: "success",
     };
 
-    nock(BASE_URL)
-      .get(`/v1.1/devices/${deviceId}/status`)
-      .reply(200, mockStatusResponse);
+    nock(BASE_URL).get(`/v1.1/devices`).reply(200, mockStatusResponse);
 
-    const response = await switchBot.bot(deviceId).getStatus();
+    const response = await switchBot.devices();
 
     expect(response).toEqual(mockStatusResponse.body);
   });

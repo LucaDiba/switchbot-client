@@ -37,8 +37,12 @@ export default class SwitchBot {
     });
   }
 
-  public devices = () =>
-    this.getRequest<GetAllDevicesResponse>("/v1.1/devices");
+  public devices = async () => {
+    const response = await this.getRequest<GetAllDevicesResponse>(
+      "/v1.1/devices"
+    );
+    return response.body;
+  };
 
   public bot = (deviceId: DeviceId) => {
     return new SwitchBotBot(deviceId, this.getDeps());

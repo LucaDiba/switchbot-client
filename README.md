@@ -59,6 +59,8 @@ Currently supported devices:
 - Plug
 - Plug Mini (US)
 - Plug Mini (JP)
+- Robot Vacuum Cleaner S1
+- Robot Vacuum Cleaner S1 Plus
 - [📘 Full documentation](https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html)
 
 Coming soon:
@@ -68,8 +70,6 @@ Coming soon:
 - Ceiling Light Pro
 - Strip Light
 - Color Bulb
-- Robot Vacuum Cleaner S1
-- Robot Vacuum Cleaner S1 Plus
 - Indoor Cam
 - Pan/Tilt Cam
 - Pan/Tilt Cam 2K

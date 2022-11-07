@@ -1,0 +1,47 @@
+import { BaseDeviceGetDeviceBody, BaseDeviceStatusBody } from "../types.js";
+import { DEVICE_TYPES } from "../utils/constant.js";
+import { DeviceWithStatus } from "./Device.js";
+
+type DeviceType =
+  | typeof DEVICE_TYPES.ROBOT_VACUUM_CLEANER_S1
+  | typeof DEVICE_TYPES.ROBOT_VACUUM_CLEANER_S1_PLUS;
+
+export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType>;
+
+export type StatusBody = BaseDeviceStatusBody<DeviceType> & {
+  workingStatus:
+    | "StandBy"
+    | "Clearing"
+    | "Paused"
+    | "GotoChargeBase"
+    | "Charging"
+    | "ChargeDone"
+    | "Dormant"
+    | "InTrouble"
+    | "InRemoteControl"
+    | "InDustCollecting";
+  onlineStatus: "online" | "offline";
+  battery: number;
+};
+
+export type CommandBody = any; // TODO: Figure out what this is
+
+export default class SwitchBotRobotVacuumCleaner extends DeviceWithStatus<
+  StatusBody,
+  CommandBody
+> {
+  /**
+   * Start vacuuming.
+   */
+  public start = () => this.sendCommand("start");
+
+  /**
+   * Stop vacuuming.
+   */
+  public stop = () => this.sendCommand("stop");
+
+  /**
+   * Return to charging dock.
+   */
+  public dock = () => this.sendCommand("dock");
+}

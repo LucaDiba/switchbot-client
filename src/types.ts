@@ -1,6 +1,7 @@
 import { DEVICE_TYPES_ARRAY } from "./utils/constant";
 import { GetDeviceBody as GetDeviceBodyBot } from "./devices/SwitchBotBot";
 import { GetDeviceBody as GetDeviceBodyCamera } from "./devices/SwitchBotCamera";
+import { GetDeviceBody as GetDeviceBodyCeilingLight } from "./devices/SwitchBotCeilingLight";
 import { GetDeviceBody as GetDeviceBodyContactSensor } from "./devices/SwitchBotContactSensor";
 import { GetDeviceBody as GetDeviceBodyCurtain } from "./devices/SwitchBotCurtain";
 import { GetDeviceBody as GetDeviceBodyHub } from "./devices/SwitchBotHub";
@@ -31,6 +32,7 @@ export type GetAllDevicesResponse = SwitchBotResponse<{
   deviceList: Array<
     | GetDeviceBodyBot
     | GetDeviceBodyCamera
+    | GetDeviceBodyCeilingLight
     | GetDeviceBodyContactSensor
     | GetDeviceBodyCurtain
     | GetDeviceBodyHub
@@ -69,6 +71,13 @@ export type BaseDeviceWithPowerStatusBody<DeviceType> =
   BaseDeviceStatusBody<DeviceType> & {
     power: "on" | "off";
   };
+
+export type BaseDeviceWithPowerBrightnessColorTemperatureStatusBody<
+  DeviceType
+> = BaseDeviceWithPowerStatusBody<DeviceType> & {
+  brightness: number;
+  colorTemperature: number;
+};
 
 export type BaseDeviceWithTemperatureHumidityStatusBody<DeviceType> =
   BaseDeviceStatusBody<DeviceType> & {

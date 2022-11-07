@@ -12,6 +12,7 @@ import SwitchBotMeter from "./devices/SwitchBotMeter.js";
 import SwitchBotMotionSensor from "./devices/SwitchBotMotionSensor.js";
 import SwitchBotPlug from "./devices/SwitchBotPlug.js";
 import SwitchBotPlugMini from "./devices/SwitchBotPlugMini.js";
+import SwitchBotRemote from "./devices/SwitchBotRemote.js";
 import SwitchBotRobotVacuumCleaner from "./devices/SwitchBotRobotVacuumCleaner.js";
 import { DeviceId, GetAllDevicesResponse } from "./types.js";
 
@@ -92,6 +93,10 @@ export default class SwitchBot {
 
   public plugMini = (deviceId: DeviceId) => {
     return new SwitchBotPlugMini(deviceId, this.getDeps());
+  };
+
+  public remote = (deviceId: DeviceId) => {
+    return new SwitchBotRemote(deviceId, this.getDeps());
   };
 
   public robotVacuumCleaner = (deviceId: DeviceId) => {

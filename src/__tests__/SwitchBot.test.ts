@@ -13,6 +13,7 @@ import SwitchBotMeter from "../devices/SwitchBotMeter";
 import SwitchBotMotionSensor from "../devices/SwitchBotMotionSensor";
 import SwitchBotPlug from "../devices/SwitchBotPlug";
 import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
+import SwitchBotRemote from "../devices/SwitchBotRemote";
 import SwitchBotRobotVacuumCleaner from "../devices/SwitchBotRobotVacuumCleaner";
 import { getMockedCommandResponse } from "../utils/tests";
 
@@ -196,6 +197,10 @@ describe("instantiate devices", () => {
 
   test("Plug Mini", () => {
     expect(switchBot.plugMini(deviceId)).toBeInstanceOf(SwitchBotPlugMini);
+  });
+
+  test("Remote", () => {
+    expect(switchBot.remote(deviceId)).toBeInstanceOf(SwitchBotRemote);
   });
 
   test("Robot Vacuum Cleaner", () => {

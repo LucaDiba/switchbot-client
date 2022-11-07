@@ -41,7 +41,7 @@ const switchbot = new SwitchBot({
 switchbot.bot("deviceId").press();
 ```
 
-Currently supported devices:
+Supported devices:
 
 - Bot
 - Ceiling Light
@@ -49,7 +49,7 @@ Currently supported devices:
 - Color Bulb
 - Contact Sensor
 - Curtain
-- Hum
+- Hub
 - Hub Plus
 - Hub Mini
 - Humidifier
@@ -68,11 +68,11 @@ Currently supported devices:
 - Remote
 - Robot Vacuum Cleaner S1
 - Robot Vacuum Cleaner S1 Plus
+- Strip Light
 - [📘 Full documentation](https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html)
 
-Coming soon:
+Currently not supported:
 
-- Strip Light
 - Virtual infrared remote devices
 
 ## Author

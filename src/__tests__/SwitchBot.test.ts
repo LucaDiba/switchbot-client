@@ -151,7 +151,7 @@ describe("instantiate devices", () => {
   });
 
   test("Camera", () => {
-    expect(switchBot.bot(deviceId)).toBeInstanceOf(SwitchBotCamera);
+    expect(switchBot.camera(deviceId)).toBeInstanceOf(SwitchBotCamera);
   });
 
   test("ContactSensor", () => {

@@ -50,12 +50,15 @@ Currently supported devices:
 - Hub Plus
 - Hub Mini
 - Humidifier
+- Indoor Cam
 - Keypad
 - Keypad Touch
 - Lock
 - Meter
 - Meter Plus
 - Motion Sensor
+- Pan/Tilt Cam
+- Pan/Tilt Cam 2K
 - Plug
 - Plug Mini (US)
 - Plug Mini (JP)
@@ -70,9 +73,6 @@ Coming soon:
 - Ceiling Light Pro
 - Strip Light
 - Color Bulb
-- Indoor Cam
-- Pan/Tilt Cam
-- Pan/Tilt Cam 2K
 - Virtual infrared remote devices
 
 ## Author

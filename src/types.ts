@@ -1,5 +1,6 @@
 import { DEVICE_TYPES_ARRAY } from "./utils/constant";
 import { GetDeviceBody as GetDeviceBodyBot } from "./devices/SwitchBotBot";
+import { GetDeviceBody as GetDeviceBodyCamera } from "./devices/SwitchBotCamera";
 import { GetDeviceBody as GetDeviceBodyContactSensor } from "./devices/SwitchBotContactSensor";
 import { GetDeviceBody as GetDeviceBodyCurtain } from "./devices/SwitchBotCurtain";
 import { GetDeviceBody as GetDeviceBodyHub } from "./devices/SwitchBotHub";
@@ -28,6 +29,7 @@ export type SwitchBotResponse<T> = {
 export type GetAllDevicesResponse = SwitchBotResponse<{
   deviceList: Array<
     | GetDeviceBodyBot
+    | GetDeviceBodyCamera
     | GetDeviceBodyContactSensor
     | GetDeviceBodyCurtain
     | GetDeviceBodyHub

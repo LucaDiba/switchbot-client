@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { createHmac, randomUUID } from "crypto";
 import SwitchBotBot from "./devices/SwitchBotBot.js";
+import SwitchBotCamera from "./devices/SwitchBotCamera.js";
 import SwitchBotContactSensor from "./devices/SwitchBotContactSensor.js";
 import SwitchBotCurtain from "./devices/SwitchBotCurtain.js";
 import SwitchBotHub from "./devices/SwitchBotHub.js";
@@ -47,6 +48,10 @@ export default class SwitchBot {
 
   public bot = (deviceId: DeviceId) => {
     return new SwitchBotBot(deviceId, this.getDeps());
+  };
+
+  public camera = (deviceId: DeviceId) => {
+    return new SwitchBotCamera(deviceId, this.getDeps());
   };
 
   public contactSensor = (deviceId: DeviceId) => {

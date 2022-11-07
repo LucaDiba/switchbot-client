@@ -2,6 +2,7 @@ import { createHmac } from "crypto";
 import nock from "nock";
 import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
+import SwitchBotCamera from "../devices/SwitchBotCamera";
 import SwitchBotContactSensor from "../devices/SwitchBotContactSensor";
 import SwitchBotCurtain from "../devices/SwitchBotCurtain";
 import SwitchBotHub from "../devices/SwitchBotHub";
@@ -147,6 +148,10 @@ describe("requests", () => {
 describe("instantiate devices", () => {
   test("Bot", () => {
     expect(switchBot.bot(deviceId)).toBeInstanceOf(SwitchBotBot);
+  });
+
+  test("Camera", () => {
+    expect(switchBot.bot(deviceId)).toBeInstanceOf(SwitchBotCamera);
   });
 
   test("ContactSensor", () => {

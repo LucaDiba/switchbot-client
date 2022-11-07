@@ -11,7 +11,7 @@ import { GetDeviceBody as GetDeviceBodyMeter } from "./devices/SwitchBotMeter";
 import { GetDeviceBody as GetDeviceBodyMotionSensor } from "./devices/SwitchBotMotionSensor";
 import { GetDeviceBody as GetDeviceBodyPlug } from "./devices/SwitchBotPlug";
 import { GetDeviceBody as GetDeviceBodyPlugMini } from "./devices/SwitchBotPlugMini";
-import { GetDeviceBody as GetDeviceBodyPlugRemote } from "./devices/SwitchBotPlugRemote";
+import { GetDeviceBody as GetDeviceBodyRemote } from "./devices/SwitchBotRemote";
 import { GetDeviceBody as GetDeviceBodyRobotVacuumCleaner } from "./devices/SwitchBotRobotVacuumCleaner";
 
 export type Deps = {
@@ -41,7 +41,7 @@ export type GetAllDevicesResponse = SwitchBotResponse<{
     | GetDeviceBodyMotionSensor
     | GetDeviceBodyPlug
     | GetDeviceBodyPlugMini
-    | GetDeviceBodyPlugRemote
+    | GetDeviceBodyRemote
     | GetDeviceBodyRobotVacuumCleaner
     | any // TODO: Add all device types
   >;

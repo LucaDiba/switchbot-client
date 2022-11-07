@@ -4,6 +4,7 @@ import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
 import SwitchBotCamera from "../devices/SwitchBotCamera";
 import SwitchBotCeilingLight from "../devices/SwitchBotCeilingLight";
+import SwitchBotColorBulb from "../devices/SwitchBotColorBulb";
 import SwitchBotContactSensor from "../devices/SwitchBotContactSensor";
 import SwitchBotCurtain from "../devices/SwitchBotCurtain";
 import SwitchBotHub from "../devices/SwitchBotHub";
@@ -160,6 +161,10 @@ describe("instantiate devices", () => {
     expect(switchBot.ceilingLight(deviceId)).toBeInstanceOf(
       SwitchBotCeilingLight
     );
+  });
+
+  test("Color Bulb", () => {
+    expect(switchBot.colorBulb(deviceId)).toBeInstanceOf(SwitchBotColorBulb);
   });
 
   test("ContactSensor", () => {

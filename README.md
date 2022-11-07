@@ -62,13 +62,13 @@ Currently supported devices:
 - Plug
 - Plug Mini (US)
 - Plug Mini (JP)
+- Remote
 - Robot Vacuum Cleaner S1
 - Robot Vacuum Cleaner S1 Plus
 - [📘 Full documentation](https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html)
 
 Coming soon:
 
-- Remote
 - Ceiling Light
 - Ceiling Light Pro
 - Strip Light

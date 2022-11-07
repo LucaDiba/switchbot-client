@@ -3,6 +3,7 @@ import { createHmac, randomUUID } from "crypto";
 import SwitchBotBot from "./devices/SwitchBotBot.js";
 import SwitchBotCamera from "./devices/SwitchBotCamera.js";
 import SwitchBotCeilingLight from "./devices/SwitchBotCeilingLight.js";
+import SwitchBotColorBulb from "./devices/SwitchBotColorBulb.js";
 import SwitchBotContactSensor from "./devices/SwitchBotContactSensor.js";
 import SwitchBotCurtain from "./devices/SwitchBotCurtain.js";
 import SwitchBotHub from "./devices/SwitchBotHub.js";
@@ -58,6 +59,10 @@ export default class SwitchBot {
 
   public ceilingLight = (deviceId: DeviceId) => {
     return new SwitchBotCeilingLight(deviceId, this.getDeps());
+  };
+
+  public colorBulb = (deviceId: DeviceId) => {
+    return new SwitchBotColorBulb(deviceId, this.getDeps());
   };
 
   public contactSensor = (deviceId: DeviceId) => {

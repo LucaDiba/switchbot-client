@@ -1,6 +1,8 @@
 import {
   BaseDeviceStatusBody,
+  BaseDeviceWithPowerBrightnessColorStatusBody,
   BaseDeviceWithPowerBrightnessColorTemperatureStatusBody,
+  BaseDeviceWithPowerBrightnessStatusBody,
   BaseDeviceWithPowerStatusBody,
   BaseDeviceWithTemperatureHumidityStatusBody,
   Deps,
@@ -118,8 +120,8 @@ export class DeviceWithPowerToggle<
   };
 }
 
-export class DeviceWithPowerToggleBrightnessColorTemperature<
-  StatusBody extends BaseDeviceWithPowerBrightnessColorTemperatureStatusBody<DeviceTypes>,
+export class DeviceWithPowerToggleBrightness<
+  StatusBody extends BaseDeviceWithPowerBrightnessStatusBody<DeviceTypes>,
   CommandBody
 > extends DeviceWithPowerToggle<StatusBody, CommandBody> {
   /**
@@ -129,7 +131,31 @@ export class DeviceWithPowerToggleBrightnessColorTemperature<
   public setBrightness = async (brightness: number) => {
     return this.sendCommand("setBrightness", brightness);
   };
+}
 
+export class DeviceWithPowerToggleBrightnessColor<
+  StatusBody extends BaseDeviceWithPowerBrightnessColorStatusBody<DeviceTypes>,
+  CommandBody
+> extends DeviceWithPowerToggleBrightness<StatusBody, CommandBody> {
+  /**
+   * Set color.
+   * @param rgb An array of 3 numbers representing the RGB values.
+   * - `rgb[0]` is the red value (0-255).
+   * - `rgb[1]` is the green value (0-255).
+   * - `rgb[2]` is the blue value (0-255).
+   *
+   * E.g., `[255, 0, 0]` is red.
+   */
+  public setColor = async (rgb: [number, number, number]) => {
+    const [r, g, b] = rgb;
+    return this.sendCommand("setColor", `${r}:${g}:${b}`);
+  };
+}
+
+export class DeviceWithPowerToggleBrightnessColorTemperature<
+  StatusBody extends BaseDeviceWithPowerBrightnessColorTemperatureStatusBody<DeviceTypes>,
+  CommandBody
+> extends DeviceWithPowerToggleBrightness<StatusBody, CommandBody> {
   /**
    * Set color temperature.
    * @param colorTemperature Number between 2700 and 6500.

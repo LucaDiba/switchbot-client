@@ -46,6 +46,7 @@ Currently supported devices:
 - Bot
 - Ceiling Light
 - Ceiling Light Pro
+- Color Bulb
 - Contact Sensor
 - Curtain
 - Hum
@@ -72,7 +73,6 @@ Currently supported devices:
 Coming soon:
 
 - Strip Light
-- Color Bulb
 - Virtual infrared remote devices
 
 ## Author

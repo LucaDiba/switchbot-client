@@ -62,7 +62,7 @@ export class DeviceWithStatus<
 
   protected sendCommand = async (
     command: string,
-    parameter: string = "default"
+    parameter: any = "default"
   ) => {
     const response = await this._deps.postRequest<
       DeviceCommandResponse<CommandBody>

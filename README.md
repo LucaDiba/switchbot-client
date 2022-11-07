@@ -50,6 +50,8 @@ Currently supported devices:
 - Hub Plus
 - Hub Mini
 - Humidifier
+- Keypad
+- Keypad Touch
 - Lock
 - Meter
 - Meter Plus
@@ -61,8 +63,6 @@ Currently supported devices:
 
 Coming soon:
 
-- Keypad
-- Keypad Touch
 - Remote
 - Ceiling Light
 - Ceiling Light Pro

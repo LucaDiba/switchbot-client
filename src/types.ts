@@ -4,6 +4,7 @@ import { GetDeviceBody as GetDeviceBodyContactSensor } from "./devices/SwitchBot
 import { GetDeviceBody as GetDeviceBodyCurtain } from "./devices/SwitchBotCurtain";
 import { GetDeviceBody as GetDeviceBodyHub } from "./devices/SwitchBotHub";
 import { GetDeviceBody as GetDeviceBodyHumidifier } from "./devices/SwitchBotHumidifier";
+import { GetDeviceBody as GetDeviceBodyKeypad } from "./devices/SwitchBotKeypad";
 import { GetDeviceBody as GetDeviceBodyLock } from "./devices/SwitchBotLock";
 import { GetDeviceBody as GetDeviceBodyMeter } from "./devices/SwitchBotMeter";
 import { GetDeviceBody as GetDeviceBodyMotionSensor } from "./devices/SwitchBotMotionSensor";
@@ -30,6 +31,7 @@ export type GetAllDevicesResponse = SwitchBotResponse<{
     | GetDeviceBodyCurtain
     | GetDeviceBodyHub
     | GetDeviceBodyHumidifier
+    | GetDeviceBodyKeypad
     | GetDeviceBodyLock
     | GetDeviceBodyMeter
     | GetDeviceBodyMotionSensor

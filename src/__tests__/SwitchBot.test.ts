@@ -3,6 +3,7 @@ import nock from "nock";
 import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
 import SwitchBotCamera from "../devices/SwitchBotCamera";
+import SwitchBotCeilingLight from "../devices/SwitchBotCeilingLight";
 import SwitchBotContactSensor from "../devices/SwitchBotContactSensor";
 import SwitchBotCurtain from "../devices/SwitchBotCurtain";
 import SwitchBotHub from "../devices/SwitchBotHub";
@@ -153,6 +154,12 @@ describe("instantiate devices", () => {
 
   test("Camera", () => {
     expect(switchBot.camera(deviceId)).toBeInstanceOf(SwitchBotCamera);
+  });
+
+  test("Ceiling Light", () => {
+    expect(switchBot.ceilingLight(deviceId)).toBeInstanceOf(
+      SwitchBotCeilingLight
+    );
   });
 
   test("ContactSensor", () => {

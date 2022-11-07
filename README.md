@@ -44,6 +44,8 @@ switchbot.bot("deviceId").press();
 Currently supported devices:
 
 - Bot
+- Ceiling Light
+- Ceiling Light Pro
 - Contact Sensor
 - Curtain
 - Hum
@@ -69,8 +71,6 @@ Currently supported devices:
 
 Coming soon:
 
-- Ceiling Light
-- Ceiling Light Pro
 - Strip Light
 - Color Bulb
 - Virtual infrared remote devices

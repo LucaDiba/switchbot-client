@@ -1,5 +1,6 @@
 import {
   BaseDeviceStatusBody,
+  BaseDeviceWithPowerBrightnessColorTemperatureStatusBody,
   BaseDeviceWithPowerStatusBody,
   BaseDeviceWithTemperatureHumidityStatusBody,
   Deps,
@@ -110,10 +111,31 @@ export class DeviceWithPowerToggle<
   CommandBody
 > extends DeviceWithPower<StatusBody, CommandBody> {
   /**
-   * Toggle the device power state
+   * Toggle the device power state.
    */
   public toggle = async () => {
     return this.sendCommand("toggle");
+  };
+}
+
+export class DeviceWithPowerToggleBrightnessColorTemperature<
+  StatusBody extends BaseDeviceWithPowerBrightnessColorTemperatureStatusBody<DeviceTypes>,
+  CommandBody
+> extends DeviceWithPowerToggle<StatusBody, CommandBody> {
+  /**
+   * Set brightness.
+   * @param brightness Number between 0 and 100.
+   */
+  public setBrightness = async (brightness: number) => {
+    return this.sendCommand("setBrightness", brightness);
+  };
+
+  /**
+   * Set color temperature.
+   * @param colorTemperature Number between 2700 and 6500.
+   */
+  public setColorTemperature = async (colorTemperature: number) => {
+    return this.sendCommand("setColorTemperature", colorTemperature);
   };
 }
 

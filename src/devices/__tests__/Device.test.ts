@@ -1,5 +1,6 @@
 import {
   BaseDeviceStatusBody,
+  BaseDeviceWithPowerBrightnessColorTemperatureStatusBody,
   BaseDeviceWithPowerStatusBody,
   BaseDeviceWithTemperatureHumidityStatusBody,
   Deps,
@@ -14,6 +15,7 @@ import {
   DeviceWithPower,
   DeviceWithPowerToggle,
   DeviceWithTemperatureHumidity,
+  DeviceWithPowerToggleBrightnessColorTemperature,
 } from "../Device";
 
 type DeviceTypes = typeof DEVICE_TYPES_ARRAY[number];
@@ -308,6 +310,65 @@ describe("DeviceWithPowerToggle", () => {
         {
           command: "toggle",
           parameter: "default",
+          commandType: "command",
+        }
+      );
+    });
+  });
+});
+
+describe("DeviceWithPowerToggleBrightnessColorTemperature", () => {
+  let device: DeviceWithPowerToggleBrightnessColorTemperature<
+    BaseDeviceWithPowerBrightnessColorTemperatureStatusBody<DeviceTypes>,
+    {}
+  >;
+
+  beforeEach(() => {
+    deps = {
+      getRequest: jest.fn(),
+      postRequest: jest.fn(),
+    };
+    device = new DeviceWithPowerToggleBrightnessColorTemperature(
+      deviceId,
+      deps
+    );
+  });
+
+  describe("POST requests", () => {
+    beforeEach(() => {
+      deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
+    });
+
+    afterEach(() => {
+      expect(deps.getRequest).toBeCalledTimes(0);
+      expect(deps.postRequest).toBeCalledTimes(1);
+    });
+
+    test("set brightness", async () => {
+      const BRIGHTNESS = 45;
+
+      await device.setBrightness(BRIGHTNESS);
+
+      expect(deps.postRequest).toBeCalledWith(
+        `/v1.1/devices/${deviceId}/commands`,
+        {
+          command: "setBrightness",
+          parameter: BRIGHTNESS,
+          commandType: "command",
+        }
+      );
+    });
+
+    test("set color temperature", async () => {
+      const COLOR_TEMPERATURE = 5000;
+
+      await device.setColorTemperature(COLOR_TEMPERATURE);
+
+      expect(deps.postRequest).toBeCalledWith(
+        `/v1.1/devices/${deviceId}/commands`,
+        {
+          command: "setColorTemperature",
+          parameter: COLOR_TEMPERATURE,
           commandType: "command",
         }
       );

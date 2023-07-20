@@ -1,4 +1,3 @@
-import { DEVICE_TYPES_ARRAY } from "./utils/constant";
 import { GetDeviceBody as GetDeviceBodyBot } from "./devices/SwitchBotBot";
 import { GetDeviceBody as GetDeviceBodyCamera } from "./devices/SwitchBotCamera";
 import { GetDeviceBody as GetDeviceBodyCeilingLight } from "./devices/SwitchBotCeilingLight";
@@ -16,6 +15,7 @@ import { GetDeviceBody as GetDeviceBodyPlugMini } from "./devices/SwitchBotPlugM
 import { GetDeviceBody as GetDeviceBodyRemote } from "./devices/SwitchBotRemote";
 import { GetDeviceBody as GetDeviceBodyRobotVacuumCleaner } from "./devices/SwitchBotRobotVacuumCleaner";
 import { GetDeviceBody as GetDeviceBodyStripLight } from "./devices/SwitchBotStripLight";
+import { DEVICE_TYPES_ARRAY } from "./utils/constant";
 
 export type Deps = {
   getRequest: <T>(path: string) => Promise<T>;

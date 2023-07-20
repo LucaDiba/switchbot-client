@@ -11,14 +11,14 @@ import {
   getMockedStatusResponse,
 } from "../../utils/tests";
 import {
-  DeviceWithStatus,
   DeviceWithPower,
   DeviceWithPowerToggle,
-  DeviceWithTemperatureHumidity,
   DeviceWithPowerToggleBrightnessColorTemperature,
+  DeviceWithStatus,
+  DeviceWithTemperatureHumidity,
 } from "../Device";
 
-type DeviceTypes = typeof DEVICE_TYPES_ARRAY[number];
+type DeviceTypes = (typeof DEVICE_TYPES_ARRAY)[number];
 
 const deviceId = "deviceId";
 const hubDeviceId = "hubDeviceId";

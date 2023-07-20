@@ -1,5 +1,6 @@
 import { createHmac } from "crypto";
 import nock from "nock";
+
 import SwitchBot from "..";
 import SwitchBotBot from "../devices/SwitchBotBot";
 import SwitchBotCamera from "../devices/SwitchBotCamera";

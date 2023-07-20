@@ -1,9 +1,9 @@
-import {
-  returnDeviceStatusBodyOrThrow,
-  returnDeviceCommandBodyOrThrow,
-} from "../response";
 import { DeviceStatusReponse } from "../../types";
 import { SWITCHBOT_RESPONSE_STATUS_OK } from "../constant";
+import {
+  returnDeviceCommandBodyOrThrow,
+  returnDeviceStatusBodyOrThrow,
+} from "../response";
 import { getMockedCommandResponse } from "../tests";
 
 describe("returnDeviceStatusBodyOrThrow", () => {

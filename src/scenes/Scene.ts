@@ -7,6 +7,7 @@ import { returnSceneExecuteBodyOrThrow } from "../utils/response.js";
 
 export class Scene {
   protected readonly _sceneId: SceneId;
+
   protected readonly _deps: Deps;
 
   constructor(sceneId: SceneId, deps: Deps) {

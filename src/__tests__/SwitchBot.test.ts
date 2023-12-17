@@ -19,8 +19,8 @@ import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
 import SwitchBotRemote from "../devices/SwitchBotRemote";
 import SwitchBotRobotVacuumCleaner from "../devices/SwitchBotRobotVacuumCleaner";
 import SwitchBotStripLight from "../devices/SwitchBotStripLight";
-import { getMockedCommandResponse } from "../utils/tests";
 import { Scene } from "../scenes/Scene";
+import { getMockedCommandResponse } from "../utils/tests";
 
 const BASE_URL = "https://api.switch-bot.com";
 const OPEN_TOKEN = "openToken";

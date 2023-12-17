@@ -18,8 +18,8 @@ import SwitchBotPlugMini from "./devices/SwitchBotPlugMini.js";
 import SwitchBotRemote from "./devices/SwitchBotRemote.js";
 import SwitchBotRobotVacuumCleaner from "./devices/SwitchBotRobotVacuumCleaner.js";
 import SwitchBotStripLight from "./devices/SwitchBotStripLight.js";
-import { DeviceId, GetAllDevicesResponse, GetAllScenesResponse, SceneId } from "./types.js";
 import { Scene } from "./scenes/Scene.js";
+import { DeviceId, GetAllDevicesResponse, GetAllScenesResponse, SceneId } from "./types.js";
 
 export type SwitchBotOptions = {
   openToken: string;

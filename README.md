@@ -29,6 +29,8 @@ npm install @lucadiba/switchbot-client
 
 ## Usage
 
+### Client
+
 ```typescript
 import SwitchBot from "@lucadiba/switchbot-client";
 
@@ -36,9 +38,18 @@ const switchbot = new SwitchBot({
   openToken: "openToken",
   secretKey: "secretKey",
 });
+```
 
+### Device
+```typescript
 // Press SwitchBot Bot
 switchbot.bot("deviceId").press();
+```
+
+### Scene
+```typescript
+// Execute SwitchBot Scene
+switchbot.scene("sceneId").execute();
 ```
 
 Supported devices:

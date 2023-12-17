@@ -1,4 +1,4 @@
-import { DeviceCommandResponse, DeviceId, DeviceStatusReponse } from "../types";
+import { DeviceCommandResponse, DeviceId, DeviceStatusResponse } from "../types";
 import { SWITCHBOT_RESPONSE_STATUS_OK } from "./constant";
 
 export const getMockedStatusResponse = <T>({
@@ -14,7 +14,7 @@ export const getMockedStatusResponse = <T>({
     statusCode: statusCode ?? SWITCHBOT_RESPONSE_STATUS_OK,
     message: message ?? "success",
     body: body ?? {},
-  } as DeviceStatusReponse<T>;
+  } as DeviceStatusResponse<T>;
 };
 
 export const getMockedCommandResponse = <T>({

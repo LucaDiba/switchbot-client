@@ -1,14 +1,15 @@
-import { DeviceStatusReponse } from "../../types";
+import { DeviceStatusResponse, SceneExecuteResponse } from "../../types";
 import { SWITCHBOT_RESPONSE_STATUS_OK } from "../constant";
 import {
   returnDeviceCommandBodyOrThrow,
   returnDeviceStatusBodyOrThrow,
+  returnSceneExecuteBodyOrThrow,
 } from "../response";
 import { getMockedCommandResponse } from "../tests";
 
 describe("returnDeviceStatusBodyOrThrow", () => {
   it("should return body", () => {
-    const response: DeviceStatusReponse<string> = {
+    const response: DeviceStatusResponse<string> = {
       statusCode: SWITCHBOT_RESPONSE_STATUS_OK,
       body: "body",
       message: "message",
@@ -20,7 +21,7 @@ describe("returnDeviceStatusBodyOrThrow", () => {
   it("should throw error", () => {
     const ERROR_MESSAGE = "error message";
 
-    const response: DeviceStatusReponse<string> = {
+    const response: DeviceStatusResponse<string> = {
       statusCode: 400,
       body: "body",
       message: ERROR_MESSAGE,
@@ -80,5 +81,31 @@ describe("returnDeviceCommandBodyOrThrow", () => {
     expect(() =>
       returnDeviceCommandBodyOrThrow(response)
     ).toThrowErrorMatchingInlineSnapshot(`"Unexpected items length: 0"`);
+  });
+});
+
+describe("returnSceneExecuteBodyOrThrow", () => {
+  it("should return body", () => {
+    const response: SceneExecuteResponse<string> = {
+      statusCode: SWITCHBOT_RESPONSE_STATUS_OK,
+      body: "body",
+      message: "message",
+    };
+
+    expect(returnSceneExecuteBodyOrThrow(response)).toBe("body");
+  });
+
+  it("should throw error", () => {
+    const ERROR_MESSAGE = "error message";
+
+    const response: SceneExecuteResponse<string> = {
+      statusCode: 400,
+      body: "body",
+      message: ERROR_MESSAGE,
+    };
+
+    expect(() =>
+      returnSceneExecuteBodyOrThrow(response)
+    ).toThrowErrorMatchingInlineSnapshot(`"error message"`);
   });
 });

@@ -24,6 +24,8 @@ export type Deps = {
 
 export type DeviceId = string;
 
+export type SceneId = string;
+
 export type SwitchBotResponse<T> = {
   statusCode: number;
   message: string;
@@ -58,7 +60,13 @@ export type GetAllDevicesResponse = SwitchBotResponse<{
   }>;
 }>;
 
-export type DeviceStatusReponse<T> = SwitchBotResponse<T>;
+export type GetAllScenesResponse = SwitchBotResponse<
+  { sceneId: string; sceneName: string; }[]
+>;
+
+export type SceneExecuteResponse<T> = SwitchBotResponse<T>;
+
+export type DeviceStatusResponse<T> = SwitchBotResponse<T>;
 
 export type DeviceCommandResponse<T> = SwitchBotResponse<{
   items: {

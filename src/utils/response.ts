@@ -1,8 +1,18 @@
-import { DeviceCommandResponse, DeviceStatusReponse } from "../types.js";
+import { DeviceCommandResponse, DeviceStatusResponse, SceneExecuteResponse } from "../types.js";
 import { SWITCHBOT_RESPONSE_STATUS_OK } from "./constant.js";
 
 export const returnDeviceStatusBodyOrThrow = <T>(
-  response: DeviceStatusReponse<T>
+  response: DeviceStatusResponse<T>
+) => {
+  if (response.statusCode === SWITCHBOT_RESPONSE_STATUS_OK) {
+    return response.body;
+  }
+
+  throw new Error(response.message);
+};
+
+export const returnSceneExecuteBodyOrThrow = <T>(
+  response: SceneExecuteResponse<T>
 ) => {
   if (response.statusCode === SWITCHBOT_RESPONSE_STATUS_OK) {
     return response.body;

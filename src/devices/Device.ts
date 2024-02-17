@@ -8,7 +8,7 @@ import {
   Deps,
   DeviceCommandResponse,
   DeviceId,
-  DeviceStatusReponse,
+  DeviceStatusResponse,
 } from "../types.js";
 import { DEVICE_TYPES_ARRAY } from "../utils/constant.js";
 import {
@@ -51,7 +51,7 @@ export class DeviceWithStatus<
     }
 
     const response = await this._deps.getRequest<
-      DeviceStatusReponse<DeviceStatusBody>
+      DeviceStatusResponse<DeviceStatusBody>
     >(this._getPath("/status"));
 
     this._cachedStatus = returnDeviceStatusBodyOrThrow(response);

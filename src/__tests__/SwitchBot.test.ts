@@ -19,7 +19,12 @@ import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
 import SwitchBotRemote from "../devices/SwitchBotRemote";
 import SwitchBotRobotVacuumCleaner from "../devices/SwitchBotRobotVacuumCleaner";
 import SwitchBotStripLight from "../devices/SwitchBotStripLight";
-import { getMockedCommandResponse } from "../utils/tests";
+import Scene from "../scenes/Scene";
+import {
+  getMockedCommandResponse,
+  getMockedSceneExecuteResponse,
+  getMockedScenesListResponse,
+} from "../utils/tests";
 
 const BASE_URL = "https://api.switch-bot.com";
 const OPEN_TOKEN = "openToken";
@@ -30,8 +35,18 @@ const switchBot = new SwitchBot({
   secretKey: SECRET_KEY,
 });
 const deviceId = "deviceId";
+const sceneId = "sceneId";
+const sceneName = "sceneName";
 
-describe("requests", () => {
+function getExpectedSign(t: string, nonce: string) {
+  const data = OPEN_TOKEN + t + nonce;
+  return createHmac("sha256", SECRET_KEY)
+    .update(Buffer.from(data, "utf-8"))
+    .digest()
+    .toString("base64");
+}
+
+describe("devices requests", () => {
   test("get", async () => {
     const mockStatusResponse = {
       statusCode: 100,
@@ -74,14 +89,6 @@ describe("requests", () => {
   });
 
   describe("headers", () => {
-    const getExpectedSign = (t: string, nonce: string) => {
-      const data = OPEN_TOKEN + t + nonce;
-      return createHmac("sha256", SECRET_KEY)
-        .update(Buffer.from(data, "utf-8"))
-        .digest()
-        .toString("base64");
-    };
-
     test("get", async () => {
       nock(BASE_URL)
         .get(`/v1.1/devices/${deviceId}/status`)
@@ -225,5 +232,114 @@ describe("instantiate devices", () => {
 
   test("Strip Light", () => {
     expect(switchBot.stripLight(deviceId)).toBeInstanceOf(SwitchBotStripLight);
+  });
+});
+
+describe("scenes requests", () => {
+  test("get", async () => {
+    const mockStatusResponse = {
+      statusCode: 100,
+      body: [
+        { sceneId: "scene1", sceneName: "Scene 1" },
+        { sceneId: "scene2", sceneName: "Scene 2" },
+        { sceneId: "scene3", sceneName: "Scene 3" },
+      ],
+      message: "success",
+    };
+
+    nock(BASE_URL).get(`/v1.1/scenes`).reply(200, mockStatusResponse);
+
+    const response = await switchBot.scenes();
+
+    expect(response).toEqual(mockStatusResponse.body);
+  });
+
+  test("post", async () => {
+    const mockStatusResponse = {
+      statusCode: 100,
+      body: {},
+      message: "success",
+    };
+
+    nock(BASE_URL)
+      .post(`/v1.1/scenes/${sceneId}/execute`)
+      .reply(200, mockStatusResponse);
+
+    const response = await switchBot.scene(sceneId).execute();
+
+    expect(response).toEqual(mockStatusResponse.body);
+  });
+
+  describe("headers", () => {
+    test("get", async () => {
+      nock(BASE_URL)
+        .get(`/v1.1/scenes`)
+        .reply(function (uri, body, callback) {
+          const { sign, nonce, t } = this.req.headers;
+
+          if (sign !== getExpectedSign(t, nonce)) {
+            return callback(new Error("Invalid signature"), [
+              400,
+              "Invalid signature",
+            ]);
+          }
+
+          callback(null, [
+            200,
+            getMockedScenesListResponse({ sceneId, sceneName }),
+          ]);
+        });
+
+      try {
+        const response = await switchBot.scenes();
+        expect(response).toMatchInlineSnapshot(`
+          [
+            {
+              "sceneId": "sceneId",
+              "sceneName": "sceneName",
+            },
+          ]
+        `);
+      } catch (e) {
+        throw new Error(e as any);
+      }
+    });
+
+    test("post", async () => {
+      nock(BASE_URL)
+        .post(`/v1.1/scenes/${sceneId}/execute`)
+        .reply(function (uri, body, callback) {
+          const { sign, nonce, t } = this.req.headers;
+
+          if (sign !== getExpectedSign(t, nonce)) {
+            return callback(new Error("Invalid signature"), [
+              400,
+              "Invalid signature",
+            ]);
+          }
+
+          if (this.req.headers["content-type"] !== "application/json") {
+            return callback(new Error("Invalid content type"), [
+              400,
+              "Invalid content type",
+            ]);
+          }
+
+          callback(null, [200, getMockedSceneExecuteResponse({ sceneId })]);
+        });
+
+      try {
+        const response = await switchBot.scene(sceneId).execute();
+        expect(response).toMatchInlineSnapshot(`{}`);
+      } catch (e) {
+        throw new Error(e as any);
+      }
+    });
+  });
+});
+
+describe("instantiate scenes", () => {
+  test("Scene", () => {
+    expect(switchBot.scene(sceneId)).toBeInstanceOf(Scene);
   });
 });

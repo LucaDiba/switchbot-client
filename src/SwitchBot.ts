@@ -18,7 +18,13 @@ import SwitchBotPlugMini from "./devices/SwitchBotPlugMini.js";
 import SwitchBotRemote from "./devices/SwitchBotRemote.js";
 import SwitchBotRobotVacuumCleaner from "./devices/SwitchBotRobotVacuumCleaner.js";
 import SwitchBotStripLight from "./devices/SwitchBotStripLight.js";
-import { DeviceId, GetAllDevicesResponse } from "./types.js";
+import Scene from "./scenes/Scene.js";
+import {
+  DeviceId,
+  GetAllDevicesResponse,
+  GetAllScenesResponse,
+  SceneId,
+} from "./types.js";
 
 export type SwitchBotOptions = {
   openToken: string;
@@ -44,6 +50,7 @@ export default class SwitchBot {
     });
   }
 
+  // Devices
   public devices = async () => {
     const response = await this.getRequest<GetAllDevicesResponse>(
       "/v1.1/devices"
@@ -119,6 +126,19 @@ export default class SwitchBot {
     return new SwitchBotStripLight(deviceId, this.getDeps());
   };
 
+  // Scenes
+  public scenes = async () => {
+    const response = await this.getRequest<GetAllScenesResponse>(
+      "/v1.1/scenes"
+    );
+    return response.body;
+  };
+
+  public scene = (sceneId: SceneId) => {
+    return new Scene(sceneId, this.getDeps());
+  };
+
+  // Internal
   private getDeps = () => ({
     getRequest: this.getRequest,
     postRequest: this.postRequest,

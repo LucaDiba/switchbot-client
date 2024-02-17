@@ -1,11 +1,7 @@
-import {
-  Deps,
-  SceneExecuteResponse,
-  SceneId
-} from "../types.js";
+import { Deps, SceneExecuteResponse, SceneId } from "../types.js";
 import { returnSceneExecuteBodyOrThrow } from "../utils/response.js";
 
-export class Scene {
+export default class Scene {
   protected readonly _sceneId: SceneId;
 
   protected readonly _deps: Deps;
@@ -16,9 +12,12 @@ export class Scene {
   }
 
   public async execute() {
-    const res = await this._deps.postRequest<SceneExecuteResponse<{}>>(this._getPath("/execute"), {})
+    const res = await this._deps.postRequest<SceneExecuteResponse<{}>>(
+      this._getPath("/execute"),
+      {}
+    );
 
-    return returnSceneExecuteBodyOrThrow(res)
+    return returnSceneExecuteBodyOrThrow(res);
   }
 
   protected _getPath = (path: string) => {

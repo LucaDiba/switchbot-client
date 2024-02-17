@@ -19,8 +19,12 @@ import SwitchBotPlugMini from "../devices/SwitchBotPlugMini";
 import SwitchBotRemote from "../devices/SwitchBotRemote";
 import SwitchBotRobotVacuumCleaner from "../devices/SwitchBotRobotVacuumCleaner";
 import SwitchBotStripLight from "../devices/SwitchBotStripLight";
-import { Scene } from "../scenes/Scene";
-import { getMockedCommandResponse } from "../utils/tests";
+import Scene from "../scenes/Scene";
+import {
+  getMockedCommandResponse,
+  getMockedSceneExecuteResponse,
+  getMockedScenesListResponse,
+} from "../utils/tests";
 
 const BASE_URL = "https://api.switch-bot.com";
 const OPEN_TOKEN = "openToken";
@@ -32,78 +36,78 @@ const switchBot = new SwitchBot({
 });
 const deviceId = "deviceId";
 const sceneId = "sceneId";
+const sceneName = "sceneName";
 
-describe("requests", () => {
-  describe("devices", () => {
+function getExpectedSign(t: string, nonce: string) {
+  const data = OPEN_TOKEN + t + nonce;
+  return createHmac("sha256", SECRET_KEY)
+    .update(Buffer.from(data, "utf-8"))
+    .digest()
+    .toString("base64");
+}
+
+describe("devices requests", () => {
+  test("get", async () => {
+    const mockStatusResponse = {
+      statusCode: 100,
+      body: {
+        deviceList: [
+          {
+            deviceId: "deviceId",
+            deviceName: "deviceName",
+            deviceType: "Bot",
+            hubDeviceId: "hubDeviceId",
+            enableCloudService: true,
+          },
+        ],
+        infraredRemoteList: [],
+      },
+      message: "success",
+    };
+
+    nock(BASE_URL).get(`/v1.1/devices`).reply(200, mockStatusResponse);
+
+    const response = await switchBot.devices();
+
+    expect(response).toEqual(mockStatusResponse.body);
+  });
+
+  test("post", async () => {
+    const mockCommandResponse = getMockedCommandResponse({ deviceId });
+
+    nock(BASE_URL)
+      .post(`/v1.1/devices/${deviceId}/commands`, {
+        command: "press",
+        parameter: "default",
+        commandType: "command",
+      })
+      .reply(200, mockCommandResponse);
+
+    const response = await switchBot.bot(deviceId).press();
+
+    expect(response).toEqual(mockCommandResponse.body.items[0].status);
+  });
+
+  describe("headers", () => {
     test("get", async () => {
-      const mockStatusResponse = {
-        statusCode: 100,
-        body: {
-          deviceList: [
-            {
-              deviceId: "deviceId",
-              deviceName: "deviceName",
-              deviceType: "Bot",
-              hubDeviceId: "hubDeviceId",
-              enableCloudService: true,
-            },
-          ],
-          infraredRemoteList: [],
-        },
-        message: "success",
-      };
-
-      nock(BASE_URL).get(`/v1.1/devices`).reply(200, mockStatusResponse);
-
-      const response = await switchBot.devices();
-
-      expect(response).toEqual(mockStatusResponse.body);
-    });
-
-    test("post", async () => {
-      const mockCommandResponse = getMockedCommandResponse({ deviceId });
-
       nock(BASE_URL)
-        .post(`/v1.1/devices/${deviceId}/commands`, {
-          command: "press",
-          parameter: "default",
-          commandType: "command",
-        })
-        .reply(200, mockCommandResponse);
+        .get(`/v1.1/devices/${deviceId}/status`)
+        .reply(function (uri, body, callback) {
+          const { sign, nonce, t } = this.req.headers;
 
-      const response = await switchBot.bot(deviceId).press();
+          if (sign !== getExpectedSign(t, nonce)) {
+            return callback(new Error("Invalid signature"), [
+              400,
+              "Invalid signature",
+            ]);
+          }
 
-      expect(response).toEqual(mockCommandResponse.body.items[0].status);
-    });
+          callback(null, [200, getMockedCommandResponse({ deviceId })]);
+        });
 
-    describe("headers", () => {
-      const getExpectedSign = (t: string, nonce: string) => {
-        const data = OPEN_TOKEN + t + nonce;
-        return createHmac("sha256", SECRET_KEY)
-          .update(Buffer.from(data, "utf-8"))
-          .digest()
-          .toString("base64");
-      };
-
-      test("get", async () => {
-        nock(BASE_URL)
-          .get(`/v1.1/devices/${deviceId}/status`)
-          .reply(function (uri, body, callback) {
-            const { sign, nonce, t } = this.req.headers;
-
-            if (sign !== getExpectedSign(t, nonce)) {
-              return callback(new Error("Invalid signature"), [
-                400,
-                "Invalid signature",
-              ]);
-            }
-
-            callback(null, [200, getMockedCommandResponse({ deviceId })]);
-          });
-
-        try {
-          const response = await switchBot.bot(deviceId).getStatus();
-          expect(response).toMatchInlineSnapshot(`
+      try {
+        const response = await switchBot.bot(deviceId).getStatus();
+        expect(response).toMatchInlineSnapshot(`
           {
             "items": [
               {
@@ -115,131 +119,130 @@ describe("requests", () => {
             ],
           }
         `);
-        } catch (e) {
-          throw new Error(e as any);
-        }
-      });
-
-      test("post", async () => {
-        nock(BASE_URL)
-          .post(`/v1.1/devices/${deviceId}/commands`)
-          .reply(function (uri, body, callback) {
-            const { sign, nonce, t } = this.req.headers;
-
-            if (sign !== getExpectedSign(t, nonce)) {
-              return callback(new Error("Invalid signature"), [
-                400,
-                "Invalid signature",
-              ]);
-            }
-
-            if (this.req.headers["content-type"] !== "application/json") {
-              return callback(new Error("Invalid content type"), [
-                400,
-                "Invalid content type",
-              ]);
-            }
-
-            callback(null, [200, getMockedCommandResponse({ deviceId })]);
-          });
-
-        try {
-          const response = await switchBot.bot(deviceId).press();
-          expect(response).toMatchInlineSnapshot(`{}`);
-        } catch (e) {
-          throw new Error(e as any);
-        }
-      });
-    });
-  });
-
-  describe("instantiate devices", () => {
-    test("Bot", () => {
-      expect(switchBot.bot(deviceId)).toBeInstanceOf(SwitchBotBot);
+      } catch (e) {
+        throw new Error(e as any);
+      }
     });
 
-    test("Camera", () => {
-      expect(switchBot.camera(deviceId)).toBeInstanceOf(SwitchBotCamera);
-    });
+    test("post", async () => {
+      nock(BASE_URL)
+        .post(`/v1.1/devices/${deviceId}/commands`)
+        .reply(function (uri, body, callback) {
+          const { sign, nonce, t } = this.req.headers;
 
-    test("Ceiling Light", () => {
-      expect(switchBot.ceilingLight(deviceId)).toBeInstanceOf(
-        SwitchBotCeilingLight
-      );
-    });
+          if (sign !== getExpectedSign(t, nonce)) {
+            return callback(new Error("Invalid signature"), [
+              400,
+              "Invalid signature",
+            ]);
+          }
 
-    test("Color Bulb", () => {
-      expect(switchBot.colorBulb(deviceId)).toBeInstanceOf(SwitchBotColorBulb);
-    });
+          if (this.req.headers["content-type"] !== "application/json") {
+            return callback(new Error("Invalid content type"), [
+              400,
+              "Invalid content type",
+            ]);
+          }
 
-    test("ContactSensor", () => {
-      expect(switchBot.contactSensor(deviceId)).toBeInstanceOf(
-        SwitchBotContactSensor
-      );
-    });
+          callback(null, [200, getMockedCommandResponse({ deviceId })]);
+        });
 
-    test("Curtain", () => {
-      expect(switchBot.curtain(deviceId)).toBeInstanceOf(SwitchBotCurtain);
-    });
-
-    test("Hub", () => {
-      expect(switchBot.hub(deviceId)).toBeInstanceOf(SwitchBotHub);
-    });
-
-    test("Humidifier", () => {
-      expect(switchBot.humidifier(deviceId)).toBeInstanceOf(SwitchBotHumidifier);
-    });
-
-    test("Keypad", () => {
-      expect(switchBot.keypad(deviceId)).toBeInstanceOf(SwitchBotKeypad);
-    });
-
-    test("Lock", () => {
-      expect(switchBot.lock(deviceId)).toBeInstanceOf(SwitchBotLock);
-    });
-
-    test("Meter", () => {
-      expect(switchBot.meter(deviceId)).toBeInstanceOf(SwitchBotMeter);
-    });
-
-    test("MotionSensor", () => {
-      expect(switchBot.motionSensor(deviceId)).toBeInstanceOf(
-        SwitchBotMotionSensor
-      );
-    });
-
-    test("Plug", () => {
-      expect(switchBot.plug(deviceId)).toBeInstanceOf(SwitchBotPlug);
-    });
-
-    test("Plug Mini", () => {
-      expect(switchBot.plugMini(deviceId)).toBeInstanceOf(SwitchBotPlugMini);
-    });
-
-    test("Remote", () => {
-      expect(switchBot.remote(deviceId)).toBeInstanceOf(SwitchBotRemote);
-    });
-
-    test("Robot Vacuum Cleaner", () => {
-      expect(switchBot.robotVacuumCleaner(deviceId)).toBeInstanceOf(
-        SwitchBotRobotVacuumCleaner
-      );
-    });
-
-    test("Strip Light", () => {
-      expect(switchBot.stripLight(deviceId)).toBeInstanceOf(SwitchBotStripLight);
+      try {
+        const response = await switchBot.bot(deviceId).press();
+        expect(response).toMatchInlineSnapshot(`{}`);
+      } catch (e) {
+        throw new Error(e as any);
+      }
     });
   });
 });
 
-describe("scenes", () => {
+describe("instantiate devices", () => {
+  test("Bot", () => {
+    expect(switchBot.bot(deviceId)).toBeInstanceOf(SwitchBotBot);
+  });
+
+  test("Camera", () => {
+    expect(switchBot.camera(deviceId)).toBeInstanceOf(SwitchBotCamera);
+  });
+
+  test("Ceiling Light", () => {
+    expect(switchBot.ceilingLight(deviceId)).toBeInstanceOf(
+      SwitchBotCeilingLight
+    );
+  });
+
+  test("Color Bulb", () => {
+    expect(switchBot.colorBulb(deviceId)).toBeInstanceOf(SwitchBotColorBulb);
+  });
+
+  test("ContactSensor", () => {
+    expect(switchBot.contactSensor(deviceId)).toBeInstanceOf(
+      SwitchBotContactSensor
+    );
+  });
+
+  test("Curtain", () => {
+    expect(switchBot.curtain(deviceId)).toBeInstanceOf(SwitchBotCurtain);
+  });
+
+  test("Hub", () => {
+    expect(switchBot.hub(deviceId)).toBeInstanceOf(SwitchBotHub);
+  });
+
+  test("Humidifier", () => {
+    expect(switchBot.humidifier(deviceId)).toBeInstanceOf(SwitchBotHumidifier);
+  });
+
+  test("Keypad", () => {
+    expect(switchBot.keypad(deviceId)).toBeInstanceOf(SwitchBotKeypad);
+  });
+
+  test("Lock", () => {
+    expect(switchBot.lock(deviceId)).toBeInstanceOf(SwitchBotLock);
+  });
+
+  test("Meter", () => {
+    expect(switchBot.meter(deviceId)).toBeInstanceOf(SwitchBotMeter);
+  });
+
+  test("MotionSensor", () => {
+    expect(switchBot.motionSensor(deviceId)).toBeInstanceOf(
+      SwitchBotMotionSensor
+    );
+  });
+
+  test("Plug", () => {
+    expect(switchBot.plug(deviceId)).toBeInstanceOf(SwitchBotPlug);
+  });
+
+  test("Plug Mini", () => {
+    expect(switchBot.plugMini(deviceId)).toBeInstanceOf(SwitchBotPlugMini);
+  });
+
+  test("Remote", () => {
+    expect(switchBot.remote(deviceId)).toBeInstanceOf(SwitchBotRemote);
+  });
+
+  test("Robot Vacuum Cleaner", () => {
+    expect(switchBot.robotVacuumCleaner(deviceId)).toBeInstanceOf(
+      SwitchBotRobotVacuumCleaner
+    );
+  });
+
+  test("Strip Light", () => {
+    expect(switchBot.stripLight(deviceId)).toBeInstanceOf(SwitchBotStripLight);
+  });
+});
+
+describe("scenes requests", () => {
   test("get", async () => {
     const mockStatusResponse = {
       statusCode: 100,
       body: [
         { sceneId: "scene1", sceneName: "Scene 1" },
         { sceneId: "scene2", sceneName: "Scene 2" },
-        { sceneId: "scene3", sceneName: "Scene 3" }
+        { sceneId: "scene3", sceneName: "Scene 3" },
       ],
       message: "success",
     };
@@ -250,6 +253,7 @@ describe("scenes", () => {
 
     expect(response).toEqual(mockStatusResponse.body);
   });
+
   test("post", async () => {
     const mockStatusResponse = {
       statusCode: 100,
@@ -257,15 +261,85 @@ describe("scenes", () => {
       message: "success",
     };
 
-    nock(BASE_URL).post(`/v1.1/scenes/${sceneId}/execute`).reply(200, mockStatusResponse);
+    nock(BASE_URL)
+      .post(`/v1.1/scenes/${sceneId}/execute`)
+      .reply(200, mockStatusResponse);
 
     const response = await switchBot.scene(sceneId).execute();
 
     expect(response).toEqual(mockStatusResponse.body);
   });
-  describe("instantiate scenes", () => {
-    test("Scene", () => {
-      expect(switchBot.scene(sceneId)).toBeInstanceOf(Scene);
+
+  describe("headers", () => {
+    test("get", async () => {
+      nock(BASE_URL)
+        .get(`/v1.1/scenes`)
+        .reply(function (uri, body, callback) {
+          const { sign, nonce, t } = this.req.headers;
+
+          if (sign !== getExpectedSign(t, nonce)) {
+            return callback(new Error("Invalid signature"), [
+              400,
+              "Invalid signature",
+            ]);
+          }
+
+          callback(null, [
+            200,
+            getMockedScenesListResponse({ sceneId, sceneName }),
+          ]);
+        });
+
+      try {
+        const response = await switchBot.scenes();
+        expect(response).toMatchInlineSnapshot(`
+          [
+            {
+              "sceneId": "sceneId",
+              "sceneName": "sceneName",
+            },
+          ]
+        `);
+      } catch (e) {
+        throw new Error(e as any);
+      }
     });
+
+    test("post", async () => {
+      nock(BASE_URL)
+        .post(`/v1.1/scenes/${sceneId}/execute`)
+        .reply(function (uri, body, callback) {
+          const { sign, nonce, t } = this.req.headers;
+
+          if (sign !== getExpectedSign(t, nonce)) {
+            return callback(new Error("Invalid signature"), [
+              400,
+              "Invalid signature",
+            ]);
+          }
+
+          if (this.req.headers["content-type"] !== "application/json") {
+            return callback(new Error("Invalid content type"), [
+              400,
+              "Invalid content type",
+            ]);
+          }
+
+          callback(null, [200, getMockedSceneExecuteResponse({ sceneId })]);
+        });
+
+      try {
+        const response = await switchBot.scene(sceneId).execute();
+        expect(response).toMatchInlineSnapshot(`{}`);
+      } catch (e) {
+        throw new Error(e as any);
+      }
+    });
+  });
+});
+
+describe("instantiate scenes", () => {
+  test("Scene", () => {
+    expect(switchBot.scene(sceneId)).toBeInstanceOf(Scene);
   });
 });

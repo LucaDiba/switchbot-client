@@ -1,9 +1,9 @@
 import {
   BaseDeviceGetDeviceBody,
   BaseDeviceWithPowerBrightnessColorTemperatureStatusBody,
-} from "../types.js";
-import { DEVICE_TYPES } from "../utils/constant.js";
-import { DeviceWithPowerToggleBrightnessColorTemperature } from "./Device.js";
+} from "../types";
+import { DEVICE_TYPES } from "../utils/constant";
+import { DeviceWithPowerToggleBrightnessColorTemperature } from "./Device";
 
 type DeviceType =
   | typeof DEVICE_TYPES.CEILING_LIGHT

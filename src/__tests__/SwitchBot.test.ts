@@ -85,7 +85,7 @@ describe("devices requests", () => {
 
     const response = await switchBot.bot(deviceId).press();
 
-    expect(response).toEqual(mockCommandResponse.body.items[0].status);
+    expect(response).toEqual(mockCommandResponse.body.items[0]!.status);
   });
 
   describe("headers", () => {
@@ -95,7 +95,7 @@ describe("devices requests", () => {
         .reply(function (uri, body, callback) {
           const { sign, nonce, t } = this.req.headers;
 
-          if (sign !== getExpectedSign(t, nonce)) {
+          if (sign !== getExpectedSign(t!, nonce!)) {
             return callback(new Error("Invalid signature"), [
               400,
               "Invalid signature",
@@ -130,7 +130,7 @@ describe("devices requests", () => {
         .reply(function (uri, body, callback) {
           const { sign, nonce, t } = this.req.headers;
 
-          if (sign !== getExpectedSign(t, nonce)) {
+          if (sign !== getExpectedSign(t!, nonce!)) {
             return callback(new Error("Invalid signature"), [
               400,
               "Invalid signature",
@@ -277,7 +277,7 @@ describe("scenes requests", () => {
         .reply(function (uri, body, callback) {
           const { sign, nonce, t } = this.req.headers;
 
-          if (sign !== getExpectedSign(t, nonce)) {
+          if (sign !== getExpectedSign(t!, nonce!)) {
             return callback(new Error("Invalid signature"), [
               400,
               "Invalid signature",
@@ -311,7 +311,7 @@ describe("scenes requests", () => {
         .reply(function (uri, body, callback) {
           const { sign, nonce, t } = this.req.headers;
 
-          if (sign !== getExpectedSign(t, nonce)) {
+          if (sign !== getExpectedSign(t!, nonce!)) {
             return callback(new Error("Invalid signature"), [
               400,
               "Invalid signature",

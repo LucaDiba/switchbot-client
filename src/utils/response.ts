@@ -1,5 +1,9 @@
-import { DeviceCommandResponse, DeviceStatusResponse, SceneExecuteResponse } from "../types.js";
-import { SWITCHBOT_RESPONSE_STATUS_OK } from "./constant.js";
+import {
+  DeviceCommandResponse,
+  DeviceStatusResponse,
+  SceneExecuteResponse,
+} from "../types";
+import { SWITCHBOT_RESPONSE_STATUS_OK } from "./constant";
 
 export const returnDeviceStatusBodyOrThrow = <T>(
   response: DeviceStatusResponse<T>
@@ -35,7 +39,7 @@ export const returnDeviceCommandBodyOrThrow = <T>(
     throw new Error(`Unexpected items length: ${body.items.length}`);
   }
 
-  const item = body.items[0];
+  const item = body.items[0]!;
   const { code, status } = item;
 
   if (code !== SWITCHBOT_RESPONSE_STATUS_OK) {

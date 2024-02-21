@@ -1,9 +1,9 @@
 import {
   BaseDeviceGetDeviceBody,
   BaseDeviceWithPowerStatusBody,
-} from "../types.js";
-import { DEVICE_TYPES } from "../utils/constant.js";
-import { DeviceWithPower } from "./Device.js";
+} from "../types";
+import { DEVICE_TYPES } from "../utils/constant";
+import { DeviceWithPower } from "./Device";
 
 type DeviceType = typeof DEVICE_TYPES.PLUG;
 

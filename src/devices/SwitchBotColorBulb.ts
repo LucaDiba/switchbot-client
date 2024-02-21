@@ -1,9 +1,9 @@
 import {
   BaseDeviceGetDeviceBody,
   BaseDeviceWithPowerBrightnessColorStatusBody,
-} from "../types.js";
-import { DEVICE_TYPES } from "../utils/constant.js";
-import { DeviceWithPowerToggleBrightnessColor } from "./Device.js";
+} from "../types";
+import { DEVICE_TYPES } from "../utils/constant";
+import { DeviceWithPowerToggleBrightnessColor } from "./Device";
 
 type DeviceType = typeof DEVICE_TYPES.COLOR_BULB;
 

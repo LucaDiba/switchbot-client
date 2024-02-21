@@ -9,14 +9,14 @@ import {
   DeviceCommandResponse,
   DeviceId,
   DeviceStatusResponse,
-} from "../types.js";
-import { DEVICE_TYPES_ARRAY } from "../utils/constant.js";
+} from "../types";
+import { DEVICE_TYPES_ARRAY } from "../utils/constant";
 import {
   returnDeviceCommandBodyOrThrow,
   returnDeviceStatusBodyOrThrow,
-} from "../utils/response.js";
+} from "../utils/response";
 
-type DeviceTypes = typeof DEVICE_TYPES_ARRAY[number];
+type DeviceTypes = (typeof DEVICE_TYPES_ARRAY)[number];
 
 export type GetStatusOptions = {
   forceRefresh?: boolean;
@@ -39,7 +39,7 @@ export class Device {
 
 export class DeviceWithStatus<
   DeviceStatusBody extends BaseDeviceStatusBody<DeviceTypes>,
-  CommandBody
+  CommandBody,
 > extends Device {
   private _cachedStatus: DeviceStatusBody | null = null;
 
@@ -81,7 +81,7 @@ export class DeviceWithStatus<
 
 export class DeviceWithPower<
   StatusBody extends BaseDeviceWithPowerStatusBody<DeviceTypes>,
-  CommandBody
+  CommandBody,
 > extends DeviceWithStatus<StatusBody, CommandBody> {
   public getPowerStatus = async () => {
     const status = await this.getStatus();
@@ -110,7 +110,7 @@ export class DeviceWithPower<
 
 export class DeviceWithPowerToggle<
   StatusBody extends BaseDeviceWithPowerStatusBody<DeviceTypes>,
-  CommandBody
+  CommandBody,
 > extends DeviceWithPower<StatusBody, CommandBody> {
   /**
    * Toggle the device power state.
@@ -122,7 +122,7 @@ export class DeviceWithPowerToggle<
 
 export class DeviceWithPowerToggleBrightness<
   StatusBody extends BaseDeviceWithPowerBrightnessStatusBody<DeviceTypes>,
-  CommandBody
+  CommandBody,
 > extends DeviceWithPowerToggle<StatusBody, CommandBody> {
   /**
    * Set brightness.
@@ -135,7 +135,7 @@ export class DeviceWithPowerToggleBrightness<
 
 export class DeviceWithPowerToggleBrightnessColor<
   StatusBody extends BaseDeviceWithPowerBrightnessColorStatusBody<DeviceTypes>,
-  CommandBody
+  CommandBody,
 > extends DeviceWithPowerToggleBrightness<StatusBody, CommandBody> {
   /**
    * Set color.
@@ -153,8 +153,9 @@ export class DeviceWithPowerToggleBrightnessColor<
 }
 
 export class DeviceWithPowerToggleBrightnessColorTemperature<
-  StatusBody extends BaseDeviceWithPowerBrightnessColorTemperatureStatusBody<DeviceTypes>,
-  CommandBody
+  StatusBody extends
+    BaseDeviceWithPowerBrightnessColorTemperatureStatusBody<DeviceTypes>,
+  CommandBody,
 > extends DeviceWithPowerToggleBrightness<StatusBody, CommandBody> {
   /**
    * Set color temperature.
@@ -167,7 +168,7 @@ export class DeviceWithPowerToggleBrightnessColorTemperature<
 
 export class DeviceWithTemperatureHumidity<
   StatusBody extends BaseDeviceWithTemperatureHumidityStatusBody<DeviceTypes>,
-  CommandBody
+  CommandBody,
 > extends DeviceWithStatus<StatusBody, CommandBody> {
   /**
    * @returns Temperature in celsius.

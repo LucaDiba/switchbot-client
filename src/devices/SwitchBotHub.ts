@@ -1,6 +1,6 @@
-import { BaseDeviceGetDeviceBody } from "../types.js";
-import { DEVICE_TYPES } from "../utils/constant.js";
-import { Device } from "./Device.js";
+import { BaseDeviceGetDeviceBody } from "../types";
+import { DEVICE_TYPES } from "../utils/constant";
+import { Device } from "./Device";
 
 type DeviceType =
   | typeof DEVICE_TYPES.HUB

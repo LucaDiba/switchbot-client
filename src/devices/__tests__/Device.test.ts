@@ -66,9 +66,9 @@ describe("Device", () => {
         power: "on",
       });
 
-      expect(deps.getRequest).toBeCalledTimes(1);
-      expect(deps.postRequest).toBeCalledTimes(0);
-      expect(deps.getRequest).toBeCalledWith(
+      expect(deps.getRequest).toHaveBeenCalledTimes(1);
+      expect(deps.postRequest).toHaveBeenCalledTimes(0);
+      expect(deps.getRequest).toHaveBeenCalledWith(
         `/v1.1/devices/${deviceId}/status`
       );
     });
@@ -103,9 +103,9 @@ describe("Device", () => {
       const secondStatus = await device.getStatus({ forceRefresh: true });
       expect((secondStatus as any).cacheValueTest).toEqual("value2");
 
-      expect(deps.getRequest).toBeCalledTimes(2);
-      expect(deps.postRequest).toBeCalledTimes(0);
-      expect(deps.getRequest).toBeCalledWith(
+      expect(deps.getRequest).toHaveBeenCalledTimes(2);
+      expect(deps.postRequest).toHaveBeenCalledTimes(0);
+      expect(deps.getRequest).toHaveBeenCalledWith(
         `/v1.1/devices/${deviceId}/status`
       );
     });
@@ -140,9 +140,9 @@ describe("Device", () => {
       const secondStatus = await device.getStatus();
       expect((secondStatus as any).cacheValueTest).toEqual("value1");
 
-      expect(deps.getRequest).toBeCalledTimes(1);
-      expect(deps.postRequest).toBeCalledTimes(0);
-      expect(deps.getRequest).toBeCalledWith(
+      expect(deps.getRequest).toHaveBeenCalledTimes(1);
+      expect(deps.postRequest).toHaveBeenCalledTimes(0);
+      expect(deps.getRequest).toHaveBeenCalledWith(
         `/v1.1/devices/${deviceId}/status`
       );
     });
@@ -162,9 +162,11 @@ describe("Device", () => {
     const hubDeviceIdStatus = await device.getHubDeviceId();
     expect(hubDeviceIdStatus).toEqual(hubDeviceId);
 
-    expect(deps.getRequest).toBeCalledTimes(1);
-    expect(deps.postRequest).toBeCalledTimes(0);
-    expect(deps.getRequest).toBeCalledWith(`/v1.1/devices/${deviceId}/status`);
+    expect(deps.getRequest).toHaveBeenCalledTimes(1);
+    expect(deps.postRequest).toHaveBeenCalledTimes(0);
+    expect(deps.getRequest).toHaveBeenCalledWith(
+      `/v1.1/devices/${deviceId}/status`
+    );
   });
 });
 
@@ -181,9 +183,9 @@ describe("DeviceWithPower", () => {
 
   describe("GET requests", () => {
     afterEach(() => {
-      expect(deps.getRequest).toBeCalledTimes(1);
-      expect(deps.postRequest).toBeCalledTimes(0);
-      expect(deps.getRequest).toBeCalledWith(
+      expect(deps.getRequest).toHaveBeenCalledTimes(1);
+      expect(deps.postRequest).toHaveBeenCalledTimes(0);
+      expect(deps.getRequest).toHaveBeenCalledWith(
         `/v1.1/devices/${deviceId}/status`
       );
     });
@@ -246,14 +248,14 @@ describe("DeviceWithPower", () => {
     });
 
     afterEach(() => {
-      expect(deps.getRequest).toBeCalledTimes(0);
-      expect(deps.postRequest).toBeCalledTimes(1);
+      expect(deps.getRequest).toHaveBeenCalledTimes(0);
+      expect(deps.postRequest).toHaveBeenCalledTimes(1);
     });
 
     test("turn on", async () => {
       await device.turnOn();
 
-      expect(deps.postRequest).toBeCalledWith(
+      expect(deps.postRequest).toHaveBeenCalledWith(
         `/v1.1/devices/${deviceId}/commands`,
         {
           command: "turnOn",
@@ -266,7 +268,7 @@ describe("DeviceWithPower", () => {
     test("turn off", async () => {
       await device.turnOff();
 
-      expect(deps.postRequest).toBeCalledWith(
+      expect(deps.postRequest).toHaveBeenCalledWith(
         `/v1.1/devices/${deviceId}/commands`,
         {
           command: "turnOff",
@@ -298,14 +300,14 @@ describe("DeviceWithPowerToggle", () => {
     });
 
     afterEach(() => {
-      expect(deps.getRequest).toBeCalledTimes(0);
-      expect(deps.postRequest).toBeCalledTimes(1);
+      expect(deps.getRequest).toHaveBeenCalledTimes(0);
+      expect(deps.postRequest).toHaveBeenCalledTimes(1);
     });
 
     test("toggle", async () => {
       await device.toggle();
 
-      expect(deps.postRequest).toBeCalledWith(
+      expect(deps.postRequest).toHaveBeenCalledWith(
         `/v1.1/devices/${deviceId}/commands`,
         {
           command: "toggle",
@@ -340,8 +342,8 @@ describe("DeviceWithPowerToggleBrightnessColorTemperature", () => {
     });
 
     afterEach(() => {
-      expect(deps.getRequest).toBeCalledTimes(0);
-      expect(deps.postRequest).toBeCalledTimes(1);
+      expect(deps.getRequest).toHaveBeenCalledTimes(0);
+      expect(deps.postRequest).toHaveBeenCalledTimes(1);
     });
 
     test("set brightness", async () => {
@@ -349,7 +351,7 @@ describe("DeviceWithPowerToggleBrightnessColorTemperature", () => {
 
       await device.setBrightness(BRIGHTNESS);
 
-      expect(deps.postRequest).toBeCalledWith(
+      expect(deps.postRequest).toHaveBeenCalledWith(
         `/v1.1/devices/${deviceId}/commands`,
         {
           command: "setBrightness",
@@ -364,7 +366,7 @@ describe("DeviceWithPowerToggleBrightnessColorTemperature", () => {
 
       await device.setColorTemperature(COLOR_TEMPERATURE);
 
-      expect(deps.postRequest).toBeCalledWith(
+      expect(deps.postRequest).toHaveBeenCalledWith(
         `/v1.1/devices/${deviceId}/commands`,
         {
           command: "setColorTemperature",
@@ -406,8 +408,8 @@ describe("DeviceWithPowerLevel", () => {
 
     expect(temperature).toEqual(EXPECTED_TEMPERATURE);
 
-    expect(deps.getRequest).toBeCalledTimes(1);
-    expect(deps.postRequest).toBeCalledTimes(0);
+    expect(deps.getRequest).toHaveBeenCalledTimes(1);
+    expect(deps.postRequest).toHaveBeenCalledTimes(0);
   });
 
   test("get humidity", async () => {
@@ -415,7 +417,7 @@ describe("DeviceWithPowerLevel", () => {
 
     expect(humidity).toEqual(EXPECTED_HUMIDITY);
 
-    expect(deps.getRequest).toBeCalledTimes(1);
-    expect(deps.postRequest).toBeCalledTimes(0);
+    expect(deps.getRequest).toHaveBeenCalledTimes(1);
+    expect(deps.postRequest).toHaveBeenCalledTimes(0);
   });
 });

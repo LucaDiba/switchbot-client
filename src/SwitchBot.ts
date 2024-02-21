@@ -1,30 +1,30 @@
 import axios, { AxiosInstance } from "axios";
 import { createHmac, randomUUID } from "crypto";
 
-import SwitchBotBot from "./devices/SwitchBotBot.js";
-import SwitchBotCamera from "./devices/SwitchBotCamera.js";
-import SwitchBotCeilingLight from "./devices/SwitchBotCeilingLight.js";
-import SwitchBotColorBulb from "./devices/SwitchBotColorBulb.js";
-import SwitchBotContactSensor from "./devices/SwitchBotContactSensor.js";
-import SwitchBotCurtain from "./devices/SwitchBotCurtain.js";
-import SwitchBotHub from "./devices/SwitchBotHub.js";
-import SwitchBotHumidifier from "./devices/SwitchBotHumidifier.js";
-import SwitchBotKeypad from "./devices/SwitchBotKeypad.js";
-import SwitchBotLock from "./devices/SwitchBotLock.js";
-import SwitchBotMeter from "./devices/SwitchBotMeter.js";
-import SwitchBotMotionSensor from "./devices/SwitchBotMotionSensor.js";
-import SwitchBotPlug from "./devices/SwitchBotPlug.js";
-import SwitchBotPlugMini from "./devices/SwitchBotPlugMini.js";
-import SwitchBotRemote from "./devices/SwitchBotRemote.js";
-import SwitchBotRobotVacuumCleaner from "./devices/SwitchBotRobotVacuumCleaner.js";
-import SwitchBotStripLight from "./devices/SwitchBotStripLight.js";
-import Scene from "./scenes/Scene.js";
+import SwitchBotBot from "./devices/SwitchBotBot";
+import SwitchBotCamera from "./devices/SwitchBotCamera";
+import SwitchBotCeilingLight from "./devices/SwitchBotCeilingLight";
+import SwitchBotColorBulb from "./devices/SwitchBotColorBulb";
+import SwitchBotContactSensor from "./devices/SwitchBotContactSensor";
+import SwitchBotCurtain from "./devices/SwitchBotCurtain";
+import SwitchBotHub from "./devices/SwitchBotHub";
+import SwitchBotHumidifier from "./devices/SwitchBotHumidifier";
+import SwitchBotKeypad from "./devices/SwitchBotKeypad";
+import SwitchBotLock from "./devices/SwitchBotLock";
+import SwitchBotMeter from "./devices/SwitchBotMeter";
+import SwitchBotMotionSensor from "./devices/SwitchBotMotionSensor";
+import SwitchBotPlug from "./devices/SwitchBotPlug";
+import SwitchBotPlugMini from "./devices/SwitchBotPlugMini";
+import SwitchBotRemote from "./devices/SwitchBotRemote";
+import SwitchBotRobotVacuumCleaner from "./devices/SwitchBotRobotVacuumCleaner";
+import SwitchBotStripLight from "./devices/SwitchBotStripLight";
+import Scene from "./scenes/Scene";
 import {
   DeviceId,
   GetAllDevicesResponse,
   GetAllScenesResponse,
   SceneId,
-} from "./types.js";
+} from "./types";
 
 export type SwitchBotOptions = {
   openToken: string;
@@ -52,9 +52,8 @@ export default class SwitchBot {
 
   // Devices
   public devices = async () => {
-    const response = await this.getRequest<GetAllDevicesResponse>(
-      "/v1.1/devices"
-    );
+    const response =
+      await this.getRequest<GetAllDevicesResponse>("/v1.1/devices");
     return response.body;
   };
 
@@ -128,9 +127,8 @@ export default class SwitchBot {
 
   // Scenes
   public scenes = async () => {
-    const response = await this.getRequest<GetAllScenesResponse>(
-      "/v1.1/scenes"
-    );
+    const response =
+      await this.getRequest<GetAllScenesResponse>("/v1.1/scenes");
     return response.body;
   };
 

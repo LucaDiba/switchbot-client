@@ -1,6 +1,6 @@
-import { BaseDeviceGetDeviceBody, BaseDeviceStatusBody } from "../types.js";
-import { DEVICE_TYPES } from "../utils/constant.js";
-import { DeviceWithStatus } from "./Device.js";
+import { BaseDeviceGetDeviceBody, BaseDeviceStatusBody } from "../types";
+import { DEVICE_TYPES } from "../utils/constant";
+import { DeviceWithStatus } from "./Device";
 
 type DeviceType = typeof DEVICE_TYPES.KEYPAD | typeof DEVICE_TYPES.KEYPAD_TOUCH;
 

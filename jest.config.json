@@ -1,29 +1,4 @@
 {
-  "roots": [
-    "<rootDir>"
-  ],
-  "transform": {
-    "^.+\\.ts?$": [
-      "ts-jest",
-      {
-        "useESM": true
-      }
-    ]
-  },
-  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$",
-  "moduleFileExtensions": [
-    "ts",
-    "js",
-    "json",
-    "node"
-  ],
-  "collectCoverage": true,
-  "clearMocks": true,
-  "coverageDirectory": "coverage",
-  "extensionsToTreatAsEsm": [
-    ".ts"
-  ],
-  "moduleNameMapper": {
-    "^(\\.{1,2}/.*)\\.js$": "$1"
-  }
+  "preset": "ts-jest",
+  "testEnvironment": "node"
 }

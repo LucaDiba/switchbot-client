@@ -23,9 +23,9 @@ describe("set mode", () => {
 
     await device.setMode("auto");
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(1);
-    expect(deps.postRequest).toBeCalledWith(
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(1);
+    expect(deps.postRequest).toHaveBeenCalledWith(
       `/v1.1/devices/${deviceId}/commands`,
       { command: "setMode", commandType: "command", parameter: "auto" }
     );
@@ -36,9 +36,9 @@ describe("set mode", () => {
 
     await device.setMode(45);
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(1);
-    expect(deps.postRequest).toBeCalledWith(
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(1);
+    expect(deps.postRequest).toHaveBeenCalledWith(
       `/v1.1/devices/${deviceId}/commands`,
       { command: "setMode", commandType: "command", parameter: "45" }
     );
@@ -51,7 +51,7 @@ describe("set mode", () => {
       "Atomization efficiency must be between 0 and 100"
     );
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(0);
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(0);
   });
 });

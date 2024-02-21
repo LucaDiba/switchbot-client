@@ -22,9 +22,9 @@ test("lock", async () => {
 
   await device.lock();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "lock", commandType: "command", parameter: "default" }
   );
@@ -35,9 +35,9 @@ test("unlock", async () => {
 
   await device.unlock();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "unlock", commandType: "command", parameter: "default" }
   );

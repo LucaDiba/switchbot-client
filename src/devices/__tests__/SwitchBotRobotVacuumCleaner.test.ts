@@ -22,9 +22,9 @@ test("start", async () => {
 
   await device.start();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "start", commandType: "command", parameter: "default" }
   );
@@ -35,9 +35,9 @@ test("stop", async () => {
 
   await device.stop();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "stop", commandType: "command", parameter: "default" }
   );
@@ -48,9 +48,9 @@ test("dock", async () => {
 
   await device.dock();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "dock", commandType: "command", parameter: "default" }
   );

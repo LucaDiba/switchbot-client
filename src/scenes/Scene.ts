@@ -1,5 +1,5 @@
-import { Deps, SceneExecuteResponse, SceneId } from "../types.js";
-import { returnSceneExecuteBodyOrThrow } from "../utils/response.js";
+import { Deps, SceneExecuteResponse, SceneId } from "../types";
+import { returnSceneExecuteBodyOrThrow } from "../utils/response";
 
 export default class Scene {
   protected readonly _sceneId: SceneId;

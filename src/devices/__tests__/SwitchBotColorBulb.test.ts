@@ -22,9 +22,9 @@ test("turn on", async () => {
 
   await device.turnOn();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "turnOn", commandType: "command", parameter: "default" }
   );
@@ -35,9 +35,9 @@ test("turn off", async () => {
 
   await device.turnOff();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "turnOff", commandType: "command", parameter: "default" }
   );
@@ -48,9 +48,9 @@ test("toggle", async () => {
 
   await device.toggle();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "toggle", commandType: "command", parameter: "default" }
   );
@@ -62,9 +62,9 @@ test("set brightness", async () => {
 
   await device.setBrightness(BRIGHTNESS);
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "setBrightness", commandType: "command", parameter: BRIGHTNESS }
   );
@@ -76,9 +76,9 @@ test("set color", async () => {
 
   await device.setColor([COLOR.red, COLOR.green, COLOR.blue]);
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     {
       command: "setColor",
@@ -94,9 +94,9 @@ test("set color temperature", async () => {
 
   await device.setColorTemperature(COLOR_TEMPERATURE);
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     {
       command: "setColorTemperature",

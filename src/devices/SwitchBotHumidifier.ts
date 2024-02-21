@@ -1,9 +1,9 @@
 import {
   BaseDeviceGetDeviceBody,
   BaseDeviceWithTemperatureHumidityStatusBody,
-} from "../types.js";
-import { DEVICE_TYPES } from "../utils/constant.js";
-import { DeviceWithTemperatureHumidity } from "./Device.js";
+} from "../types";
+import { DEVICE_TYPES } from "../utils/constant";
+import { DeviceWithTemperatureHumidity } from "./Device";
 
 type DeviceType = typeof DEVICE_TYPES.HUMIDIFIER;
 

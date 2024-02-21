@@ -10,6 +10,8 @@
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "lint": "tsc && eslint src/**/*.ts",
     "test": "jest",
+    "coverage": "jest --coverage",
+    "release": "npm run lint && npm run test && npm run build && changeset publish",
     "build-docs": "typedoc --readme none --exclude \"**/*+(.test).ts\" --exclude \"**/utils/*.ts\" --entryPointStrategy expand ./src"
   },
   "repository": {

@@ -1,6 +1,7 @@
 <h1 align="center">SwitchBot client</h1>
-<h2 align="center">⚠️ This package is in alpha ⚠️</h2>
+<h2 align="center">⚠️ This package is in beta ⚠️</h2>
 <p>
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white" />
   <a href="https://www.npmjs.com/package/@lucadiba/switchbot-client">
     <img alt="NPM package" src="https://img.shields.io/npm/v/@lucadiba/switchbot-client?color=blue" />
   </a>
@@ -19,9 +20,12 @@
   </a>
 </p>
 
-> A JavaScript client for SwitchBot 1.1 APIs with built-in TypeScript types.
+> A JavaScript client for SwitchBot 1.1 APIs with built-in TypeScript types.<br />
+> This package supports both ESM and CommonJS.
 
-## Install
+## Installation
+
+Install the package using your preferred package manager:
 
 ```sh
 npm install @lucadiba/switchbot-client
@@ -29,11 +33,17 @@ npm install @lucadiba/switchbot-client
 
 ## Usage
 
-### Client
+### Initialize the client
+
+Import the package in your application.
 
 ```typescript
 import SwitchBot from "@lucadiba/switchbot-client";
+```
 
+Initialize the client with your open token and secret key. You can [find these values in the SwitchBot app](https://support.switch-bot.com/hc/en-us/articles/12822710195351-How-to-obtain-a-Token).
+
+```typescript
 const switchbot = new SwitchBot({
   openToken: "openToken",
   secretKey: "secretKey",
@@ -41,6 +51,18 @@ const switchbot = new SwitchBot({
 ```
 
 ### Device
+
+To interact with a device, you need to know its ID. You can find it in the SwitchBot app or by calling the `devices` method.
+
+```typescript
+const devices = await switchbot.devices();
+// [{
+//   deviceId: "deviceId",
+//   ...
+// }]
+```
+
+Then, you can interact with the device.
 
 ```typescript
 // Press SwitchBot Bot
@@ -56,7 +78,7 @@ switchbot.scene("sceneId").execute();
 
 ## Support
 
-Supported devices:
+The following devices are supported:
 
 - Bot
 - Ceiling Light
@@ -86,7 +108,7 @@ Supported devices:
 - Strip Light
 - [📘 Full documentation](https://lucadiba.github.io/switchbot-client/modules/SwitchBot.html)
 
-Currently not supported:
+The following devices are currently not supported:
 
 - Battery Circulator Fan
 - Blind Tilt

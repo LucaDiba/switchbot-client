@@ -41,12 +41,14 @@ const switchbot = new SwitchBot({
 ```
 
 ### Device
+
 ```typescript
 // Press SwitchBot Bot
 switchbot.bot("deviceId").press();
 ```
 
 ### Scene
+
 ```typescript
 // Execute SwitchBot Scene
 switchbot.scene("sceneId").execute();
@@ -95,7 +97,9 @@ Currently not supported:
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/LucaDiba/switchbot-client/issues).
+Contributions, issues and feature requests are welcome!<br />
+Feel free to check [issues page](https://github.com/LucaDiba/switchbot-client/issues).<br />
+Please run `npx changeset` and follow the instructions to create a new changeset before opening a pull request.
 
 ## Show your support
 

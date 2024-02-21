@@ -1,7 +1,7 @@
 {
   "name": "@lucadiba/switchbot-client",
   "version": "0.0.9",
-  "description": "A client for SwitchBot 1.1 APIs",
+  "description": "A Node.js client for SwitchBot 1.1 APIs",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/LucaDiba/switchbot-client#readme",
   "dependencies": {
+    "@changesets/cli": "^2.27.1",
     "axios": "^1.6.7"
   },
   "devDependencies": {

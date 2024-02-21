@@ -54,6 +54,8 @@ switchbot.bot("deviceId").press();
 switchbot.scene("sceneId").execute();
 ```
 
+## Support
+
 Supported devices:
 
 - Bot
@@ -86,6 +88,11 @@ Supported devices:
 
 Currently not supported:
 
+- Battery Circulator Fan
+- Blind Tilt
+- Curtain 3
+- Hub 2
+- Outdoor meter
 - Virtual infrared remote devices
 
 ## Author

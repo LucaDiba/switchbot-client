@@ -30,8 +30,8 @@ describe("setPosition", () => {
       "ff," + // mode: 0 (Performance Mode), 1 (Silent Mode), ff (default mode)
       "50"; // position: 0~100 (0 means opened, 100 means closed)
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(1);
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(1);
     expect(deps.postRequest).toHaveBeenCalledWith(
       `/v1.1/devices/${deviceId}/commands`,
       {
@@ -47,8 +47,8 @@ describe("setPosition", () => {
       await device.setPosition(-1);
     }).rejects.toThrowError("Position must be between 0 and 100");
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(0);
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(0);
   });
 
   it("should throw error if position is greater than 100", async () => {
@@ -56,8 +56,8 @@ describe("setPosition", () => {
       await device.setPosition(101);
     }).rejects.toThrowError("Position must be between 0 and 100");
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(0);
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(0);
   });
 });
 
@@ -66,9 +66,9 @@ test("open", async () => {
 
   await device.open();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "turnOn", commandType: "command", parameter: "default" }
   );
@@ -79,9 +79,9 @@ test("open", async () => {
 
   await device.close();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "turnOff", commandType: "command", parameter: "default" }
   );

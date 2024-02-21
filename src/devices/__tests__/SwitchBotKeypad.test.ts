@@ -28,9 +28,9 @@ describe("create key", () => {
 
     await device.createKey(key);
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(1);
-    expect(deps.postRequest).toBeCalledWith(
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(1);
+    expect(deps.postRequest).toHaveBeenCalledWith(
       `/v1.1/devices/${deviceId}/commands`,
       { command: "createKey", commandType: "command", parameter: key }
     );
@@ -46,9 +46,9 @@ describe("create key", () => {
 
     await device.createKey(key);
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(1);
-    expect(deps.postRequest).toBeCalledWith(
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(1);
+    expect(deps.postRequest).toHaveBeenCalledWith(
       `/v1.1/devices/${deviceId}/commands`,
       { command: "createKey", commandType: "command", parameter: key }
     );
@@ -71,9 +71,9 @@ describe("create key", () => {
 
     await device.createKey(params);
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(1);
-    expect(deps.postRequest).toBeCalledWith(
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(1);
+    expect(deps.postRequest).toHaveBeenCalledWith(
       `/v1.1/devices/${deviceId}/commands`,
       {
         command: "createKey",
@@ -104,9 +104,9 @@ describe("create key", () => {
 
     await device.createKey(params);
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(1);
-    expect(deps.postRequest).toBeCalledWith(
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(1);
+    expect(deps.postRequest).toHaveBeenCalledWith(
       `/v1.1/devices/${deviceId}/commands`,
       {
         command: "createKey",
@@ -132,8 +132,8 @@ describe("create key", () => {
       })
     ).toThrowErrorMatchingInlineSnapshot(`"Invalid type"`);
 
-    expect(deps.getRequest).toBeCalledTimes(0);
-    expect(deps.postRequest).toBeCalledTimes(0);
+    expect(deps.getRequest).toHaveBeenCalledTimes(0);
+    expect(deps.postRequest).toHaveBeenCalledTimes(0);
   });
 });
 
@@ -143,9 +143,9 @@ test("delete key", async () => {
 
   await device.deleteKey(KEY_ID);
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/devices/${deviceId}/commands`,
     { command: "deleteKey", commandType: "command", parameter: { id: KEY_ID } }
   );

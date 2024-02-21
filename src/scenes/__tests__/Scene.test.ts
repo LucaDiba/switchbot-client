@@ -22,9 +22,9 @@ test("press", async () => {
 
   await scene.execute();
 
-  expect(deps.getRequest).toBeCalledTimes(0);
-  expect(deps.postRequest).toBeCalledTimes(1);
-  expect(deps.postRequest).toBeCalledWith(
+  expect(deps.getRequest).toHaveBeenCalledTimes(0);
+  expect(deps.postRequest).toHaveBeenCalledTimes(1);
+  expect(deps.postRequest).toHaveBeenCalledWith(
     `/v1.1/scenes/${sceneId}/execute`,
     {}
   );

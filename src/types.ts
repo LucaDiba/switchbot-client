@@ -1,3 +1,4 @@
+import { GetDeviceBody as GetDeviceBodyBlindTilt } from "./devices/SwitchBotBlindTilt";
 import { GetDeviceBody as GetDeviceBodyBot } from "./devices/SwitchBotBot";
 import { GetDeviceBody as GetDeviceBodyCamera } from "./devices/SwitchBotCamera";
 import { GetDeviceBody as GetDeviceBodyCeilingLight } from "./devices/SwitchBotCeilingLight";
@@ -36,6 +37,7 @@ export type SwitchBotResponse<T> = {
 
 export type GetAllDevicesResponse = SwitchBotResponse<{
   deviceList: Array<
+    | GetDeviceBodyBlindTilt
     | GetDeviceBodyBot
     | GetDeviceBodyCamera
     | GetDeviceBodyCeilingLight

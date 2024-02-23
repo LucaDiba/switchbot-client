@@ -2,6 +2,7 @@ import { createHmac } from "crypto";
 import nock from "nock";
 
 import SwitchBot from "..";
+import SwitchBotBlindTilt from "../devices/SwitchBotBlindTilt";
 import SwitchBotBot from "../devices/SwitchBotBot";
 import SwitchBotCamera from "../devices/SwitchBotCamera";
 import SwitchBotCeilingLight from "../devices/SwitchBotCeilingLight";
@@ -160,6 +161,10 @@ describe("devices requests", () => {
 });
 
 describe("instantiate devices", () => {
+  test("Blind Tilt", () => {
+    expect(switchBot.blindTilt(deviceId)).toBeInstanceOf(SwitchBotBlindTilt);
+  });
+
   test("Bot", () => {
     expect(switchBot.bot(deviceId)).toBeInstanceOf(SwitchBotBot);
   });

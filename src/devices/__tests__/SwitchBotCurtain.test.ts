@@ -82,7 +82,7 @@ describe.each([DEVICE_TYPES.CURTAIN, DEVICE_TYPES.CURTAIN_3])(
       );
     });
 
-    test("open", async () => {
+    test("close", async () => {
       deps.postRequest = jest.fn().mockReturnValueOnce(mockCommandResponse);
 
       await device.close();

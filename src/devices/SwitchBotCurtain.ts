@@ -22,7 +22,9 @@ export type StatusBody<T> = BaseDeviceStatusBody<T> & {
   calibrate: boolean;
   group: boolean;
   moving: boolean;
-  slidePosition: String;
+  slidePosition: string;
+  battery: number;
+  version: string;
 };
 
 export type CommandBody = any; // TODO: Figure out what this is

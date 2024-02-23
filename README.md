@@ -99,6 +99,7 @@ The following devices are supported:
 - Lock
 - Meter
 - Meter Plus
+- Outdoor meter
 - Motion Sensor
 - Pan/Tilt Cam
 - Pan/Tilt Cam 2K
@@ -114,7 +115,6 @@ The following devices are supported:
 The following devices are currently not supported:
 
 - Battery Circulator Fan
-- Outdoor meter
 - Virtual infrared remote devices
 
 ## Author

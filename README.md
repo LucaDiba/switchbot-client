@@ -88,6 +88,7 @@ The following devices are supported:
 - Curtain
 - Curtain 3
 - Hub
+- Hub 2
 - Hub Plus
 - Hub Mini
 - Humidifier
@@ -113,7 +114,6 @@ The following devices are currently not supported:
 
 - Battery Circulator Fan
 - Blind Tilt
-- Hub 2
 - Outdoor meter
 - Virtual infrared remote devices
 

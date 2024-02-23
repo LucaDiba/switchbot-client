@@ -5,6 +5,7 @@ export const DEVICE_TYPES = {
   CURTAIN: "Curtain",
   CURTAIN_3: "Curtain 3",
   HUB: "Hub",
+  HUB_2: "Hub 2",
   HUB_PLUS: "Hub Plus",
   HUB_MINI: "Hub Mini",
   METER: "Meter",

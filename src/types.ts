@@ -4,7 +4,9 @@ import { GetDeviceBody as GetDeviceBodyCeilingLight } from "./devices/SwitchBotC
 import { GetDeviceBody as GetDeviceBodyColorBulb } from "./devices/SwitchBotColorBulb";
 import { GetDeviceBody as GetDeviceBodyContactSensor } from "./devices/SwitchBotContactSensor";
 import { GetDeviceBody as GetDeviceBodyCurtain } from "./devices/SwitchBotCurtain";
+import { GetDeviceBody as GetDeviceBodyCurtain3 } from "./devices/SwitchBotCurtain3";
 import { GetDeviceBody as GetDeviceBodyHub } from "./devices/SwitchBotHub";
+import { GetDeviceBody as GetDeviceBodyHub2 } from "./devices/SwitchBotHub2";
 import { GetDeviceBody as GetDeviceBodyHumidifier } from "./devices/SwitchBotHumidifier";
 import { GetDeviceBody as GetDeviceBodyKeypad } from "./devices/SwitchBotKeypad";
 import { GetDeviceBody as GetDeviceBodyLock } from "./devices/SwitchBotLock";
@@ -40,7 +42,9 @@ export type GetAllDevicesResponse = SwitchBotResponse<{
     | GetDeviceBodyColorBulb
     | GetDeviceBodyContactSensor
     | GetDeviceBodyCurtain
+    | GetDeviceBodyCurtain3
     | GetDeviceBodyHub
+    | GetDeviceBodyHub2
     | GetDeviceBodyHumidifier
     | GetDeviceBodyKeypad
     | GetDeviceBodyLock
@@ -61,7 +65,7 @@ export type GetAllDevicesResponse = SwitchBotResponse<{
 }>;
 
 export type GetAllScenesResponse = SwitchBotResponse<
-  { sceneId: string; sceneName: string; }[]
+  { sceneId: string; sceneName: string }[]
 >;
 
 export type SceneExecuteResponse<T> = SwitchBotResponse<T>;
@@ -79,7 +83,7 @@ export type DeviceCommandResponse<T> = SwitchBotResponse<{
 
 export type BaseDeviceStatusBody<DeviceType> = {
   deviceId: DeviceId;
-  deviceType: DeviceType & typeof DEVICE_TYPES_ARRAY[number];
+  deviceType: DeviceType & (typeof DEVICE_TYPES_ARRAY)[number];
   hubDeviceId: DeviceId;
 };
 
@@ -99,7 +103,7 @@ export type BaseDeviceWithPowerBrightnessColorStatusBody<DeviceType> =
   };
 
 export type BaseDeviceWithPowerBrightnessColorTemperatureStatusBody<
-  DeviceType
+  DeviceType,
 > = BaseDeviceWithPowerBrightnessStatusBody<DeviceType> & {
   colorTemperature: number;
 };

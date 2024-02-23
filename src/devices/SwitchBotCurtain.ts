@@ -8,13 +8,15 @@ import { DeviceWithStatus } from "./Device";
 
 type DeviceType = typeof DEVICE_TYPES.CURTAIN;
 
-export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType> & {
+export type GetDeviceBodyCurtainBase<T> = BaseDeviceGetDeviceBody<T> & {
   curtainDevicesIds: DeviceId[];
   calibrate: boolean;
   group: boolean;
   master: boolean;
   openDirection: string; // TODO: determine possible values ("left" | "right" ?)
 };
+
+export type GetDeviceBody = GetDeviceBodyCurtainBase<DeviceType>;
 
 export type StatusBody<T> = BaseDeviceStatusBody<T> & {
   calibrate: boolean;

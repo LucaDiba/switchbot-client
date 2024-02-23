@@ -9,6 +9,7 @@ import SwitchBotContactSensor from "./devices/SwitchBotContactSensor";
 import SwitchBotCurtain from "./devices/SwitchBotCurtain";
 import SwitchBotCurtain3 from "./devices/SwitchBotCurtain3";
 import SwitchBotHub from "./devices/SwitchBotHub";
+import SwitchBotHub2 from "./devices/SwitchBotHub2";
 import SwitchBotHumidifier from "./devices/SwitchBotHumidifier";
 import SwitchBotKeypad from "./devices/SwitchBotKeypad";
 import SwitchBotLock from "./devices/SwitchBotLock";
@@ -88,6 +89,10 @@ export default class SwitchBot {
 
   public hub = (deviceId: DeviceId) => {
     return new SwitchBotHub(deviceId, this.getDeps());
+  };
+
+  public hub2 = (deviceId: DeviceId) => {
+    return new SwitchBotHub2(deviceId, this.getDeps());
   };
 
   public humidifier = (deviceId: DeviceId) => {

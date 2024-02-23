@@ -10,6 +10,7 @@ import SwitchBotContactSensor from "../devices/SwitchBotContactSensor";
 import SwitchBotCurtain from "../devices/SwitchBotCurtain";
 import SwitchBotCurtain3 from "../devices/SwitchBotCurtain3";
 import SwitchBotHub from "../devices/SwitchBotHub";
+import SwitchBotHub2 from "../devices/SwitchBotHub2";
 import SwitchBotHumidifier from "../devices/SwitchBotHumidifier";
 import SwitchBotKeypad from "../devices/SwitchBotKeypad";
 import SwitchBotLock from "../devices/SwitchBotLock";
@@ -193,6 +194,10 @@ describe("instantiate devices", () => {
 
   test("Hub", () => {
     expect(switchBot.hub(deviceId)).toBeInstanceOf(SwitchBotHub);
+  });
+
+  test("Hub 2", () => {
+    expect(switchBot.hub2(deviceId)).toBeInstanceOf(SwitchBotHub2);
   });
 
   test("Humidifier", () => {

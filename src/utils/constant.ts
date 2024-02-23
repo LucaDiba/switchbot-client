@@ -3,6 +3,7 @@ export const SWITCHBOT_RESPONSE_STATUS_OK = 100;
 export const DEVICE_TYPES = {
   BOT: "Bot",
   CURTAIN: "Curtain",
+  CURTAIN_3: "Curtain 3",
   HUB: "Hub",
   HUB_PLUS: "Hub Plus",
   HUB_MINI: "Hub Mini",

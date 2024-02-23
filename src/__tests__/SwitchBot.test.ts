@@ -8,6 +8,7 @@ import SwitchBotCeilingLight from "../devices/SwitchBotCeilingLight";
 import SwitchBotColorBulb from "../devices/SwitchBotColorBulb";
 import SwitchBotContactSensor from "../devices/SwitchBotContactSensor";
 import SwitchBotCurtain from "../devices/SwitchBotCurtain";
+import SwitchBotCurtain3 from "../devices/SwitchBotCurtain3";
 import SwitchBotHub from "../devices/SwitchBotHub";
 import SwitchBotHumidifier from "../devices/SwitchBotHumidifier";
 import SwitchBotKeypad from "../devices/SwitchBotKeypad";
@@ -176,7 +177,7 @@ describe("instantiate devices", () => {
     expect(switchBot.colorBulb(deviceId)).toBeInstanceOf(SwitchBotColorBulb);
   });
 
-  test("ContactSensor", () => {
+  test("Contact Sensor", () => {
     expect(switchBot.contactSensor(deviceId)).toBeInstanceOf(
       SwitchBotContactSensor
     );
@@ -184,6 +185,10 @@ describe("instantiate devices", () => {
 
   test("Curtain", () => {
     expect(switchBot.curtain(deviceId)).toBeInstanceOf(SwitchBotCurtain);
+  });
+
+  test("Curtain 3", () => {
+    expect(switchBot.curtain3(deviceId)).toBeInstanceOf(SwitchBotCurtain3);
   });
 
   test("Hub", () => {
@@ -206,7 +211,7 @@ describe("instantiate devices", () => {
     expect(switchBot.meter(deviceId)).toBeInstanceOf(SwitchBotMeter);
   });
 
-  test("MotionSensor", () => {
+  test("Motion Sensor", () => {
     expect(switchBot.motionSensor(deviceId)).toBeInstanceOf(
       SwitchBotMotionSensor
     );

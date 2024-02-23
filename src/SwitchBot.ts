@@ -7,6 +7,7 @@ import SwitchBotCeilingLight from "./devices/SwitchBotCeilingLight";
 import SwitchBotColorBulb from "./devices/SwitchBotColorBulb";
 import SwitchBotContactSensor from "./devices/SwitchBotContactSensor";
 import SwitchBotCurtain from "./devices/SwitchBotCurtain";
+import SwitchBotCurtain3 from "./devices/SwitchBotCurtain3";
 import SwitchBotHub from "./devices/SwitchBotHub";
 import SwitchBotHumidifier from "./devices/SwitchBotHumidifier";
 import SwitchBotKeypad from "./devices/SwitchBotKeypad";
@@ -79,6 +80,10 @@ export default class SwitchBot {
 
   public curtain = (deviceId: DeviceId) => {
     return new SwitchBotCurtain(deviceId, this.getDeps());
+  };
+
+  public curtain3 = (deviceId: DeviceId) => {
+    return new SwitchBotCurtain3(deviceId, this.getDeps());
   };
 
   public hub = (deviceId: DeviceId) => {

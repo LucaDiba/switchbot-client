@@ -6,7 +6,7 @@ import {
 import { DEVICE_TYPES } from "../utils/constant";
 import { DeviceWithStatus } from "./Device";
 
-type DeviceType = typeof DEVICE_TYPES.BOT;
+type DeviceType = typeof DEVICE_TYPES.CURTAIN;
 
 export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType> & {
   curtainDevicesIds: DeviceId[];
@@ -16,7 +16,7 @@ export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType> & {
   openDirection: string; // TODO: determine possible values ("left" | "right" ?)
 };
 
-export type StatusBody = BaseDeviceStatusBody<DeviceType> & {
+export type StatusBody<T> = BaseDeviceStatusBody<T> & {
   calibrate: boolean;
   group: boolean;
   moving: boolean;
@@ -31,8 +31,8 @@ enum SetPositionMode {
   DEFAULT = "ff",
 }
 
-export default class SwitchBotCurtain extends DeviceWithStatus<
-  StatusBody,
+export class SwitchBotCurtainBase<T> extends DeviceWithStatus<
+  StatusBody<T>,
   CommandBody
 > {
   /**
@@ -60,3 +60,5 @@ export default class SwitchBotCurtain extends DeviceWithStatus<
    */
   public close = () => this.sendCommand("turnOff");
 }
+
+export default class SwitchBotCurtain extends SwitchBotCurtainBase<DeviceType> {}

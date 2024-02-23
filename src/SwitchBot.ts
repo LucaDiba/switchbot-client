@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { createHmac, randomUUID } from "crypto";
 
+import SwitchBotBlindTilt from "./devices/SwitchBotBlindTilt";
 import SwitchBotBot from "./devices/SwitchBotBot";
 import SwitchBotCamera from "./devices/SwitchBotCamera";
 import SwitchBotCeilingLight from "./devices/SwitchBotCeilingLight";
@@ -57,6 +58,10 @@ export default class SwitchBot {
     const response =
       await this.getRequest<GetAllDevicesResponse>("/v1.1/devices");
     return response.body;
+  };
+
+  public blindTilt = (deviceId: DeviceId) => {
+    return new SwitchBotBlindTilt(deviceId, this.getDeps());
   };
 
   public bot = (deviceId: DeviceId) => {

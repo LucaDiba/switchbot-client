@@ -1,6 +1,7 @@
 export const SWITCHBOT_RESPONSE_STATUS_OK = 100;
 
 export const DEVICE_TYPES = {
+  BLIND_TILT: "Blind Tilt",
   BOT: "Bot",
   CURTAIN: "Curtain",
   CURTAIN_3: "Curtain 3",

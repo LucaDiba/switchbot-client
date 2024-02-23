@@ -80,6 +80,7 @@ switchbot.scene("sceneId").execute();
 
 The following devices are supported:
 
+- Blind Tilt
 - Bot
 - Ceiling Light
 - Ceiling Light Pro
@@ -113,7 +114,6 @@ The following devices are supported:
 The following devices are currently not supported:
 
 - Battery Circulator Fan
-- Blind Tilt
 - Outdoor meter
 - Virtual infrared remote devices
 

@@ -11,6 +11,7 @@ export const DEVICE_TYPES = {
   HUB_MINI: "Hub Mini",
   METER: "Meter",
   METER_PLUS: "MeterPlus",
+  OUTDOOR_METER: "WoIOSensor",
   LOCK: "Smart Lock",
   KEYPAD: "Keypad",
   KEYPAD_TOUCH: "Keypad Touch",

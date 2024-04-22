@@ -1,5 +1,11 @@
 # @lucadiba/switchbot-client
 
+## 0.3.0
+
+### Minor Changes
+
+- 60ef831: [BREAKING] Use node:crypto instead of crypto
+
 ## 0.2.0
 
 ### Minor Changes

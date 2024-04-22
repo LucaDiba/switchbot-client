@@ -1,5 +1,6 @@
-import axios, { AxiosInstance } from "axios";
 import { createHmac, randomUUID } from "node:crypto";
+
+import axios, { AxiosInstance } from "axios";
 
 import SwitchBotBlindTilt from "./devices/SwitchBotBlindTilt";
 import SwitchBotBot from "./devices/SwitchBotBot";

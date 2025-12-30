@@ -238,7 +238,7 @@ describe("DeviceWithPower", () => {
 
       await expect(async () => {
         await device.getPowerStatus();
-      }).rejects.toThrowError(`Unexpected power status: ${INVALID_STATUS}`);
+      }).rejects.toThrowErrorMatchingInlineSnapshot(`"Unexpected power status: ${INVALID_STATUS}"`);
     });
   });
 

@@ -1,5 +1,17 @@
 # @lucadiba/switchbot-client
 
+## 0.4.0
+
+### Minor Changes
+
+- 74c539a: - BREAKING CHANGE: required Node.js 20, 22, or 24
+  - Migrate to Eslint 9
+  - Add Prettier
+
+### Patch Changes
+
+- 1dc0bff: Bump dependencies
+
 ## 0.3.0
 
 ### Minor Changes

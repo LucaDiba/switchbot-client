@@ -1,6 +1,6 @@
 {
   "name": "@lucadiba/switchbot-client",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A Node.js client for SwitchBot 1.1 APIs",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

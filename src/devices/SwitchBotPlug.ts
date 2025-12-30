@@ -11,6 +11,7 @@ export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType>;
 
 export type StatusBody = BaseDeviceWithPowerStatusBody<DeviceType>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CommandBody = any; // TODO: Figure out what this is
 
 export default class SwitchBotPlug extends DeviceWithPower<

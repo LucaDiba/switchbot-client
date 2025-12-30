@@ -22,6 +22,7 @@ import { DEVICE_TYPES_ARRAY } from "./utils/constant";
 
 export type Deps = {
   getRequest: <T>(path: string) => Promise<T>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   postRequest: <T>(path: string, body: any) => Promise<T>;
 };
 

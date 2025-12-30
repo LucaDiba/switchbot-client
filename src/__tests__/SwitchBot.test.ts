@@ -108,9 +108,8 @@ describe("devices requests", () => {
           callback(null, [200, getMockedCommandResponse({ deviceId })]);
         });
 
-      try {
-        const response = await switchBot.bot(deviceId).getStatus();
-        expect(response).toMatchInlineSnapshot(`
+      const response = await switchBot.bot(deviceId).getStatus();
+      expect(response).toMatchInlineSnapshot(`
           {
             "items": [
               {
@@ -122,9 +121,6 @@ describe("devices requests", () => {
             ],
           }
         `);
-      } catch (e) {
-        throw new Error(e as any);
-      }
     });
 
     test("post", async () => {
@@ -150,12 +146,8 @@ describe("devices requests", () => {
           callback(null, [200, getMockedCommandResponse({ deviceId })]);
         });
 
-      try {
-        const response = await switchBot.bot(deviceId).press();
-        expect(response).toMatchInlineSnapshot(`{}`);
-      } catch (e) {
-        throw new Error(e as any);
-      }
+      const response = await switchBot.bot(deviceId).press();
+      expect(response).toMatchInlineSnapshot(`{}`);
     });
   });
 });
@@ -175,7 +167,7 @@ describe("instantiate devices", () => {
 
   test("Ceiling Light", () => {
     expect(switchBot.ceilingLight(deviceId)).toBeInstanceOf(
-      SwitchBotCeilingLight
+      SwitchBotCeilingLight,
     );
   });
 
@@ -185,7 +177,7 @@ describe("instantiate devices", () => {
 
   test("Contact Sensor", () => {
     expect(switchBot.contactSensor(deviceId)).toBeInstanceOf(
-      SwitchBotContactSensor
+      SwitchBotContactSensor,
     );
   });
 
@@ -223,7 +215,7 @@ describe("instantiate devices", () => {
 
   test("Motion Sensor", () => {
     expect(switchBot.motionSensor(deviceId)).toBeInstanceOf(
-      SwitchBotMotionSensor
+      SwitchBotMotionSensor,
     );
   });
 
@@ -241,7 +233,7 @@ describe("instantiate devices", () => {
 
   test("Robot Vacuum Cleaner", () => {
     expect(switchBot.robotVacuumCleaner(deviceId)).toBeInstanceOf(
-      SwitchBotRobotVacuumCleaner
+      SwitchBotRobotVacuumCleaner,
     );
   });
 
@@ -305,9 +297,8 @@ describe("scenes requests", () => {
           ]);
         });
 
-      try {
-        const response = await switchBot.scenes();
-        expect(response).toMatchInlineSnapshot(`
+      const response = await switchBot.scenes();
+      expect(response).toMatchInlineSnapshot(`
           [
             {
               "sceneId": "sceneId",
@@ -315,9 +306,6 @@ describe("scenes requests", () => {
             },
           ]
         `);
-      } catch (e) {
-        throw new Error(e as any);
-      }
     });
 
     test("post", async () => {
@@ -343,12 +331,8 @@ describe("scenes requests", () => {
           callback(null, [200, getMockedSceneExecuteResponse({ sceneId })]);
         });
 
-      try {
-        const response = await switchBot.scene(sceneId).execute();
-        expect(response).toMatchInlineSnapshot(`{}`);
-      } catch (e) {
-        throw new Error(e as any);
-      }
+      const response = await switchBot.scene(sceneId).execute();
+      expect(response).toMatchInlineSnapshot(`{}`);
     });
   });
 });

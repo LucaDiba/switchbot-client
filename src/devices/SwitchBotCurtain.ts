@@ -27,6 +27,7 @@ export type StatusBody<T> = BaseDeviceStatusBody<T> & {
   version: string;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CommandBody = any; // TODO: Figure out what this is
 
 enum SetPositionMode {

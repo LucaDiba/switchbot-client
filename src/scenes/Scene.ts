@@ -12,10 +12,9 @@ export default class Scene {
   }
 
   public async execute() {
-    const res = await this._deps.postRequest<SceneExecuteResponse<{}>>(
-      this._getPath("/execute"),
-      {}
-    );
+    const res = await this._deps.postRequest<
+      SceneExecuteResponse<Record<string, never>>
+    >(this._getPath("/execute"), {});
 
     return returnSceneExecuteBodyOrThrow(res);
   }

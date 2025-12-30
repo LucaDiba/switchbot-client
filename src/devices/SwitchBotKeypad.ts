@@ -21,6 +21,7 @@ export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType> & {
 
 export type StatusBody = BaseDeviceStatusBody<DeviceType>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CommandBody = any; // TODO: Figure out what this is
 
 export default class SwitchBotKeypad extends DeviceWithStatus<
@@ -43,7 +44,7 @@ export default class SwitchBotKeypad extends DeviceWithStatus<
           password: string;
           startTime: Date;
           endTime: Date;
-        }
+        },
   ) => {
     const { name, type, password } = params;
 

@@ -12,6 +12,7 @@ export type GetDeviceBody = BaseDeviceGetDeviceBody<DeviceType>;
 export type StatusBody =
   BaseDeviceWithPowerBrightnessColorStatusBody<DeviceType>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CommandBody = any; // TODO: Figure out what this is
 
 export default class SwitchBotStripLight extends DeviceWithPowerToggleBrightnessColor<

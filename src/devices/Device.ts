@@ -65,7 +65,8 @@ export class DeviceWithStatus<
 
   protected sendCommand = async (
     command: string,
-    parameter: any = "default"
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    parameter: any = "default",
   ) => {
     const response = await this._deps.postRequest<
       DeviceCommandResponse<CommandBody>

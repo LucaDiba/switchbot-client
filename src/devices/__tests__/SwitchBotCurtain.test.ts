@@ -53,7 +53,7 @@ describe.each([DEVICE_TYPES.CURTAIN, DEVICE_TYPES.CURTAIN_3])(
       it("should throw error if position is less than 0", async () => {
         await expect(async () => {
           await device.setPosition(-1);
-        }).rejects.toThrowError("Position must be between 0 and 100");
+        }).rejects.toThrowErrorMatchingInlineSnapshot(`"Position must be between 0 and 100"`);
 
         expect(deps.getRequest).toHaveBeenCalledTimes(0);
         expect(deps.postRequest).toHaveBeenCalledTimes(0);
@@ -62,7 +62,7 @@ describe.each([DEVICE_TYPES.CURTAIN, DEVICE_TYPES.CURTAIN_3])(
       it("should throw error if position is greater than 100", async () => {
         await expect(async () => {
           await device.setPosition(101);
-        }).rejects.toThrowError("Position must be between 0 and 100");
+        }).rejects.toThrowErrorMatchingInlineSnapshot(`"Position must be between 0 and 100"`);
 
         expect(deps.getRequest).toHaveBeenCalledTimes(0);
         expect(deps.postRequest).toHaveBeenCalledTimes(0);
